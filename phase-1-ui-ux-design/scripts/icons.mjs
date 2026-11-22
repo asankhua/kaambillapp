@@ -44,7 +44,8 @@ export function usedIconNames() {
 export const iconFontUrl = (names) =>
   `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=${names.join(",")}&display=block`;
 
-export const ICON_LINK_RE = /<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Material\+Symbols\+Outlined[^"]*" rel="stylesheet" \/>/;
+// Whitespace-tolerant: Prettier (pre-commit) wraps the <link> attributes onto separate lines.
+export const ICON_LINK_RE = /<link\s+href="https:\/\/fonts\.googleapis\.com\/css2\?family=Material\+Symbols\+Outlined[^"]*"\s+rel="stylesheet"\s*\/>/;
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const file = join(root, "app/index.html");
