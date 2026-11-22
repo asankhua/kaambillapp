@@ -1,0 +1,25 @@
+# Secrets: only .env.example is committed
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+.vercel/
+coverage/
+*.tsbuildinfo
+test-results/
+playwright-report/
+**/e2e/screenshots/
+
+# Raw eval audio stays local (may contain voices)
+phase-6-quality-demo/eval/audio/*
+!phase-6-quality-demo/eval/audio/.gitkeep
+
+# OS
+.DS_Store
+
+# Local-only tool settings and caches
+.claude/settings.local.json
+phase-6-quality-demo/eval/results/eval-cache.json

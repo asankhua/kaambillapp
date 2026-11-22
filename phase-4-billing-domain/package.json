@@ -1,0 +1,13 @@
+{
+  "name": "@kaambill/phase-4-billing-domain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 4: rate card, matcher, bill model, clarifier, replies, billing adapter, bill screens.",
+  "dependencies": {
+    "fuse.js": "^7.5.0",
+    "idb-keyval": "^6.3.0",
+    "react": "^19.3.1",
+    "xstate": "^5.33.4"
+  }
+}

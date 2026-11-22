@@ -1,0 +1,13 @@
+{
+  "name": "@kaambill/phase-5-output-share",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 5: UPI link, QR, PDF receipt, WhatsApp share, history, profile.",
+  "dependencies": {
+    "idb-keyval": "^6.3.0",
+    "jspdf": "^4.2.1",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1"
+  }
+}

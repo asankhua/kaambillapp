@@ -1,0 +1,11 @@
+{
+  "name": "@kaambill/phase-2-voice-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 2: reusable voice core (conversation machine, speech in/out, text box, shell UI).",
+  "dependencies": {
+    "react": "^19.3.1",
+    "xstate": "^5.33.4"
+  }
+}

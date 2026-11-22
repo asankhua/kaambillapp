@@ -1,0 +1,5 @@
+dist
+node_modules
+phase-1-ui-ux-design/design
+package-lock.json
+**/*.jsonl

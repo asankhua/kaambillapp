@@ -1,0 +1,17 @@
+{
+  "name": "@kaambill/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 0: shared types, Zod schema, seed rate card, server env/health, test helpers.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./seed/rateCard.json": "./seed/rateCard.json"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@kaambill/phase-1-ui-ux-design",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 1: Stitch design export, Tailwind theme and design tokens."
+}

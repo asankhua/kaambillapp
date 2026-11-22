@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+/* The app is assembled from the phase folders: scan all of them for class names. */
+@source "../../app/src";
+@source "../../phase-*/src/**/*.{ts,tsx}";
+@source "../../domain-*/src/**/*.{ts,tsx}";
+
+/*
+  Design tokens generated from the Google Stitch export (tailwind.config in each design/<screen>/code.html)
+  = "Bharat Trades Kinetic" DESIGN.md. Same class names as the Stitch HTML, so markup ports over directly.
+  Regenerate if the Stitch design system changes. See architecture.md §7.5.
+*/
+@theme {
+  --color-background: #f9f9ff;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-inverse-on-surface: #edf0ff;
+  --color-inverse-primary: #7bdaa2;
+  --color-inverse-surface: #293040;
+  --color-on-background: #141b2b;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #a5ffc7;
+  --color-on-primary-fixed: #002110;
+  --color-on-primary-fixed-variant: #005230;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #fefcff;
+  --color-on-secondary-fixed: #00174b;
+  --color-on-secondary-fixed-variant: #003ea8;
+  --color-on-surface: #141b2b;
+  --color-on-surface-variant: #3f4941;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #ffe8d1;
+  --color-on-tertiary-fixed: #2a1700;
+  --color-on-tertiary-fixed-variant: #653e00;
+  --color-outline: #6f7a71;
+  --color-outline-variant: #becabf;
+  --color-primary: #005f39;
+  --color-primary-container: #0b7a4b;
+  --color-primary-fixed: #97f6bc;
+  --color-primary-fixed-dim: #7bdaa2;
+  --color-secondary: #0051d5;
+  --color-secondary-container: #316bf3;
+  --color-secondary-fixed: #dbe1ff;
+  --color-secondary-fixed-dim: #b4c5ff;
+  --color-surface: #f9f9ff;
+  --color-surface-bright: #f9f9ff;
+  --color-surface-container: #e9edff;
+  --color-surface-container-high: #e1e8fd;
+  --color-surface-container-highest: #dce2f7;
+  --color-surface-container-low: #f1f3ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-dim: #d3daef;
+  --color-surface-tint: #006d41;
+  --color-surface-variant: #dce2f7;
+  --color-tertiary: #754900;
+  --color-tertiary-container: #965e00;
+  --color-tertiary-fixed: #ffddb8;
+  --color-tertiary-fixed-dim: #ffb95f;
+  /* Extra roles from DESIGN.md prose */
+  --color-canvas: #fafaf7;
+  --color-border-subtle: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-listening: #2563eb;
+  --color-amber: #f59e0b;
+  --color-amber-tint: #fff4db;
+  --color-amber-text: #92400e;
+  --color-primary-tint: #e7f5ee;
+  --color-text-strong: #111827;
+  --color-text-muted: #4b5563;
+  --color-danger: #dc2626;
+  --font-sans: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-body-md: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-headline-lg-mobile: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-caption: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-body-lg: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-headline-lg: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-headline-xl-mobile: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-headline-md: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-title-lg: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-headline-xl: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-label-md: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-label-lg: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+  --text-headline-lg-mobile: 26px;
+  --text-headline-lg-mobile--line-height: 34px;
+  --text-headline-lg-mobile--font-weight: 700;
+  --text-caption: 13px;
+  --text-caption--line-height: 18px;
+  --text-caption--font-weight: 500;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 26px;
+  --text-body-lg--font-weight: 500;
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--font-weight: 700;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-xl-mobile: 34px;
+  --text-headline-xl-mobile--line-height: 42px;
+  --text-headline-xl-mobile--font-weight: 700;
+  --text-headline-xl-mobile--letter-spacing: -0.02em;
+  --text-headline-md: 22px;
+  --text-headline-md--line-height: 30px;
+  --text-headline-md--font-weight: 600;
+  --text-title-lg: 20px;
+  --text-title-lg--line-height: 28px;
+  --text-title-lg--font-weight: 600;
+  --text-headline-xl: 40px;
+  --text-headline-xl--line-height: 48px;
+  --text-headline-xl--font-weight: 700;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--font-weight: 600;
+  --text-label-lg: 16px;
+  --text-label-lg--line-height: 22px;
+  --text-label-lg--font-weight: 600;
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --spacing-space-xl: 2rem;
+  --spacing-gutter: 1rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-margin: 1rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+/* Grows with its content (a fixed 100% height let long pages overflow the phone column,
+   so on a big screen everything below the first screen sat on the grey page background). */
+#root {
+  min-height: 100%;
+}
+body {
+  margin: 0;
+  overscroll-behavior: none;
+  background: var(--color-canvas);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+/*
+  Mobile-only layout. KaamBill is a phone app (designed at 360–430 px, like the Stitch export).
+  On a tablet or monitor the app stays a phone-width column in the middle, including the fixed
+  top bar, voice dock and onboarding bars, instead of stretching across the screen.
+*/
+:root {
+  --app-max-width: 480px;
+}
+#root {
+  max-width: var(--app-max-width);
+  margin-inline: auto;
+  background: var(--color-canvas);
+  position: relative;
+}
+@media (min-width: 481px) {
+  body {
+    background: #e3e6e1;
+  }
+  #root {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.04),
+      0 8px 40px rgba(0, 0, 0, 0.08);
+  }
+  #root .fixed {
+    left: 50% !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: var(--app-max-width);
+    translate: -50% 0;
+  }
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mic pulse while listening (DESIGN.md: ring of #2563EB at 20% expanding to 112px) */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.27);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 1.6s ease-in-out infinite;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+  /* Until the icon font loads (or if it fails on a weak network) the ligature name
+     ("receipt_long") would render as wide text and break the layout: keep a 1em box. */
+  display: inline-block;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/*
+  Icon size fix: Google's Material Symbols stylesheet (app/index.html) sets
+  `.material-symbols-outlined { font-size: 24px }` OUTSIDE any CSS layer, which beats every Tailwind
+  utility, so `text-[44px]` on an icon did nothing. 24px becomes the base-layer default, and this
+  higher-specificity unlayered rule hands sizing back to the layers (utilities win again).
+*/
+@layer base {
+  .material-symbols-outlined {
+    font-size: 24px;
+  }
+}
+span.material-symbols-outlined {
+  font-size: revert-layer;
+}

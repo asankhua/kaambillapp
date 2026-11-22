@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+      name="viewport"
+    />
+    <meta content="mobile_tab" name="shell-type" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#97f6bc",
+              tertiary: "#754900",
+              "on-error": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#7bdaa2",
+              "tertiary-container": "#965e00",
+              "on-secondary-fixed": "#00174b",
+              "surface-variant": "#dce2f7",
+              "outline-variant": "#becabf",
+              secondary: "#0051d5",
+              background: "#f9f9ff",
+              outline: "#6f7a71",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-surface": "#141b2b",
+              "surface-container": "#e9edff",
+              surface: "#f9f9ff",
+              "on-primary-fixed": "#002110",
+              "on-tertiary": "#ffffff",
+              primary: "#005f39",
+              "primary-container": "#0b7a4b",
+              "on-primary": "#ffffff",
+              "secondary-container": "#316bf3",
+              "inverse-surface": "#293040",
+              "surface-tint": "#006d41",
+              "on-background": "#141b2b",
+              "on-primary-fixed-variant": "#005230",
+              "inverse-primary": "#7bdaa2",
+              "on-tertiary-fixed": "#2a1700",
+              "on-tertiary-container": "#ffe8d1",
+              "on-secondary-fixed-variant": "#003ea8",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f1f3ff",
+              "secondary-fixed": "#dbe1ff",
+              "surface-container-high": "#e1e8fd",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#dce2f7",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d3daef",
+              "inverse-on-surface": "#edf0ff",
+              "on-tertiary-fixed-variant": "#653e00",
+              "surface-bright": "#f9f9ff",
+              error: "#ba1a1a",
+              "on-primary-container": "#a5ffc7",
+              "on-secondary-container": "#fefcff",
+              "on-surface-variant": "#3f4941",
+              "tertiary-fixed": "#ffddb8",
+              "secondary-fixed-dim": "#b4c5ff",
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+            spacing: {
+              "space-xl": "2rem",
+              gutter: "1rem",
+              "space-sm": "0.5rem",
+              "space-md": "1rem",
+              "space-lg": "1.5rem",
+              "space-xs": "0.25rem",
+              margin: "1rem",
+            },
+            fontFamily: {
+              "body-md": ["Noto Sans"],
+              "headline-lg-mobile": ["Noto Sans"],
+              caption: ["Noto Sans"],
+              "body-lg": ["Noto Sans"],
+              "headline-lg": ["Noto Sans"],
+              "headline-xl-mobile": ["Noto Sans"],
+              "headline-md": ["Noto Sans"],
+              "title-lg": ["Noto Sans"],
+              "headline-xl": ["Noto Sans"],
+              "label-md": ["Noto Sans"],
+              "label-lg": ["Noto Sans"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg-mobile": ["26px", { lineHeight: "34px", fontWeight: "700" }],
+              caption: ["13px", { lineHeight: "18px", fontWeight: "500" }],
+              "body-lg": ["18px", { lineHeight: "26px", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" },
+              ],
+              "headline-xl-mobile": [
+                "34px",
+                { lineHeight: "42px", letterSpacing: "-0.02em", fontWeight: "700" },
+              ],
+              "headline-md": ["22px", { lineHeight: "30px", fontWeight: "600" }],
+              "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              "headline-xl": [
+                "40px",
+                { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" },
+              ],
+              "label-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+              "label-lg": ["16px", { lineHeight: "22px", fontWeight: "600" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @layer base {
+        html,
+        body {
+          width: 100vw;
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+          background-color: #fafaf7;
+        }
+        .pb-safe {
+          padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        .pt-safe {
+          padding-top: env(safe-area-inset-top, 0px);
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.95);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 0.25;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 0.8;
+        }
+      }
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      .text-on-surface-variant,
+      .text-outline,
+      .text-gray-500,
+      .text-gray-400,
+      .text-slate-500,
+      [class*="text-caption"] {
+        color: #374151 !important;
+      }
+    </style>
+  </head>
+  <body class="bg-[#FAFAF7] font-body-md text-body-md text-on-surface flex flex-col min-h-screen">
+    <header
+      class="fixed top-0 w-full z-50 pt-safe bg-[#FAFAF7]/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div class="h-20 px-margin flex items-center justify-between gap-space-sm">
+        <div class="flex items-center gap-space-xs">
+          <div
+            class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-[0_2px_6px_rgba(11,122,75,0.25)]"
+          >
+            <span class="material-symbols-outlined text-[24px]">handyman</span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1">
+              <span
+                class="font-headline-md text-headline-md text-primary-container tracking-tight leading-none"
+                >KaamBill</span
+              ><span
+                class="px-1.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption uppercase text-[10px] leading-tight font-bold tracking-wider"
+                >Voice</span
+              >
+            </div>
+            <span
+              class="font-caption text-caption text-on-surface-variant text-[11px] leading-tight"
+              >Karigar Billing Assistant</span
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-space-xs">
+          <button
+            class="min-h-[48px] px-3 py-2 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shadow-[0_1px_4px_rgba(0,0,0,0.05)] active:scale-95 transition-transform"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px] text-primary-container"
+              >translate</span
+            ><span>Hinglish</span
+            ><span class="material-symbols-outlined text-[18px] text-on-surface-variant"
+              >arrow_drop_down</span
+            ></button
+          ><button
+            class="min-h-[48px] px-3 py-2 rounded-xl bg-surface-container-lowest text-primary-container font-label-md text-label-md flex items-center gap-1.5 shadow-[0_1px_4px_rgba(0,0,0,0.05)] active:scale-95 transition-transform"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px]">receipt_long</span
+            ><span>Rate Card</span>
+          </button>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex flex-col relative w-full px-margin pt-20 pb-56 bg-[#FAFAF7] flex-1">
+      <div class="flex flex-col w-full pb-6">
+        <!-- Screen Heading Strip -->
+        <div class="flex items-center justify-between gap-space-sm mb-space-sm">
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
+                Mere Bills
+              </h1>
+              <span
+                class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-caption text-caption font-semibold"
+                >11 Total</span
+              >
+            </div>
+            <p class="font-caption text-caption text-on-surface-variant">
+              Aapke saare bills, hisaab-kitab aur vasooli
+            </p>
+          </div>
+          <!-- Quick Search Pill Button -->
+          <button
+            aria-label="Search bills"
+            class="min-h-[48px] px-3.5 py-2 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform"
+            id="toggleSearchBtn"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px] text-primary-container">search</span>
+            <span>Dhoondhein</span>
+          </button>
+        </div>
+        <!-- Collapsible / Live Search Bar -->
+        <div class="hidden mb-space-sm" id="searchBarContainer">
+          <div
+            class="relative flex items-center w-full bg-surface-container-lowest rounded-xl shadow-sm p-1.5"
+          >
+            <span class="material-symbols-outlined text-[22px] text-on-surface-variant ml-2"
+              >search</span
+            >
+            <input
+              class="w-full bg-transparent px-3 py-2 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none"
+              id="billSearchInput"
+              placeholder="Customer name, site ya #bill..."
+              type="text"
+            />
+            <button
+              class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary-container active:scale-95 transition-transform"
+              title="Boliye customer ka naam"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[20px]">mic</span>
+            </button>
+          </div>
+        </div>
+        <!-- Weekly Glance / Khata Breakdown Card -->
+        <section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-md">
+          <div class="flex items-start justify-between gap-space-xs pb-space-sm">
+            <div class="flex flex-col">
+              <span class="font-caption text-caption text-on-surface-variant font-medium"
+                >Is hafte ki kul kamai</span
+              >
+              <div class="flex items-baseline gap-1.5 mt-0.5">
+                <span
+                  class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight"
+                  >₹14,250</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant font-medium"
+                  >· 11 bills</span
+                >
+              </div>
+            </div>
+            <div
+              class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0"
+            >
+              <span
+                class="material-symbols-outlined text-[22px]"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >trending_up</span
+              >
+            </div>
+          </div>
+          <!-- Visual Split Progress Bar -->
+          <div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden flex my-2">
+            <div
+              class="bg-primary-container h-full transition-all duration-500"
+              style="width: 79.6%"
+              title="80% Collected"
+            ></div>
+            <div
+              class="bg-tertiary-container h-full transition-all duration-500"
+              style="width: 20.4%"
+              title="20% Pending"
+            ></div>
+          </div>
+          <!-- Metrics Tile Split -->
+          <div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+            <div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col">
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                <span class="font-caption text-caption text-on-surface-variant font-semibold"
+                  >Kul Vasooli (8)</span
+                >
+              </div>
+              <span class="font-title-lg text-title-lg text-primary font-bold">₹11,350</span>
+              <span class="font-caption text-caption text-primary-container text-[11px] mt-0.5"
+                >Jma ho chuka</span
+              >
+            </div>
+            <div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col">
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+                <span class="font-caption text-caption text-on-surface-variant font-semibold"
+                  >Baaki / Pending (3)</span
+                >
+              </div>
+              <span class="font-title-lg text-title-lg text-tertiary font-bold">₹2,900</span>
+              <span class="font-caption text-caption text-tertiary-container text-[11px] mt-0.5"
+                >Vasoolna bacha hai</span
+              >
+            </div>
+          </div>
+        </section>
+        <!-- Filter Pills Bar (Horizontal Scrollable) -->
+        <section
+          class="flex items-center gap-space-xs overflow-x-auto pb-space-sm mb-space-xs no-scrollbar"
+          role="tablist"
+        >
+          <button
+            class="filter-pill min-h-[44px] px-4 py-2 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95 transition-transform"
+            data-filter="all"
+            type="button"
+          >
+            <span>Sab</span>
+            <span
+              class="px-1.5 py-0.5 rounded-full bg-primary font-caption text-caption text-on-primary text-[11px] font-bold"
+              >11</span
+            >
+          </button>
+          <button
+            class="filter-pill min-h-[44px] px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95 transition-transform"
+            data-filter="unpaid"
+            type="button"
+          >
+            <span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+            <span>Baaki</span>
+            <span
+              class="px-1.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption text-[11px] font-bold"
+              >3</span
+            >
+          </button>
+          <button
+            class="filter-pill min-h-[44px] px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95 transition-transform"
+            data-filter="paid"
+            type="button"
+          >
+            <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+            <span>Paid</span>
+            <span
+              class="px-1.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption text-[11px] font-bold"
+              >8</span
+            >
+          </button>
+          <button
+            class="filter-pill min-h-[44px] px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm active:scale-95 transition-transform"
+            data-filter="draft"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[16px] text-on-surface-variant"
+              >edit_note</span
+            >
+            <span>Drafts</span>
+            <span
+              class="px-1.5 py-0.5 rounded-full bg-surface-container font-caption text-caption text-on-surface text-[11px] font-bold"
+              >1</span
+            >
+          </button>
+        </section>
+        <!-- Bills Feed List -->
+        <div class="flex flex-col gap-space-sm" id="billsFeedList">
+          <!-- Card 1: Baaki (Unpaid) - High Attention -->
+          <article
+            class="bill-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all relative overflow-hidden"
+            data-status="unpaid"
+          >
+            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+            <div class="flex items-start justify-between gap-space-xs">
+              <div class="flex flex-col pl-1 min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-headline-md text-headline-md text-on-surface truncate"
+                    >Verma ji</span
+                  >
+                  <span class="font-caption text-caption text-on-surface-variant"
+                    >(Sector 4, Site)</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-caption text-on-surface-variant mt-0.5 flex items-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]">schedule</span>
+                  Aaj, 11:45 AM · #KB-2026-0042
+                </span>
+              </div>
+              <div class="flex flex-col items-end shrink-0">
+                <span
+                  class="font-headline-md text-headline-md text-on-surface tracking-tight font-bold"
+                  >₹1,735</span
+                >
+                <span
+                  class="mt-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption flex items-center gap-1 font-semibold"
+                >
+                  <span class="material-symbols-outlined text-[14px]">hourglass_top</span>
+                  Baaki
+                </span>
+              </div>
+            </div>
+            <!-- Item Chips Summary -->
+            <div
+              class="mt-space-sm pl-1 py-2 px-2.5 bg-surface-container-low rounded-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-on-surface-variant shrink-0"
+                >build_circle</span
+              >
+              <p class="font-caption text-caption text-on-surface truncate">
+                Havells MCB (2), Finolex Wire (15m), Labour charge
+              </p>
+            </div>
+            <!-- High Tactile Outdoor Action Row -->
+            <div class="grid grid-cols-2 gap-space-xs mt-space-sm pl-1">
+              <button
+                class="min-h-[52px] px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 active:scale-98 transition-transform shadow-sm mark-paid-action"
+                data-bill-id="0042"
+                type="button"
+              >
+                <span
+                  class="material-symbols-outlined text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                <span>Paid Mark</span>
+              </button>
+              <button
+                class="min-h-[52px] px-3 py-2.5 rounded-xl bg-surface-container-lowest text-primary-container font-label-lg text-label-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform resend-whatsapp-action"
+                data-amount="1735"
+                data-client="Verma ji"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                <span>Phir Bhejein</span>
+              </button>
+            </div>
+          </article>
+          <!-- Card 2: Baaki (Unpaid) -->
+          <article
+            class="bill-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all relative overflow-hidden"
+            data-status="unpaid"
+          >
+            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+            <div class="flex items-start justify-between gap-space-xs">
+              <div class="flex flex-col pl-1 min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-headline-md text-headline-md text-on-surface truncate"
+                    >Gupta ji</span
+                  >
+                  <span class="font-caption text-caption text-on-surface-variant"
+                    >• C-Block Villa</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-caption text-on-surface-variant mt-0.5 flex items-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                  Kal, 5:30 PM · #KB-2026-0039
+                </span>
+              </div>
+              <div class="flex flex-col items-end shrink-0">
+                <span
+                  class="font-headline-md text-headline-md text-on-surface tracking-tight font-bold"
+                  >₹1,165</span
+                >
+                <span
+                  class="mt-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption flex items-center gap-1 font-semibold"
+                >
+                  <span class="material-symbols-outlined text-[14px]">schedule</span>
+                  Baaki
+                </span>
+              </div>
+            </div>
+            <!-- Item Chips Summary -->
+            <div
+              class="mt-space-sm pl-1 py-2 px-2.5 bg-surface-container-low rounded-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-on-surface-variant shrink-0"
+                >electrical_services</span
+              >
+              <p class="font-caption text-caption text-on-surface truncate">
+                Distribution box fitting + 32A MCB replacement
+              </p>
+            </div>
+            <!-- High Tactile Outdoor Action Row -->
+            <div class="grid grid-cols-2 gap-space-xs mt-space-sm pl-1">
+              <button
+                class="min-h-[52px] px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 active:scale-98 transition-transform shadow-sm mark-paid-action"
+                data-bill-id="0039"
+                type="button"
+              >
+                <span
+                  class="material-symbols-outlined text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                <span>Paid Mark</span>
+              </button>
+              <button
+                class="min-h-[52px] px-3 py-2.5 rounded-xl bg-surface-container-lowest text-primary-container font-label-lg text-label-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform resend-whatsapp-action"
+                data-amount="1165"
+                data-client="Gupta ji"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                <span>Phir Bhejein</span>
+              </button>
+            </div>
+          </article>
+          <!-- Card 3: Paid (UPI Settle) -->
+          <article
+            class="bill-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all"
+            data-status="paid"
+          >
+            <div class="flex items-start justify-between gap-space-xs">
+              <div class="flex flex-col min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-headline-md text-headline-md text-on-surface truncate"
+                    >Sharma Ji</span
+                  >
+                  <span class="font-caption text-caption text-on-surface-variant">• Flat 402</span>
+                </div>
+                <span
+                  class="font-caption text-caption text-on-surface-variant mt-0.5 flex items-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]">event_available</span>
+                  20 Nov 2026 · #KB-2026-0038
+                </span>
+              </div>
+              <div class="flex flex-col items-end shrink-0">
+                <span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+                  >₹1,840</span
+                >
+                <span
+                  class="mt-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption flex items-center gap-1 font-semibold"
+                >
+                  <span
+                    class="material-symbols-outlined text-[14px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >verified</span
+                  >
+                  UPI se mila
+                </span>
+              </div>
+            </div>
+            <!-- Item Chips Summary -->
+            <div
+              class="mt-space-sm py-2 px-2.5 bg-surface-container-low rounded-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-on-surface-variant shrink-0"
+                >mode_fan</span
+              >
+              <p class="font-caption text-caption text-on-surface truncate">
+                Ceiling fan installation (2) + Roma switches
+              </p>
+            </div>
+            <!-- Action & Notification Feedback -->
+            <div class="flex items-center justify-between gap-space-xs mt-space-sm pt-space-xs">
+              <div class="flex items-center gap-1.5 text-primary">
+                <span class="material-symbols-outlined text-[16px]">done_all</span>
+                <span class="font-caption text-caption text-primary font-medium"
+                  >WhatsApp bheja gaya</span
+                >
+              </div>
+              <button
+                class="min-h-[48px] px-3.5 py-2 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-1.5 active:scale-95 transition-transform"
+                onclick="alert('Sharma ji ka receipt download/share ho raha hai.')"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px] text-primary-container"
+                  >receipt_long</span
+                >
+                <span>Receipt dekhein</span>
+              </button>
+            </div>
+          </article>
+          <!-- Card 4: Paid (Cash Settle) -->
+          <article
+            class="bill-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all"
+            data-status="paid"
+          >
+            <div class="flex items-start justify-between gap-space-xs">
+              <div class="flex flex-col min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-headline-md text-headline-md text-on-surface truncate"
+                    >Mohan Lal</span
+                  >
+                  <span class="font-caption text-caption text-on-surface-variant">(Shop 12)</span>
+                </div>
+                <span
+                  class="font-caption text-caption text-on-surface-variant mt-0.5 flex items-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]">event_available</span>
+                  19 Nov 2026 · #KB-2026-0035
+                </span>
+              </div>
+              <div class="flex flex-col items-end shrink-0">
+                <span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+                  >₹3,450</span
+                >
+                <span
+                  class="mt-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption flex items-center gap-1 font-semibold"
+                >
+                  <span
+                    class="material-symbols-outlined text-[14px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >payments</span
+                  >
+                  Cash Mila
+                </span>
+              </div>
+            </div>
+            <!-- Item Chips Summary -->
+            <div
+              class="mt-space-sm py-2 px-2.5 bg-surface-container-low rounded-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-on-surface-variant shrink-0"
+                >power</span
+              >
+              <p class="font-caption text-caption text-on-surface truncate">
+                Concealed conduit wiring &amp; 4-gang board fitting
+              </p>
+            </div>
+            <!-- Quick Action Row -->
+            <div class="flex items-center justify-between gap-space-xs mt-space-sm pt-space-xs">
+              <div class="flex items-center gap-1.5 text-on-surface-variant">
+                <span class="material-symbols-outlined text-[16px]">check</span>
+                <span class="font-caption text-caption text-on-surface-variant">Khata updated</span>
+              </div>
+              <button
+                class="min-h-[48px] px-3.5 py-2 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-1.5 active:scale-95 transition-transform"
+                onclick="alert('Mohan Lal ji ka receipt download/share ho raha hai.')"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px] text-primary-container"
+                  >receipt_long</span
+                >
+                <span>Receipt dekhein</span>
+              </button>
+            </div>
+          </article>
+          <!-- Card 5: Draft (Adhoora Kaccha Bill) -->
+          <article
+            class="bill-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all"
+            data-status="draft"
+          >
+            <div class="flex items-start justify-between gap-space-xs">
+              <div class="flex flex-col min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-headline-md text-headline-md text-on-surface truncate"
+                    >Rajesh Bhai</span
+                  >
+                  <span class="font-caption text-caption text-on-surface-variant"
+                    >• Sunshine Apts</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-caption text-on-surface-variant mt-0.5 flex items-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]">edit_calendar</span>
+                  18 Nov 2026 · #KB-2026-0031
+                </span>
+              </div>
+              <div class="flex flex-col items-end shrink-0">
+                <span
+                  class="font-title-lg text-title-lg text-on-surface-variant tracking-tight font-bold"
+                  >~₹650</span
+                >
+                <span
+                  class="mt-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-caption text-caption flex items-center gap-1 font-semibold"
+                >
+                  <span class="material-symbols-outlined text-[14px]">pending</span>
+                  Draft (Adhoora)
+                </span>
+              </div>
+            </div>
+            <!-- Item Chips Summary -->
+            <div
+              class="mt-space-sm py-2 px-2.5 bg-surface-container-low rounded-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-tertiary-container shrink-0"
+                >plumbing</span
+              >
+              <p class="font-caption text-caption text-on-surface truncate">
+                Bathroom pipe leak repair (2 items pending rate)
+              </p>
+            </div>
+            <!-- Complete Draft Action -->
+            <div class="flex items-center justify-end gap-space-xs mt-space-sm pt-space-xs">
+              <button
+                class="min-h-[48px] w-full px-4 py-2.5 rounded-xl bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 active:scale-98 transition-transform font-bold"
+                onclick="alert('Draft bill editor khul raha hai...')"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px] text-primary-container"
+                  >edit</span
+                >
+                <span>Poora karein &amp; WhatsApp bhejein</span>
+              </button>
+            </div>
+          </article>
+        </div>
+        <!-- Voice Assistant Hint & Quick Pro-Tip Banner -->
+        <section
+          class="mt-space-md bg-surface-container rounded-xl p-space-md flex items-start gap-3"
+        >
+          <div
+            class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm"
+          >
+            <span class="material-symbols-outlined text-[22px]">record_voice_over</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-label-md text-label-md text-on-surface font-bold"
+              >Boliye aur turant update karein</span
+            >
+            <p class="font-caption text-caption text-on-surface-variant mt-0.5 leading-snug">
+              Neeche mic daba kar bolein:
+              <span class="text-on-surface font-semibold">“Verma ji ka bill paid mark kar do”</span>
+              ya
+              <span class="text-on-surface font-semibold">“Kal ka Sharma ji wala bill bhejo”</span>.
+            </p>
+          </div>
+        </section>
+        <!-- Interactive Feedback Toast -->
+        <div
+          class="fixed bottom-36 left-4 right-4 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-lg flex items-center justify-between gap-2 transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none"
+          id="actionToast"
+        >
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[20px] text-primary-fixed" id="toastIcon"
+              >check_circle</span
+            >
+            <span class="font-label-md text-label-md" id="toastMessage">Bill update ho gaya</span>
+          </div>
+          <button
+            class="text-primary-fixed font-caption text-caption font-bold px-2 py-1"
+            onclick="dismissToast()"
+            type="button"
+          >
+            THEEK HAI
+          </button>
+        </div>
+      </div>
+      <script>
+        // DOM References & Interactive Hooks
+        const toggleSearchBtn = document.getElementById("toggleSearchBtn");
+        const searchBarContainer = document.getElementById("searchBarContainer");
+        const billSearchInput = document.getElementById("billSearchInput");
+        const filterPills = document.querySelectorAll(".filter-pill");
+        const billCards = document.querySelectorAll(".bill-card");
+        const toast = document.getElementById("actionToast");
+        const toastMessage = document.getElementById("toastMessage");
+        let toastTimeout;
+
+        // Toggle Search Input
+        if (toggleSearchBtn && searchBarContainer) {
+          toggleSearchBtn.addEventListener("click", () => {
+            searchBarContainer.classList.toggle("hidden");
+            if (!searchBarContainer.classList.contains("hidden")) {
+              billSearchInput.focus();
+            }
+          });
+        }
+
+        // Toast Helper
+        function showToast(msg, icon = "check_circle") {
+          if (!toast) return;
+          toastMessage.textContent = msg;
+          document.getElementById("toastIcon").textContent = icon;
+          toast.classList.remove("translate-y-10", "opacity-0", "pointer-events-none");
+          toast.classList.add("translate-y-0", "opacity-100");
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            dismissToast();
+          }, 3200);
+        }
+
+        function dismissToast() {
+          if (!toast) return;
+          toast.classList.add("translate-y-10", "opacity-0", "pointer-events-none");
+          toast.classList.remove("translate-y-0", "opacity-100");
+        }
+
+        // Filter Pills Logic
+        filterPills.forEach((pill) => {
+          pill.addEventListener("click", () => {
+            filterPills.forEach((p) => {
+              p.classList.remove("bg-primary-container", "text-on-primary");
+              p.classList.add("bg-surface-container-lowest", "text-on-surface");
+            });
+            pill.classList.remove("bg-surface-container-lowest", "text-on-surface");
+            pill.classList.add("bg-primary-container", "text-on-primary");
+
+            const filterType = pill.getAttribute("data-filter");
+            billCards.forEach((card) => {
+              const cardStatus = card.getAttribute("data-status");
+              if (filterType === "all" || cardStatus === filterType) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Search Filter Interaction
+        if (billSearchInput) {
+          billSearchInput.addEventListener("input", (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            billCards.forEach((card) => {
+              const text = card.innerText.toLowerCase();
+              if (text.includes(q)) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        }
+
+        // Mark Paid Micro-Interaction
+        document.querySelectorAll(".mark-paid-action").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const card = this.closest(".bill-card");
+            const billId = this.getAttribute("data-bill-id");
+
+            // Update UI to paid state
+            card.setAttribute("data-status", "paid");
+            const statusStrip = card.querySelector(".absolute.left-0");
+            if (statusStrip) statusStrip.remove();
+
+            // Change tag to paid
+            const badgeContainer = card.querySelector(".font-caption.flex.items-center.gap-1");
+            if (badgeContainer) {
+              badgeContainer.className =
+                "mt-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption flex items-center gap-1 font-semibold";
+              badgeContainer.innerHTML =
+                '<span class="material-symbols-outlined text-[14px]">verified</span> Paid (Cash mila)';
+            }
+
+            // Convert action row
+            const actionRow = this.parentElement;
+            actionRow.innerHTML = `
+        <div class="col-span-2 flex items-center justify-between py-1 text-primary">
+          <span class="font-caption text-caption font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[18px]">verified</span> Abhi Paid Mark Kiya
+          </span>
+          <button type="button" class="min-h-[44px] px-3 py-1 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-primary-container">receipt</span>
+            Receipt Bhejein
+          </button>
+        </div>
+      `;
+
+            showToast(`Bill #KB-2026-${billId} paid mark ho gaya!`, "task_alt");
+          });
+        });
+
+        // Resend WhatsApp Micro-Interaction
+        document.querySelectorAll(".resend-whatsapp-action").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const client = this.getAttribute("data-client");
+            const amt = this.getAttribute("data-amount");
+            showToast(`${client} ko ₹${amt} ka WhatsApp bill reminder bheja gaya!`, "send");
+          });
+        });
+
+        // Sync with App Shell's "Bills" active navigation state
+        (function setNavActive() {
+          const navLinks = document.querySelectorAll("nav a");
+          navLinks.forEach((link) => {
+            const isBillsTab =
+              link.getAttribute("data-path") === "bills-ledger" ||
+              link.textContent.includes("Bills");
+            if (isBillsTab) {
+              link.classList.remove("text-on-surface-variant");
+              link.classList.add("text-primary-container", "font-bold");
+              const icon = link.querySelector(".material-symbols-outlined");
+              if (icon) {
+                icon.style.fontVariationSettings = "'FILL' 1";
+              }
+            } else {
+              link.classList.remove("text-primary-container", "font-bold");
+              link.classList.add("text-on-surface-variant");
+            }
+          });
+        })();
+      </script>
+    </main>
+    <div
+      class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.06)]"
+    >
+      <div class="flex flex-col items-center pt-space-xs">
+        <div class="w-full max-w-md px-margin flex items-center justify-between gap-space-sm py-1">
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span
+              class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse shrink-0"
+            ></span
+            ><span class="font-body-md text-body-md text-on-surface truncate font-semibold"
+              >Tap karke boliye
+              <span class="font-caption text-caption text-on-surface-variant font-normal"
+                >(Sun raha hoon...)</span
+              ></span
+            >
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <span class="font-caption text-caption text-secondary font-semibold"
+              >Wispr Flow Active</span
+            >
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center my-1">
+          <div
+            class="absolute w-28 h-28 rounded-full bg-primary-container/20"
+            style="animation: pulse-ring 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite"
+          ></div>
+          <button
+            class="relative w-[88px] h-[88px] rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-[0_8px_24px_rgba(11,122,75,0.35)] active:scale-95 active:bg-primary transition-all z-10"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[40px]">mic</span>
+          </button>
+        </div>
+      </div>
+      <nav
+        class="flex items-center justify-around h-16 px-space-md pt-1 pb-1"
+        data-active-classes="text-primary-container font-bold"
+      >
+        <a
+          class="min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant px-3"
+          data-path="voice-billing-desk"
+          href="#"
+          ><span class="material-symbols-outlined text-[24px]">mic_none</span
+          ><span class="font-caption text-caption">Boliye</span></a
+        ><a
+          class="min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant px-3"
+          data-path="share-preview"
+          href="#"
+          ><span class="material-symbols-outlined text-[24px]">share</span
+          ><span class="font-caption text-caption">Share</span></a
+        ><a
+          class="min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant px-3"
+          data-path="bills-ledger"
+          href="#"
+          ><span class="material-symbols-outlined text-[24px]">receipt</span
+          ><span class="font-caption text-caption">Bills</span></a
+        ><a
+          class="min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant px-3"
+          data-path="rate-card-catalog"
+          href="#"
+          ><span class="material-symbols-outlined text-[24px]">calculate</span
+          ><span class="font-caption text-caption">Rates</span></a
+        ><a
+          class="min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant px-3"
+          data-path="technician-profile"
+          href="#"
+          ><span class="material-symbols-outlined text-[24px]">badge</span
+          ><span class="font-caption text-caption">Khata</span></a
+        >
+      </nav>
+    </div>
+  </body>
+</html>

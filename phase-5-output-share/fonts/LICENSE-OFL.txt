@@ -1,0 +1,3 @@
+Noto Sans and Noto Sans Devanagari, (c) Google / Noto project, SIL Open Font License 1.1.
+Subset to Latin + Rupee sign + punctuation (and the Devanagari block) for KaamBill PDF receipts.
+https://openfontlicense.org

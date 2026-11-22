@@ -1,0 +1,11 @@
+{
+  "name": "@kaambill/phase-3-understanding",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 3: Groq structured extraction, endpoint factory, on-device number normalizer.",
+  "dependencies": {
+    "groq-sdk": "^1.6.0",
+    "zod": "^4.6.7"
+  }
+}

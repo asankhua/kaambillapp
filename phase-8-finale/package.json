@@ -1,0 +1,10 @@
+{
+  "name": "@kaambill/phase-8-finale",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 8: Groq Whisper, voice detector, demo mode, finale tools.",
+  "dependencies": {
+    "groq-sdk": "^1.6.0"
+  }
+}

@@ -1,0 +1,203 @@
+[
+  {
+    "id": "rc_mcb_16a",
+    "name": "Havells MCB 16A Single Pole",
+    "aliases": [
+      "havells mcb",
+      "mcb",
+      "hevells mcb",
+      "em see bee",
+      "16 amp mcb",
+      "solah amp mcb",
+      "एमसीबी",
+      "एम सी बी"
+    ],
+    "unit": "pc",
+    "price": 180,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_mcb_32a_dp",
+    "name": "Havells MCB 32A Double Pole",
+    "aliases": ["32 amp mcb", "double pole mcb", "battees amp mcb", "dp mcb", "32 एम्प एमसीबी"],
+    "unit": "pc",
+    "price": 390,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_wire_1_5",
+    "name": "Finolex Wire 1.5 sq mm",
+    "aliases": [
+      "finolex wire",
+      "phenolex wire",
+      "finolex taar",
+      "wire",
+      "taar",
+      "1.5 wire",
+      "dedh mm wire",
+      "तार",
+      "वायर",
+      "फिनोलेक्स तार"
+    ],
+    "unit": "m",
+    "price": 25,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_switch_6a",
+    "name": "Anchor Roma 6A Switch",
+    "aliases": [
+      "roma switch",
+      "anchor switch",
+      "switch",
+      "6 amp switch",
+      "chhe amp switch",
+      "स्विच"
+    ],
+    "unit": "pc",
+    "price": 75,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_socket_16a",
+    "name": "Anchor Roma 16A Socket",
+    "aliases": [
+      "socket",
+      "roma socket",
+      "16 amp socket",
+      "power socket",
+      "plug point",
+      "सॉकेट",
+      "सोकेट",
+      "प्लग"
+    ],
+    "unit": "pc",
+    "price": 120,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_board_6m",
+    "name": "Switch Board 6-Module Plate",
+    "aliases": [
+      "switch board",
+      "board",
+      "6 module plate",
+      "chhe module board",
+      "modular plate",
+      "स्विच बोर्ड",
+      "बोर्ड"
+    ],
+    "unit": "pc",
+    "price": 150,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_fan_regulator",
+    "name": "Ceiling Fan Regulator",
+    "aliases": ["regulator", "fan regulator", "pankha regulator", "dimmer", "रेगुलेटर", "रेग्युलेटर"],
+    "unit": "pc",
+    "price": 250,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_led_batten",
+    "name": "LED Batten 20W",
+    "aliases": [
+      "led batten",
+      "batten",
+      "tube light",
+      "tubelight",
+      "led tube",
+      "ट्यूबलाइट",
+      "ट्यूब लाइट",
+      "बैटन"
+    ],
+    "unit": "pc",
+    "price": 220,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_conduit_20mm",
+    "name": "PVC Conduit Pipe 20mm",
+    "aliases": [
+      "conduit pipe",
+      "conduit",
+      "pvc pipe",
+      "wiring pipe",
+      "casing pipe",
+      "पाइप",
+      "केसिंग पाइप"
+    ],
+    "unit": "m",
+    "price": 18,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_tape",
+    "name": "PVC Insulation Tape",
+    "aliases": ["tape", "insulation tape", "black tape", "taping", "टेप"],
+    "unit": "pc",
+    "price": 15,
+    "category": "electrical"
+  },
+  {
+    "id": "rc_cpvc_pipe_half",
+    "name": "CPVC Pipe 1/2 inch",
+    "aliases": [
+      "cpvc pipe",
+      "cpvc",
+      "see pvc pipe",
+      "aadha inch pipe",
+      "half inch pipe",
+      "सीपीवीसी पाइप"
+    ],
+    "unit": "m",
+    "price": 60,
+    "category": "plumbing"
+  },
+  {
+    "id": "rc_cpvc_elbow_half",
+    "name": "CPVC Elbow 1/2 inch",
+    "aliases": ["elbow", "cpvc elbow", "elbo", "bend", "एल्बो"],
+    "unit": "pc",
+    "price": 15,
+    "category": "plumbing"
+  },
+  {
+    "id": "rc_cpvc_tee_half",
+    "name": "CPVC Tee 1/2 inch",
+    "aliases": ["tee", "cpvc tee", "t joint", "tee joint", "टी"],
+    "unit": "pc",
+    "price": 18,
+    "category": "plumbing"
+  },
+  {
+    "id": "rc_ball_valve_half",
+    "name": "Ball Valve 1/2 inch",
+    "aliases": ["ball valve", "valve", "stop cock", "stopcock", "val", "वाल्व", "बॉल वाल्व"],
+    "unit": "pc",
+    "price": 180,
+    "category": "plumbing"
+  },
+  {
+    "id": "rc_labour_fan_install",
+    "name": "Ceiling Fan Installation (Labour)",
+    "aliases": [
+      "fan installation",
+      "fan lagana",
+      "pankha lagana",
+      "fan fitting",
+      "fan lagane",
+      "fan lagaye",
+      "fan lagaya",
+      "pankha lagaya",
+      "pankhe lagane",
+      "pankhe lagaye",
+      "पंखा लगाना",
+      "पंखा लगाया"
+    ],
+    "unit": "fan",
+    "price": 200,
+    "category": "labour"
+  }
+]

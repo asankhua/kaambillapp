@@ -1,0 +1,12 @@
+{
+  "name": "@kaambill/phase-7-domain-sprint",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 7: domain-swap rehearsal and new-domain scaffold.",
+  "dependencies": {
+    "groq-sdk": "^1.6.0",
+    "xstate": "^5.33.4",
+    "zod": "^4.6.7"
+  }
+}

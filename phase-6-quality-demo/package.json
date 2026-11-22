@@ -1,0 +1,10 @@
+{
+  "name": "@kaambill/phase-6-quality-demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Phase 6: telemetry, eval set + runner, test configs, demo pack.",
+  "dependencies": {
+    "groq-sdk": "^1.6.0"
+  }
+}
