@@ -6,4 +6,9 @@ const procs = [run("dev:api"), run("dev:web")];
 const stop = () => procs.forEach((p) => p.kill("SIGTERM"));
 process.on("SIGINT", stop);
 process.on("SIGTERM", stop);
-procs.forEach((p) => p.on("exit", (code) => { stop(); process.exitCode = code ?? 0; }));
+procs.forEach((p) =>
+  p.on("exit", (code) => {
+    stop();
+    process.exitCode = code ?? 0;
+  }),
+);

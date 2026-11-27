@@ -114,6 +114,21 @@ TypeScript: `phase-0-setup/tsconfig.base.json` + a `tsconfig.json` (and `tsconfi
 
 Groq (`openai/gpt-oss-120b`, strict JSON schema; optional `whisper-large-v3-turbo`) · optional Sarvam AI speech-to-text (`saaras:v4`) · browser Web Speech (input only) · Wispr Flow (dictation into the text box) · XState · IndexedDB · `qrcode` + `jspdf` + Web Share API · Vite + React + Tailwind (theme from the Stitch export) · Vitest + Playwright.
 
+## Deploy to a Hugging Face Space
+
+The [`Dockerfile`](./Dockerfile) builds the front end and serves it with the `/api` functions on port 7860 (`phase-0-setup/scripts/serve.ts`). The GitHub Action [`deploy-hf-space.yml`](./.github/workflows/deploy-hf-space.yml) pushes every commit on `main` to https://huggingface.co/spaces/ashishsankhua/kaambill (also runnable by hand from the **Actions** tab).
+
+Repository secrets used by the Action (**Settings → Secrets and variables → Actions**):
+
+| Name                        | Needed?  | Purpose                                                                 |
+| --------------------------- | -------- | ----------------------------------------------------------------------- |
+| `HF_TOKEN`                  | Yes      | Hugging Face token with **write** access to the Space                   |
+| `GROQ_API_KEY`              | Yes      | Copied to the Space as a secret (bill extraction)                       |
+| `SARVAM_API_KEY`            | Optional | Copied to the Space as a secret (Sarvam speech-to-text)                 |
+| `VOICE_PROVIDER` (variable) | Optional | `groq` or `sarvam`, copied to the Space as a variable (default: `groq`) |
+
+Run it locally the same way: `npx vite build --config app/vite.config.ts && node --env-file=.env --import tsx phase-0-setup/scripts/serve.ts`.
+
 ## License
 
 [MIT](./LICENSE), © 2026 Ashish Kumar Sankhua. The landing page footer links to the same file (`app/public/LICENSE.txt`) as a download.

@@ -1,0 +1,22 @@
+# Keep secrets, local state and build junk out of the image.
+.git
+.github
+.husky
+node_modules
+**/node_modules
+app/dist
+**/dist
+.env
+.env.*
+!.env.example
+.claude
+.DS_Store
+untitled folder
+stitch_kaambill_voice_invoicing_app
+test-results
+playwright-report
+coverage
+*.tsbuildinfo
+**/e2e/screenshots
+phase-6-quality-demo/eval/audio
+phase-6-quality-demo/eval/results

@@ -1,0 +1,35 @@
+name: Deploy to Hugging Face Space
+
+# Pushes the app to https://huggingface.co/spaces/ashishsankhua/kaambill (Docker Space: see Dockerfile).
+# Needs the repository secret HF_TOKEN (a Hugging Face token with write access).
+# Optional secrets, copied to the Space so the API works there: GROQ_API_KEY, SARVAM_API_KEY.
+# Optional repository variable: VOICE_PROVIDER (groq | sarvam).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hf-space
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet "huggingface_hub>=0.30"
+      - name: Deploy
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_ID: ashishsankhua/kaambill
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SARVAM_API_KEY: ${{ secrets.SARVAM_API_KEY }}
+          VOICE_PROVIDER: ${{ vars.VOICE_PROVIDER }}
+        run: python .github/scripts/deploy_space.py
