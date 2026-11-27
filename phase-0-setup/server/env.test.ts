@@ -27,4 +27,31 @@ describe("server env", () => {
     const summary = JSON.stringify(describeEnv(getEnv(base)));
     expect(summary).not.toContain(base.GROQ_API_KEY);
   });
+
+  it("defaults the voice provider to groq and treats blank values as unset", () => {
+    expect(getEnv(base).VOICE_PROVIDER).toBe("groq");
+    const env = getEnv({ ...base, VOICE_PROVIDER: "", SARVAM_API_KEY: "", SARVAM_STT_MODEL: "" });
+    expect(env).toMatchObject({
+      VOICE_PROVIDER: "groq",
+      SARVAM_API_KEY: undefined,
+      SARVAM_STT_MODEL: "saaras:v4",
+      SARVAM_STT_MODE: "codemix",
+    });
+  });
+
+  it("accepts VOICE_PROVIDER=sarvam only with SARVAM_API_KEY", () => {
+    const key = "sk_" + "y".repeat(20);
+    expect(getEnv({ ...base, VOICE_PROVIDER: "sarvam", SARVAM_API_KEY: key }).VOICE_PROVIDER).toBe(
+      "sarvam",
+    );
+    expect(() => getEnv({ ...base, VOICE_PROVIDER: "sarvam" })).toThrow(/SARVAM_API_KEY/);
+    expect(() => getEnv({ ...base, VOICE_PROVIDER: "whisper" })).toThrow(/VOICE_PROVIDER/);
+  });
+
+  it("never exposes the Sarvam key in describeEnv", () => {
+    const key = "sk_" + "z".repeat(20);
+    const summary = JSON.stringify(describeEnv(getEnv({ ...base, SARVAM_API_KEY: key })));
+    expect(summary).not.toContain(key);
+    expect(summary).toContain('"sarvam":"set"');
+  });
 });

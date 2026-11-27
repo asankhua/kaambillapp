@@ -3,19 +3,27 @@ import type { SttCallbacks, SttProvider } from "../../../phase-2-voice-core/src/
 import { EnergyVad, rmsOf } from "../audio/vad";
 import type { VoiceErrorKind } from "../../../phase-2-voice-core/src/machine/types";
 
-/** POST one clip to /api/stt (Groq Whisper). Shared by the Whisper engine and the second pass. */
+/** Cloud backend a mic engine asks /api/stt to use. */
+export type CloudStt = "groq" | "sarvam";
+
+/**
+ * POST one clip to /api/stt. Shared by the cloud mic engines and the Whisper second pass.
+ * `provider` picks the backend; without it the server uses VOICE_PROVIDER.
+ */
 export async function uploadClip(
   endpoint: string,
   audio: Blob,
   lang: string,
   hints: string[],
   fetchImpl: typeof fetch = fetch,
+  provider?: CloudStt,
 ): Promise<{ text: string; confidence: number | null } | { error: VoiceErrorKind }> {
   try {
     const form = new FormData();
     form.append("audio", audio, "turn.webm");
     form.append("lang", lang);
     form.append("hints", hints.join(","));
+    if (provider) form.append("provider", provider);
     const res = await fetchImpl(endpoint, { method: "POST", body: form });
     if (res.status === 429) return { error: "rate_limited" };
     if (!res.ok) return { error: "network" };
@@ -34,13 +42,13 @@ export async function uploadClip(
 }
 
 /**
- * Groq Whisper via /api/stt (Phase 8). Records with MediaRecorder, ends on 1.5 s of silence
+ * Cloud speech-to-text via /api/stt (Phase 8): Groq Whisper (default) or Sarvam. Records with MediaRecorder, ends on 1.5 s of silence
  * (EnergyVad), uploads once, returns ONE final turn. No live partials (Whisper is batch):
  * the dock shows "Sun raha hoon…" and a level meter instead.
  * Audio goes to our server → Groq; it is not stored (architecture.md §8).
  */
 export class GroqWhisperProvider implements SttProvider {
-  readonly id = "groq-whisper";
+  readonly id: string;
   private stream: MediaStream | null = null;
   private recorder: MediaRecorder | null = null;
   private ctx: AudioContext | null = null;
@@ -51,7 +59,10 @@ export class GroqWhisperProvider implements SttProvider {
   constructor(
     private readonly endpoint = `${import.meta.env?.VITE_API_BASE_URL ?? "/api"}/stt`,
     private readonly silenceMs = Number(import.meta.env?.VITE_VAD_SILENCE_MS ?? DEFAULT_SILENCE_MS), // 4 s pause between items
-  ) {}
+    private readonly backend: CloudStt = "groq",
+  ) {
+    this.id = backend === "sarvam" ? "sarvam" : "groq-whisper";
+  }
 
   isSupported() {
     return typeof MediaRecorder !== "undefined" && !!navigator.mediaDevices?.getUserMedia;
@@ -98,6 +109,8 @@ export class GroqWhisperProvider implements SttProvider {
         new Blob(chunks, { type: rec.mimeType || "audio/webm" }),
         lang,
         this.hints,
+        fetch,
+        this.backend,
       );
       if ("error" in r) return cb.onError(r.error);
       cb.onFinal({
@@ -140,5 +153,12 @@ export class GroqWhisperProvider implements SttProvider {
     this.stream = null;
     void this.ctx?.close().catch(() => {});
     this.ctx = null;
+  }
+}
+
+/** Sarvam AI speech-to-text (Hindi / Hinglish / Indian English): same record-and-upload flow, Sarvam backend. */
+export class SarvamProvider extends GroqWhisperProvider {
+  constructor(endpoint?: string, silenceMs?: number) {
+    super(endpoint, silenceMs, "sarvam");
   }
 }

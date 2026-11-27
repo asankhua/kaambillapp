@@ -30,6 +30,3 @@ export class NotImplementedProvider implements SttProvider {
   }
   stop() {}
 }
-
-/** Phase 8, ONLY if Web Speech + Groq Whisper miss the Hinglish/Hindi accuracy target. */
-export const SarvamProvider = () => new NotImplementedProvider("sarvam");

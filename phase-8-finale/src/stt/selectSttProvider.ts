@@ -1,7 +1,6 @@
 import type { SttProvider } from "../../../phase-2-voice-core/src/stt/SttProvider";
-import { SarvamProvider } from "../../../phase-2-voice-core/src/stt/SttProvider";
 import { WebSpeechProvider } from "../../../phase-2-voice-core/src/stt/WebSpeechProvider";
-import { GroqWhisperProvider } from "./GroqWhisperProvider";
+import { GroqWhisperProvider, SarvamProvider } from "./GroqWhisperProvider";
 import { SecondPassProvider } from "./SecondPassProvider";
 
 export type SttProviderId = "webspeech" | "webspeech+whisper" | "groq-whisper" | "sarvam";
@@ -12,6 +11,7 @@ export type SttProviderId = "webspeech" | "webspeech+whisper" | "groq-whisper" |
  *   webspeech          browser Web Speech (default, live transcript)
  *   webspeech+whisper  Web Speech + Groq Whisper SECOND PASS for unsure turns (§5.1.3)
  *   groq-whisper       Groq Whisper only (record → upload)
+ *   sarvam             Sarvam AI speech-to-text (record → upload; needs SARVAM_API_KEY on the server)
  * Falls back to browser Web Speech if the chosen engine isn't supported.
  */
 export function selectSttProvider(
@@ -27,7 +27,7 @@ export function selectSttProvider(
       : id === "webspeech+whisper" && recordingOk
         ? new SecondPassProvider(web)
         : id === "sarvam"
-          ? SarvamProvider()
+          ? new SarvamProvider()
           : web;
   return chosen.isSupported() ? chosen : web;
 }
