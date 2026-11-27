@@ -82,6 +82,13 @@ def main() -> int:
     print(f"Authenticated to Hugging Face as {who}; deploying to space {SPACE_ID}")
     api.create_repo(SPACE_ID, repo_type="space", space_sdk="docker", exist_ok=True)
 
+    # ZeroGPU only exists for Gradio Spaces: a Docker Space that requests it fails with CONFIG_ERROR.
+    # Leave any other hardware choice (cpu-upgrade, a paid GPU…) alone.
+    hardware = api.get_space_runtime(SPACE_ID).requested_hardware
+    if hardware is None or str(hardware).lower().startswith("zero"):
+        api.request_space_hardware(SPACE_ID, "cpu-basic")
+        print(f"Hardware changed from {hardware} to cpu-basic (free CPU)")
+
     # 1. Stage the files.
     stage = Path(tempfile.mkdtemp(prefix="space-"))
     files = tracked_files()
