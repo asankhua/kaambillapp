@@ -149,7 +149,7 @@ Run this phase's tests: `npm run test:phase -- 1` (add `--unit` to skip the brow
 - [`src/theme.css`](./src/theme.css)
 - [`src/tokens.ts`](./src/tokens.ts)
 
-**Icon font subset:** [`scripts/icons.mjs`](./scripts/icons.mjs) (`npm run icons` rewrites the icon `<link>` in `app/index.html` with only the icons the code uses, ~27 KB instead of 1.1 MB) · valid names: [`icons/material-symbols-names.txt`](./icons/material-symbols-names.txt)
+**Icon font subset:** [`scripts/icons.mjs`](./scripts/icons.mjs) (`npm run icons` rewrites the icon `<link>` in `app/app/index.html` with only the icons the code uses, ~27 KB instead of 1.1 MB) · valid names: [`icons/material-symbols-names.txt`](./icons/material-symbols-names.txt)
 
 **Stitch export:** [`design/`](./design/), 18 folders (one per screen: `screen.png` + `code.html`, plus `bharat_trades_kinetic/DESIGN.md`).
 

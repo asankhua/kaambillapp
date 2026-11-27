@@ -2,7 +2,7 @@
  * Icon font subset. Google's full Material Symbols font is ~1.1 MB (it slowed the first screen to
  * 9 s on a slow phone). We ask Google Fonts for only the icons the app uses (`icon_names=`, ~27 KB).
  *
- *   npm run icons          → rewrite the icon <link> in app/index.html from the source code
+ *   npm run icons          → rewrite the icon <link> in app/app/index.html from the source code
  *   (the unit test icons.test.ts fails if a new icon is used but missing from the link)
  *
  * Icon names are found as string literals in app/src and phase-* /src that are valid Material Symbols
@@ -48,12 +48,12 @@ export const iconFontUrl = (names) =>
 export const ICON_LINK_RE = /<link\s+href="https:\/\/fonts\.googleapis\.com\/css2\?family=Material\+Symbols\+Outlined[^"]*"\s+rel="stylesheet"\s*\/>/;
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const file = join(root, "app/index.html");
+  const file = join(root, "app/app/index.html");
   const html = readFileSync(file, "utf8");
-  if (!ICON_LINK_RE.test(html)) throw new Error("Icon <link> not found in app/index.html");
+  if (!ICON_LINK_RE.test(html)) throw new Error("Icon <link> not found in app/app/index.html");
   const names = usedIconNames();
   writeFileSync(file, html.replace(ICON_LINK_RE, `<link href="${iconFontUrl(names)}" rel="stylesheet" />`));
-  console.log(`app/index.html: icon font subset with ${names.length} icons`);
+  console.log(`app/app/index.html: icon font subset with ${names.length} icons`);
 
   // Verify with a real browser: every icon must render as ONE glyph (1em wide). A name Google
   // doesn't know is silently dropped from the subset and would show as a word.

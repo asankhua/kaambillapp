@@ -32,7 +32,7 @@ async function toInvoice(page: Page, how: "later" | "upi-later" | "upi-paid" | "
 }
 
 test("onboarding (S1): UPI ID format is checked, no 'bank linked' claim", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/app/");
   await expect(page.getByRole("button", { name: "Aage badhein →" })).toBeDisabled();
   await page.getByLabel("Aapka / Dukaan ka naam").fill("Ramesh Electricals");
   await expect(page.getByText("Bill par yahi naam dikhai dega")).toContainText(

@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "description": "KaamBill: hands-free voice billing for Indian tradespeople. Built phase by phase; built with Wispr Flow.",
+  "author": "Ashish Kumar Sankhua",
+  "license": "MIT",
   "workspaces": [
     "phase-*",
     "domain-*",

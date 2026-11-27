@@ -79,7 +79,7 @@ const fakeMic = (page: Page, mode: "listen" | "blocked") =>
   }, mode);
 
 test("S1a–c onboarding", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/app/");
   await snap(page, "onboarding_1_aapka_naam");
   await page.getByLabel("Aapka / Dukaan ka naam").fill("Ramesh Electricals");
   await page.getByRole("button", { name: "Aage badhein →" }).click();

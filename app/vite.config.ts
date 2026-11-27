@@ -17,7 +17,17 @@ export default defineConfig({
     // Local dev: proxy /api to the local API (`npm run dev:api`, port 3000) or `vercel dev`.
     proxy: { "/api": "http://localhost:3000" },
   },
-  build: { outDir: "dist", emptyOutDir: true },
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+    // Two pages: the landing page at "/" and the KaamBill app at "/app/" (embedded in the landing page too).
+    rollupOptions: {
+      input: {
+        landing: fileURLToPath(new URL("index.html", import.meta.url)),
+        app: fileURLToPath(new URL("app/index.html", import.meta.url)),
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
@@ -28,8 +38,11 @@ export default defineConfig({
       workbox: {
         // Precache the app, the lazy jsPDF chunk and the PDF fonts so a finalized bill can be
         // turned into a PDF + QR offline (phase-5 acceptance).
-        globPatterns: ["**/*.{js,css,html,svg,png,ttf,webmanifest}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,ttf,webmanifest,txt}"],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+        // Offline navigation fallback is the app, not the landing page.
+        navigateFallback: "/app/index.html",
+        navigateFallbackAllowlist: [/^\/app\//],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
@@ -51,7 +64,8 @@ export default defineConfig({
         background_color: "#F9F9FF",
         display: "standalone",
         orientation: "portrait",
-        start_url: "/",
+        start_url: "/app/",
+        scope: "/",
         icons: [
           { src: "icon-192.png", sizes: "192x192", type: "image/png" },
           { src: "icon-512.png", sizes: "512x512", type: "image/png" },

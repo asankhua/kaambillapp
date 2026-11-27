@@ -38,6 +38,7 @@ Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 
 | --------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Groq API key** (`GROQ_API_KEY`) | ✅ **Required, the only key** | The Groq LLM (`openai/gpt-oss-120b`, strict JSON) turns the spoken / typed words into the bill: customer, items, quantities, labour, intent. Without it the app can hear but not build bills. Also used (optionally) for Groq Whisper speech-to-text |
 | Wispr Flow app                    | Optional, no key              | For dictating into the text box (sign in to the app)                                                                                                                                                                                                 |
+| Sarvam AI key (`SARVAM_API_KEY`)  | Optional                      | Alternative cloud speech-to-text for Hindi / Hinglish (`?stt=sarvam` or `VITE_STT_PROVIDER=sarvam`). `VOICE_PROVIDER=groq\|sarvam` picks the backend of `/api/stt` (default `groq`)                                                                  |
 | Browser speech recognition        | Built in, no key              | The mic button (Chrome on Android / desktop)                                                                                                                                                                                                         |
 | Text-to-speech                    | ❌ Not used                   | The app never speaks                                                                                                                                                                                                                                 |
 | Vercel account                    | For deploying                 | Hosting + the `/api` functions                                                                                                                                                                                                                       |
@@ -48,10 +49,10 @@ Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 
 npm install
 cp .env.example .env       # then set GROQ_API_KEY (the only required variable)
 npm run check:env          # validates the env and confirms the Groq key works (prints no secrets)
-npm run dev                # app on http://localhost:5173 + local API on :3000 (real Groq)
+npm run dev                # landing page on http://localhost:5173, app on /app/ + local API on :3000 (real Groq)
 ```
 
-Try it: open http://localhost:5173/?demo=1 → **Likh ke daalein** → type the sentence above → "Haan, sahi hai" → "Haan, bhejo" → UPI → "Paisa mil gaya ✓".
+Try it: open http://localhost:5173/app/?demo=1 → **Likh ke daalein** → type the sentence above → "Haan, sahi hai" → "Haan, bhejo" → UPI → "Paisa mil gaya ✓".
 
 | Command                                                          | What it does                                                                                                                                                                                                                                                                                             |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -83,19 +84,19 @@ Try it: open http://localhost:5173/?demo=1 → **Likh ke daalein** → type the 
 
 Each phase folder holds its **plan** (`README.md`) **and its code + tests**. `app/` wires the phases into one app; `api/` holds the one-line Vercel entry points. **A phase may import earlier phases, never later ones** (enforced by ESLint).
 
-| Folder                                                 | Code                                                                                                                                                     | Tests                             |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| [`phase-0-setup/`](./phase-0-setup/)                   | `@kaambill/shared` (types, Zod schema), seed rate card, server env + `/api/health`, local dev API, test helpers                                          | schema, env                       |
-| [`phase-1-ui-ux-design/`](./phase-1-ui-ux-design/)     | Stitch export (`design/`), theme CSS generated from it, tokens, `Icon`, icon-font subset                                                                 | icons · e2e                       |
-| [`phase-2-voice-core/`](./phase-2-voice-core/)         | Conversation machine (read-back gate), Web Speech (4 s pauses, auto-restart), text box, app language (`useT`), shell (top bar, dock, 4-tab nav, banners) | machine, STT · e2e                |
-| [`phase-3-understanding/`](./phase-3-understanding/)   | Normalizer (Indian numbers, Devanagari 1–100), `/api/extract` client, Groq strict-schema extraction (`LlmProvider`), rate limit, prompt                  | normalizer, client, API           |
-| [`phase-4-billing-domain/`](./phase-4-billing-domain/) | Matcher, rate card, bill model, clarifier, messages in 3 languages, billing adapter, journey step bar, S3–S6/S8 screens                                  | domain, matcher · e2e             |
-| [`phase-5-output-share/`](./phase-5-output-share/)     | Payment details → payment → invoice (PAID/DUE), UPI link + QR, A6 PDF, share, history, drafts, profile, Home, S1/S7/S9 screens                           | output, PDF · e2e (incl. offline) |
-| [`phase-6-quality-demo/`](./phase-6-quality-demo/)     | Telemetry, 208-sentence eval + resumable runner + results, UI-parity capture, demo pack                                                                  | telemetry, eval data              |
-| [`phase-7-domain-sprint/`](./phase-7-domain-sprint/)   | To-do rehearsal (schema, adapter, endpoint), new-domain scaffold + playbook                                                                              | rehearsal                         |
-| [`phase-8-finale/`](./phase-8-finale/)                 | Groq Whisper (`/api/stt` + provider), second pass, voice detector, engine selector, demo mode, scripts, pitch                                            | VAD, Whisper, second pass · e2e   |
-| [`app/`](./app/)                                       | `index.html`, Vite/PWA config, `main.tsx`, `App.tsx` (wires all phases), static assets                                                                   | e2e                               |
-| [`api/`](./api/)                                       | Vercel entry files re-exporting each phase's endpoint                                                                                                    | —                                 |
+| Folder                                                 | Code                                                                                                                                                                               | Tests                             |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| [`phase-0-setup/`](./phase-0-setup/)                   | `@kaambill/shared` (types, Zod schema), seed rate card, server env + `/api/health`, local dev API, test helpers                                                                    | schema, env                       |
+| [`phase-1-ui-ux-design/`](./phase-1-ui-ux-design/)     | Stitch export (`design/`), theme CSS generated from it, tokens, `Icon`, icon-font subset                                                                                           | icons · e2e                       |
+| [`phase-2-voice-core/`](./phase-2-voice-core/)         | Conversation machine (read-back gate), Web Speech (4 s pauses, auto-restart), text box, app language (`useT`), shell (top bar, dock, 4-tab nav, banners)                           | machine, STT · e2e                |
+| [`phase-3-understanding/`](./phase-3-understanding/)   | Normalizer (Indian numbers, Devanagari 1–100), `/api/extract` client, Groq strict-schema extraction (`LlmProvider`), rate limit, prompt                                            | normalizer, client, API           |
+| [`phase-4-billing-domain/`](./phase-4-billing-domain/) | Matcher, rate card, bill model, clarifier, messages in 3 languages, billing adapter, journey step bar, S3–S6/S8 screens                                                            | domain, matcher · e2e             |
+| [`phase-5-output-share/`](./phase-5-output-share/)     | Payment details → payment → invoice (PAID/DUE), UPI link + QR, A6 PDF, share, history, drafts, profile, Home, S1/S7/S9 screens                                                     | output, PDF · e2e (incl. offline) |
+| [`phase-6-quality-demo/`](./phase-6-quality-demo/)     | Telemetry, 208-sentence eval + resumable runner + results, UI-parity capture, demo pack                                                                                            | telemetry, eval data              |
+| [`phase-7-domain-sprint/`](./phase-7-domain-sprint/)   | To-do rehearsal (schema, adapter, endpoint), new-domain scaffold + playbook                                                                                                        | rehearsal                         |
+| [`phase-8-finale/`](./phase-8-finale/)                 | Groq Whisper (`/api/stt` + provider), second pass, voice detector, engine selector, demo mode, scripts, pitch                                                                      | VAD, Whisper, second pass · e2e   |
+| [`app/`](./app/)                                       | `index.html` (landing page at `/`), `landing/` (its CSS + script), `app/index.html` (the app at `/app/`), Vite/PWA config, `main.tsx`, `App.tsx` (wires all phases), static assets | e2e                               |
+| [`api/`](./api/)                                       | Vercel entry files re-exporting each phase's endpoint                                                                                                                              | —                                 |
 
 ### What stays at the repo root (and why)
 
@@ -111,4 +112,8 @@ TypeScript: `phase-0-setup/tsconfig.base.json` + a `tsconfig.json` (and `tsconfi
 
 ## Stack
 
-Groq (`openai/gpt-oss-120b`, strict JSON schema; optional `whisper-large-v3-turbo`) · browser Web Speech (input only) · Wispr Flow (dictation into the text box) · XState · IndexedDB · `qrcode` + `jspdf` + Web Share API · Vite + React + Tailwind (theme from the Stitch export) · Vitest + Playwright.
+Groq (`openai/gpt-oss-120b`, strict JSON schema; optional `whisper-large-v3-turbo`) · optional Sarvam AI speech-to-text (`saaras:v4`) · browser Web Speech (input only) · Wispr Flow (dictation into the text box) · XState · IndexedDB · `qrcode` + `jspdf` + Web Share API · Vite + React + Tailwind (theme from the Stitch export) · Vitest + Playwright.
+
+## License
+
+[MIT](./LICENSE), © 2026 Ashish Kumar Sankhua. The landing page footer links to the same file (`app/public/LICENSE.txt`) as a download.

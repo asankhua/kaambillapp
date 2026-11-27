@@ -66,7 +66,7 @@ test("English: screen text and the app's messages switch to English, even when t
 });
 
 test("?demo=1: no onboarding (Ramesh Electricals), demo reset in Khata", async ({ page }) => {
-  await page.goto("/?demo=1");
+  await page.goto("/app/?demo=1");
   await expect(page.getByText("Namaste, Ramesh Electricals")).toBeVisible();
   await page
     .getByRole("navigation", { name: "Main" })

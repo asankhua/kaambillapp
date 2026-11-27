@@ -1,32 +1,772 @@
 <!doctype html>
-<html lang="hi-IN">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B7A4B" />
+    <title>KaamBill: Bol ke bill banaiye | Voice billing for Indian tradespeople</title>
+    <meta
+      name="description"
+      content="KaamBill turns a 15-second spoken job summary in Hinglish, Hindi or English into an itemized bill with a UPI payment QR, shared on WhatsApp. Built for India's electricians, plumbers, AC technicians and repair workers."
+    />
+    <meta property="og:title" content="KaamBill: Bol ke bill banaiye" />
+    <meta
+      property="og:description"
+      content="Speak the job. Get an itemized bill and a UPI QR. Voice billing for India's solo tradespeople."
+    />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Text fonts load without blocking first paint (display=optional: used only if ready in ~100 ms (cached after the first visit), so text never repaints late). -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=optional"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript
-      ><link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=optional"
-        rel="stylesheet"
-    /></noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=ac_unit,account_balance,account_balance_wallet,add,add_circle,approval,arrow_drop_down,arrow_forward,auto_awesome,badge,bolt,box,build_circle,cable,calculate,call,cancel,celebration,chat,check,check_circle,chevron_right,close,cloud_off,construction,contactless,conversation,currency_rupee,directions_bike,discount,done_all,draft,drafts,edit,edit_calendar,edit_note,edit_square,electric_bolt,electrical_services,engineering,error,event_available,fact_check,format_list_bulleted,function,graphic_eq,group,handyman,hardware,healing,hearing,help,help_center,history,history_edu,hourglass_top,info,input,inventory_2,keyboard,keyboard_voice,language,light,lightbulb,link,lock,lock_reset,mark_chat_read,menu,mic,mic_off,mode_fan,paid,payments,pending,percent,person,person_pin_circle,picture_as_pdf,plumbing,power,print,qr_code_2,qr_code_scanner,quiz,radio,receipt,receipt_long,record_voice_over,refresh,remove,replay,save,schedule,search,search_off,select_all,send,settings,share,stop,storefront,switch,sync,task_alt,tips_and_updates,today,toggle_on,touch_app,translate,trending_up,tune,verified_user,view_column,visibility,wallet,water_drop,wifi_off&display=block"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <title>KaamBill: Bol ke bill banaiye</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=ac_unit,account_balance,arrow_forward,bolt,cable,chat,check_circle,download,electrical_services,engineering,error,fact_check,group,hardware,hearing,history,keyboard,language,lock,mic,open_in_new,payments,plumbing,qr_code_2,receipt_long,record_voice_over,schedule,share,touch_app,translate,trending_up,verified_user,wifi_off&display=block"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "KaamBill",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Android, iOS, Web",
+        "description": "Hands-free voice billing for Indian tradespeople.",
+        "author": { "@type": "Person", "name": "Ashish Kumar Sankhua" },
+        "license": "https://opensource.org/licenses/MIT"
+      }
+    </script>
+    <link rel="stylesheet" href="/landing/landing.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- ───────────── Header ───────────── -->
+    <header class="site-header" id="top">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="KaamBill home">
+          <span class="brand-mark" aria-hidden="true">₹</span>
+          <span class="brand-name">KaamBill</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label="Toggle menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" id="nav-links" aria-label="Primary">
+          <a href="#problem">The problem</a>
+          <a href="#solution">Solution</a>
+          <a href="#impact">Impact in India</a>
+          <a href="#how">How to use</a>
+          <a href="#faq">FAQ</a>
+          <a class="btn btn-primary btn-sm" href="#try">Try it live</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ───────────── Hero ───────────── -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="material-symbols-outlined" aria-hidden="true">record_voice_over</span>
+              Voice billing for India's tradespeople
+            </p>
+            <h1>
+              Bol ke bill banaiye.<br />
+              <span class="accent">Speak the job. Get paid.</span>
+            </h1>
+            <p class="lead">
+              An electrician, plumber or AC technician says one sentence in Hinglish, Hindi or
+              English. KaamBill builds the itemized bill, checks the total with them, and shows a
+              UPI QR the customer can scan, all without typing on a dusty screen.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary btn-lg" href="#try">
+                Try KaamBill live
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+            </div>
+            <ul class="hero-points">
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+                Hinglish · हिंदी · English
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+                Works on low-end Android phones
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+                No account or sign-up
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="Example: a spoken sentence becomes an itemized bill">
+            <figure class="speech">
+              <span class="speech-icon material-symbols-outlined" aria-hidden="true">mic</span>
+              <blockquote>
+                “Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill bana
+                do.”
+              </blockquote>
+              <figcaption>Worker speaks · about 15 seconds</figcaption>
+            </figure>
+            <div class="flow-arrow" aria-hidden="true">
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </div>
+            <div class="bill-card">
+              <div class="bill-head">
+                <div>
+                  <strong>Ramesh Electricals</strong>
+                  <span>Bill for Verma ji</span>
+                </div>
+                <span class="chip chip-green">Ready to send</span>
+              </div>
+              <ul class="bill-lines">
+                <li><span>Havells MCB × 2</span><b>₹300</b></li>
+                <li><span>Finolex wire × 15 m</span><b>₹435</b></li>
+                <li><span>Labour</span><b>₹500</b></li>
+              </ul>
+              <div class="bill-total"><span>Total</span><b>₹1,235</b></div>
+              <div class="bill-actions">
+                <span class="chip chip-blue">
+                  <span class="material-symbols-outlined" aria-hidden="true">qr_code_2</span>
+                  UPI QR
+                </span>
+                <span class="chip chip-wa">
+                  <span class="material-symbols-outlined" aria-hidden="true">share</span>
+                  WhatsApp
+                </span>
+              </div>
+              <p class="bill-note">
+                Illustrative example. Prices come from the worker's own rate card.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── Numbers ───────────── -->
+      <section class="stats" aria-label="India by the numbers">
+        <div class="container stats-grid">
+          <div class="stat">
+            <strong>≈ 7.3 crore</strong>
+            <span>unincorporated non-farm enterprises in India</span>
+          </div>
+          <div class="stat">
+            <strong>≈ 12 crore</strong>
+            <span>workers employed by those enterprises</span>
+          </div>
+          <div class="stat">
+            <strong>10.6%</strong>
+            <span>of Indians speak English as a first, second or third language</span>
+          </div>
+          <div class="stat">
+            <strong>≈ 89 in 100</strong>
+            <span>are left out of English-first software</span>
+          </div>
+        </div>
+        <p class="container source">Sources: NSO, ASUSE 2023-24 (MoSPI); Census of India 2011.</p>
+      </section>
+
+      <!-- ───────────── Problem ───────────── -->
+      <section class="section" id="problem">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">The pain point</p>
+            <h2>India's tradespeople work with their hands. Billing apps need both.</h2>
+            <p class="section-lead">
+              Most independent electricians, plumbers, AC and appliance technicians, carpenters and
+              painters work alone, with no office staff. They use Android phones and UPI every day,
+              but billing apps such as Tally, Zoho or Vyapar assume a keyboard and English. So they
+              quote a lump sum out loud, or scribble it on a scrap of paper.
+            </p>
+          </div>
+
+          <div class="card-grid four">
+            <article class="card">
+              <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
+                >receipt_long</span
+              >
+              <h3>No itemized quote</h3>
+              <p>
+                Customers haggle over parts at the door because they can't see what each part cost.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
+                >cable</span
+              >
+              <h3>Forgotten add-ons</h3>
+              <p>
+                Small fittings, extra wire and visiting charges get left off the bill, and the
+                worker loses that money.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
+                >schedule</span
+              >
+              <h3>Slow payments</h3>
+              <p>
+                With no bill and no payment link, collection means days of follow-up calls, and some
+                money is never recovered.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
+                >account_balance</span
+              >
+              <h3>No financial record</h3>
+              <p>
+                Income isn't written down anywhere, so workers can't show it when they apply for
+                credit such as MUDRA or PM SVANidhi.
+              </p>
+            </article>
+          </div>
+
+          <div class="split">
+            <div>
+              <h3 class="split-title">Why existing tools don't work</h3>
+              <ul class="check-list bad">
+                <li>
+                  <b>Typing-heavy screens.</b> Dropdowns and one-item-at-a-time forms don't suit
+                  busy hands and a rushed schedule.
+                </li>
+                <li>
+                  <b>Language mismatch.</b> Workers mix languages mid-sentence: “dedh hazaar”, “do
+                  inch CPVC elbow”. Typing that is slow and error-prone.
+                </li>
+                <li>
+                  <b>Accounting jargon.</b> “SKU”, “subtotal” and “ledger” mean nothing on the job
+                  site.
+                </li>
+                <li>
+                  <b>A keyboard mic isn't enough.</b> It only transcribes. What's missing is
+                  software that <i>understands</i> a whole spoken job summary.
+                </li>
+              </ul>
+            </div>
+            <aside class="callout">
+              <p class="callout-label">The problem in one line</p>
+              <p>
+                Solo Indian tradespeople lose money, time and credibility because creating an
+                itemized bill and collecting payment on the job site means typing in English-first
+                apps they can't use with busy hands.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── Solution ───────────── -->
+      <section class="section alt" id="solution">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">The solution</p>
+            <h2>Voice in. A bill the customer can trust out.</h2>
+            <p class="section-lead">
+              Speaking is how these workers already run their business: phone calls and WhatsApp
+              voice notes. KaamBill builds on that habit, with checks so a misheard amount never
+              reaches a customer.
+            </p>
+          </div>
+
+          <div class="card-grid three">
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true">mic</span>
+              <h3>Hands-free by design</h3>
+              <p>
+                Tap the mic and describe the job while packing up your tools. The screen is only for
+                checking and fixing.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true">translate</span>
+              <h3>Understands how you talk</h3>
+              <p>
+                Hinglish, Hindi or English, brand names, units and Indian number words included.
+                Switch the app language any time.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true"
+                >fact_check</span
+              >
+              <h3>Accuracy before speed</h3>
+              <p>
+                KaamBill asks at most one question at a time, shows the total on screen, and sends
+                nothing until you approve it with “haan”.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true">qr_code_2</span>
+              <h3>Get paid on the spot</h3>
+              <p>
+                A UPI QR with the amount filled in. The customer scans, you tap “Paisa mil gaya”,
+                and the bill says PAID.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true">share</span>
+              <h3>One tap to WhatsApp</h3>
+              <p>
+                A clean PDF bill opens in WhatsApp, ready to send. You always press Send yourself.
+              </p>
+            </article>
+            <article class="card">
+              <span class="icon-badge material-symbols-outlined" aria-hidden="true">lock</span>
+              <h3>Private and honest</h3>
+              <p>
+                Customer names and numbers stay on your phone. Output is a simple Bill or Estimate,
+                never passed off as a GST invoice.
+              </p>
+            </article>
+          </div>
+
+          <ul class="pill-row" aria-label="Also included">
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>Type or
+              dictate with Wispr Flow
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">wifi_off</span>Works on
+              patchy data
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">history</span>Bill history
+              and drafts
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">payments</span>Editable
+              rate card
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">hearing</span>Copes with
+              noisy sites
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ───────────── Impact ───────────── -->
+      <section class="section" id="impact">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">Impact in real-world India</p>
+            <h2>Small bills, large consequences for India's informal economy.</h2>
+            <p class="section-lead">
+              Most of India's unincorporated businesses are run by one person with nobody else to do
+              the billing. Making a proper bill effortless changes what that person earns, collects
+              and can prove.
+            </p>
+          </div>
+
+          <div class="card-grid four">
+            <article class="card impact">
+              <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
+                >trending_up</span
+              >
+              <h3>More of the money earned</h3>
+              <p>
+                Itemizing as you speak catches the extra wire, the fittings and the visiting charge
+                that used to be forgotten.
+              </p>
+            </article>
+            <article class="card impact">
+              <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
+                >payments</span
+              >
+              <h3>Faster collections</h3>
+              <p>
+                A UPI QR on the spot replaces days of follow-up calls and the money that is never
+                recovered.
+              </p>
+            </article>
+            <article class="card impact">
+              <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
+                >account_balance</span
+              >
+              <h3>A step toward formal credit</h3>
+              <p>
+                Every bill becomes a record of income, groundwork for schemes such as MUDRA and PM
+                SVANidhi.
+              </p>
+            </article>
+            <article class="card impact">
+              <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
+                >group</span
+              >
+              <h3>Clarity for households</h3>
+              <p>
+                Customers see what each part and each hour cost, so there's less haggling and a
+                clear record of what they paid for.
+              </p>
+            </article>
+          </div>
+
+          <div class="card wide">
+            <div class="wide-head">
+              <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
+                >language</span
+              >
+              <div>
+                <h3>Software that speaks the user's language</h3>
+                <p>
+                  About 89 in 100 Indians don't use English as a first, second or third language.
+                  Voice-first, mixed-language software opens digital billing to people who were
+                  locked out of English-first apps, and builds on the UPI and WhatsApp habits they
+                  already have.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="table-title">How big is the opportunity?</h3>
+          <div class="table-wrap">
+            <table class="market">
+              <thead>
+                <tr>
+                  <th scope="col">Level</th>
+                  <th scope="col">Who</th>
+                  <th scope="col">Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Sector</th>
+                  <td>All unincorporated non-farm enterprises in India</td>
+                  <td><b>≈ 7.3 crore</b> establishments, <b>≈ 12 crore</b> workers</td>
+                </tr>
+                <tr>
+                  <th scope="row">Addressable <em>(estimate)</em></th>
+                  <td>Services enterprises doing repair, installation and trade work</td>
+                  <td><b>≈ 1–1.5 crore</b></td>
+                </tr>
+                <tr>
+                  <th scope="row">First market <em>(estimate)</em></th>
+                  <td>
+                    Solo electricians, plumbers and AC technicians with smartphones in Hindi-belt
+                    cities
+                  </td>
+                  <td><b>≈ 10–20 lakh</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="fineprint">
+            Sector figures: NSO, Annual Survey of Unincorporated Sector Enterprises (ASUSE) 2023-24,
+            MoSPI. The addressable and first-market rows are our own estimates from stated
+            assumptions, not official statistics.
+          </p>
+
+          <h3 class="table-title">What success looks like</h3>
+          <div class="goal-grid">
+            <div class="goal">
+              <strong>60%</strong><span>of active users create 5+ voice bills a week</span>
+            </div>
+            <div class="goal">
+              <strong>&lt; 25 s</strong><span>from tapping the mic to the WhatsApp share</span>
+            </div>
+            <div class="goal">
+              <strong>&gt; 90%</strong
+              ><span>first-pass accuracy on mixed-language items and spoken numbers</span>
+            </div>
+            <div class="goal">
+              <strong>&gt; 50%</strong
+              ><span>of bills paid through the UPI link within 24 hours</span>
+            </div>
+          </div>
+          <p class="fineprint">These are our product targets, not measured results.</p>
+        </div>
+      </section>
+
+      <!-- ───────────── How to use ───────────── -->
+      <section class="section alt" id="how">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">How to use KaamBill</p>
+            <h2>From “job done” to “payment received” in five steps.</h2>
+            <p class="section-lead">
+              A step bar inside the app always shows where you are. First time? Set your name, UPI
+              ID and rate card once. After that, every bill starts with your voice.
+            </p>
+          </div>
+
+          <ol class="steps">
+            <li>
+              <span class="step-no">1</span>
+              <h3>Saaman <small>Items</small></h3>
+              <p>
+                Tap the mic and describe the job, or tap <b>“Likh ke daalein”</b> to type or dictate
+                with Wispr Flow.
+              </p>
+            </li>
+            <li>
+              <span class="step-no">2</span>
+              <h3>Jaanch <small>Check</small></h3>
+              <p>
+                Answer one question at a time (a missing price, an unsure quantity), then confirm
+                the total with “haan”.
+              </p>
+            </li>
+            <li>
+              <span class="step-no">3</span>
+              <h3>Details</h3>
+              <p>
+                Check the amount and your UPI ID, add the customer's WhatsApp number, and pick UPI,
+                Cash or Baad mein (later).
+              </p>
+            </li>
+            <li>
+              <span class="step-no">4</span>
+              <h3>Payment</h3>
+              <p>
+                The customer scans the QR with the amount filled in. You tap <b>“Paisa mil gaya”</b>
+                (or “Cash mila”).
+              </p>
+            </li>
+            <li>
+              <span class="step-no">5</span>
+              <h3>Bill</h3>
+              <p>
+                The bill is marked <b>PAID</b> or <b>DUE</b>. WhatsApp opens with the PDF and you
+                press Send.
+              </p>
+            </li>
+          </ol>
+
+          <div class="split tips">
+            <div class="card">
+              <h3 class="split-title">Say it like you'd tell a friend</h3>
+              <p class="muted">
+                Pauses are fine. KaamBill waits for you, or say “Ruk jaiye” to stop.
+              </p>
+              <ul class="examples">
+                <li>
+                  <q
+                    >Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill
+                    bana do</q
+                  >
+                  <button
+                    type="button"
+                    class="copy"
+                    data-copy="Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill bana do"
+                  >
+                    Copy
+                  </button>
+                </li>
+                <li>
+                  <q>Sharma ji ke yahan AC gas refill, dedh hazaar, aur 300 visiting charge</q>
+                  <button
+                    type="button"
+                    class="copy"
+                    data-copy="Sharma ji ke yahan AC gas refill, dedh hazaar, aur 300 visiting charge"
+                  >
+                    Copy
+                  </button>
+                </li>
+                <li>
+                  <q>Gupta ji ke ghar 4 CPVC elbow, 40 rupaye ka ek, aur 200 labour</q>
+                  <button
+                    type="button"
+                    class="copy"
+                    data-copy="Gupta ji ke ghar 4 CPVC elbow, 40 rupaye ka ek, aur 200 labour"
+                  >
+                    Copy
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 class="split-title">Good to know</h3>
+              <ul class="tip-list">
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">mic</span>
+                  <span>Use <b>Chrome</b> and allow the microphone when asked.</span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
+                  <span>
+                    No mic, weak network or a noisy site? Tap <b>“Likh ke daalein”</b> and type or
+                    dictate with Wispr Flow.
+                  </span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">language</span>
+                  <span>Choose Hinglish, हिंदी or English from the top bar of the app.</span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+                  <span>
+                    Nothing is sent to your customer until you approve the total and press Send.
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── Live app ───────────── -->
+      <section class="section try" id="try">
+        <div class="container try-grid">
+          <div class="try-copy">
+            <p class="kicker light">Try it live</p>
+            <h2>The real KaamBill app, right here.</h2>
+            <p class="section-lead light">
+              This is the full working app, not a mock-up. Finish the quick set-up, then speak or
+              type a job and watch the bill appear.
+            </p>
+            <ol class="try-steps">
+              <li>Complete the 3-step set-up (your name, UPI ID, rate card).</li>
+              <li>Tap the mic, or tap “Likh ke daalein” and paste an example sentence.</li>
+              <li>Check the total, say “haan”, and continue to the UPI QR.</li>
+            </ol>
+            <div class="cta-row">
+              <a class="btn btn-light btn-lg" href="/app/" target="_blank" rel="noopener">
+                Open full screen
+                <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+              </a>
+            </div>
+            <p class="try-note">
+              Designed for phone screens. For the best experience on a phone, open the app full
+              screen.
+            </p>
+          </div>
+
+          <div class="phone" aria-label="KaamBill app">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <iframe
+              class="phone-screen"
+              src="/app/"
+              title="KaamBill: live voice billing app"
+              loading="lazy"
+              allow="microphone; clipboard-write"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── FAQ ───────────── -->
+      <section class="section" id="faq">
+        <div class="container narrow">
+          <div class="section-head center">
+            <p class="kicker">Questions</p>
+            <h2>Frequently asked</h2>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>Which languages does KaamBill understand?</summary>
+              <p>
+                Hinglish, Hindi and English, including mixing them in one sentence. The app language
+                you pick changes the screen text, the mic language and the app's messages together.
+              </p>
+            </details>
+            <details>
+              <summary>Is this a GST invoice?</summary>
+              <p>
+                No. KaamBill produces a simple Bill or Estimate, and labels it that way. GST invoice
+                mode is on the roadmap.
+              </p>
+            </details>
+            <details>
+              <summary>Can KaamBill see whether the customer has paid?</summary>
+              <p>
+                Not yet. “Paid” is the worker's own confirmation after they see the payment.
+                Automatic payment status from UPI is on the roadmap.
+              </p>
+            </details>
+            <details>
+              <summary>What if I say the wrong amount, or it mishears?</summary>
+              <p>
+                Nothing reaches the customer until you've seen the total on screen and approved it.
+                You can edit any item, quantity or price before then.
+              </p>
+            </details>
+            <details>
+              <summary>Where is my customers' data stored?</summary>
+              <p>
+                Customer names and phone numbers are stored only on your device. The text of what
+                you say is sent to an AI service to turn it into bill items.
+              </p>
+            </details>
+            <details>
+              <summary>Does it work without a good network?</summary>
+              <p>
+                The app loads offline, and you can finish and share a bill that's already been
+                built. Understanding a new sentence needs a connection; if you're offline it's
+                queued so you can retry.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── Closing CTA ───────────── -->
+      <section class="closing">
+        <div class="container closing-inner">
+          <h2>Your next bill, in 15 seconds.</h2>
+          <p>Say the job. Check the total. Get paid.</p>
+          <a class="btn btn-light btn-lg" href="#try">
+            Try KaamBill now
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ───────────── Footer ───────────── -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="KaamBill home">
+            <span class="brand-mark" aria-hidden="true">₹</span>
+            <span class="brand-name">KaamBill</span>
+          </a>
+          <p>
+            Hands-free voice billing for India's electricians, plumbers, technicians and repair
+            workers.
+          </p>
+          <p class="hack">
+            Built for <b>India Runs on Voice</b>, a Scaler × Wispr Flow hackathon · Small business
+            track.
+          </p>
+        </div>
+        <nav class="footer-col" aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="#problem">The problem</a>
+          <a href="#solution">Solution</a>
+          <a href="#impact">Impact in India</a>
+          <a href="#how">How to use</a>
+        </nav>
+        <nav class="footer-col" aria-label="App">
+          <h4>App</h4>
+          <a href="#try">Try it live</a>
+          <a href="/app/">Open full screen</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+      <div class="container footer-bottom">
+        <p>© <span id="year">2026</span> Ashish Kumar Sankhua. All rights reserved.</p>
+        <p>
+          <a class="license-link" href="/LICENSE.txt" download="LICENSE.txt">
+            <span class="material-symbols-outlined" aria-hidden="true">download</span>
+            License (MIT)
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/landing/landing.ts"></script>
   </body>
 </html>

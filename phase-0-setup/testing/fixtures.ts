@@ -105,7 +105,7 @@ export async function mockExtract(page: Page) {
 
 /** Complete the 3-step onboarding (S1a–c) with the canonical demo profile. */
 export async function onboard(page: Page) {
-  await page.goto("/");
+  await page.goto("/app/");
   await page.getByLabel("Aapka / Dukaan ka naam").fill("Ramesh Electricals");
   await page.getByRole("button", { name: "Aage badhein →" }).click();
   await page.getByLabel("UPI ID").fill("ramesh@okaxis");

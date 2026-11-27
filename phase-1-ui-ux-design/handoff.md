@@ -1,6 +1,6 @@
 # Component Handoff
 
-Port markup from each screen's `code.html` in [`../stitch_kaambill_voice_invoicing_app/`](./design/). The Tailwind theme in `phase-1-ui-ux-design/src/theme.css` is **generated from the same Stitch config**, so class names (`bg-primary-container`, `text-body-lg`, `px-margin`, `rounded-xl`…) work as-is. Icons: Material Symbols Outlined (loaded in `app/index.html`).
+Port markup from each screen's `code.html` in [`../stitch_kaambill_voice_invoicing_app/`](./design/). The Tailwind theme in `phase-1-ui-ux-design/src/theme.css` is **generated from the same Stitch config**, so class names (`bg-primary-container`, `text-body-lg`, `px-margin`, `rounded-xl`…) work as-is. Icons: Material Symbols Outlined (loaded in `app/app/index.html`).
 
 ## App shell (Phase 2)
 
