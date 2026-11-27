@@ -89,11 +89,22 @@ def main() -> int:
         try:
             api.request_space_hardware(SPACE_ID, "cpu-basic")
             print(f"Hardware changed from {hardware} to cpu-basic (free CPU)")
-        except Exception as e:  # e.g. 402 Payment Required: change it once in the Space settings
-            print(
-                f"::warning::Space requests '{hardware}', which Docker Spaces can't use, and the API "
-                f"refused to change it ({e}). Set Settings > Space hardware > CPU basic on Hugging Face."
-            )
+        except Exception as e:  # e.g. 402 Payment Required
+            if os.environ.get("HF_RECREATE", "").lower() == "true":
+                print(f"Hardware can't be changed ({e}); recreating the Space as a Docker Space")
+                api.delete_repo(SPACE_ID, repo_type="space")
+                api.create_repo(
+                    SPACE_ID,
+                    repo_type="space",
+                    space_sdk="docker",
+                    space_hardware="cpu-basic",
+                )
+            else:
+                print(
+                    f"::warning::Space requests '{hardware}', which Docker Spaces can't use, and the "
+                    f"API refused to change it ({e}). Set Settings > Space hardware > CPU basic on "
+                    "Hugging Face, or re-run this workflow with 'recreate_space' ticked."
+                )
 
     # 1. Stage the files.
     stage = Path(tempfile.mkdtemp(prefix="space-"))

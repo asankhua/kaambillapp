@@ -8,6 +8,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      recreate_space:
+        description: "Delete and recreate the Space if its hardware (e.g. ZeroGPU) can't be changed"
+        type: boolean
+        default: false
 
 concurrency:
   group: deploy-hf-space
@@ -32,4 +37,5 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           SARVAM_API_KEY: ${{ secrets.SARVAM_API_KEY }}
           VOICE_PROVIDER: ${{ vars.VOICE_PROVIDER }}
+          HF_RECREATE: ${{ inputs.recreate_space }}
         run: python .github/scripts/deploy_space.py
