@@ -93,12 +93,8 @@ def main() -> int:
             if os.environ.get("HF_RECREATE", "").lower() == "true":
                 print(f"Hardware can't be changed ({e}); recreating the Space as a Docker Space")
                 api.delete_repo(SPACE_ID, repo_type="space")
-                api.create_repo(
-                    SPACE_ID,
-                    repo_type="space",
-                    space_sdk="docker",
-                    space_hardware="cpu-basic",
-                )
+                # No explicit hardware: a new Docker Space defaults to the free cpu-basic.
+                api.create_repo(SPACE_ID, repo_type="space", space_sdk="docker")
             else:
                 print(
                     f"::warning::Space requests '{hardware}', which Docker Spaces can't use, and the "
