@@ -86,8 +86,14 @@ def main() -> int:
     # Leave any other hardware choice (cpu-upgrade, a paid GPU…) alone.
     hardware = api.get_space_runtime(SPACE_ID).requested_hardware
     if hardware is None or str(hardware).lower().startswith("zero"):
-        api.request_space_hardware(SPACE_ID, "cpu-basic")
-        print(f"Hardware changed from {hardware} to cpu-basic (free CPU)")
+        try:
+            api.request_space_hardware(SPACE_ID, "cpu-basic")
+            print(f"Hardware changed from {hardware} to cpu-basic (free CPU)")
+        except Exception as e:  # e.g. 402 Payment Required: change it once in the Space settings
+            print(
+                f"::warning::Space requests '{hardware}', which Docker Spaces can't use, and the API "
+                f"refused to change it ({e}). Set Settings > Space hardware > CPU basic on Hugging Face."
+            )
 
     # 1. Stage the files.
     stage = Path(tempfile.mkdtemp(prefix="space-"))
