@@ -88,18 +88,7 @@ Set up and run the KaamBill app on my computer.
    - Live app (demo, skips set-up): http://localhost:5173/app/?demo=1
 ```
 
-### Deploy on Render
-
-Create a **Web Service** from this repo (branch `main`, runtime Node) with:
-
-| Setting           | Value                                                                                                                  |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Build Command     | `npm install && npm run build`                                                                                         |
-| Start Command     | `npm start`                                                                                                            |
-| Health Check Path | `/api/health`                                                                                                          |
-| Environment       | `GROQ_API_KEY` (required). Do not set `NODE_ENV=production`, it would skip the dev dependencies that `npm start` needs |
-
-`npm start` ([`phase-0-setup/scripts/serve.ts`](./phase-0-setup/scripts/serve.ts)) serves the landing page (`/`), the app (`/app/`) and the API (`/api/`) from one process on Render's `PORT`. The service's own URL is allowed as an origin automatically (`RENDER_EXTERNAL_URL`); add custom domains to `ALLOWED_ORIGINS`.
+### Commands
 
 | Command                                                          | What it does                                                                                                                                                                                                                                                                                             |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
