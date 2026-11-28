@@ -39,6 +39,16 @@ export default defineConfig({
         // Precache the app, the lazy jsPDF chunk and the PDF fonts so a finalized bill can be
         // turned into a PDF + QR offline (phase-5 acceptance).
         globPatterns: ["**/*.{js,css,html,svg,png,ttf,webmanifest,txt}"],
+        // A new deploy must take over at once. Without these two the new service worker waits for a
+        // "SKIP_WAITING" message that nothing sends (the register script is the plain one), so returning
+        // visitors and installed PWAs kept an old app and an old landing page until every tab was closed.
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
+        // The landing page (/) is NOT cached by the service worker: it is a marketing page that changes
+        // with every deploy, and a cached copy made returning visitors keep seeing an old version.
+        // Only the app (/app/) works offline.
+        globIgnores: ["index.html", "assets/landing-*"],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         // Offline navigation fallback is the app, not the landing page.
         navigateFallback: "/app/index.html",

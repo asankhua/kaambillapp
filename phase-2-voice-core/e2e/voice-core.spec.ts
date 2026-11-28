@@ -52,6 +52,20 @@ test("PWA manifest and service worker are served", async ({ request }) => {
   expect((await request.get("/sw.js")).ok()).toBe(true);
 });
 
+test("a new deploy reaches returning visitors: the service worker activates at once and never caches the landing page", async ({
+  request,
+}) => {
+  const sw = await (await request.get("/sw.js")).text();
+  // Takes over immediately (no waiting for every tab to close, no "SKIP_WAITING" message nobody sends)
+  expect(sw).toContain("clientsClaim()");
+  expect(sw).toMatch(/skipWaiting\(\)/);
+  expect(sw).not.toContain("SKIP_WAITING");
+  // The app is precached for offline use; the landing page (/) is not, or old copies would linger
+  expect(sw).toContain('url:"app/index.html"');
+  expect(sw).not.toMatch(/url:"index\.html"/);
+  expect(sw).not.toMatch(/url:"assets\/landing-/);
+});
+
 test("top bar fits a 360px phone even when icon fonts fail to load", async ({ page }) => {
   await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
   await onboard(page);
