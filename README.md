@@ -53,6 +53,7 @@ A screen recording of the real app in demo mode, from job to bill. Also availabl
 
 |                                   | Needed?                       | Why                                                                                                                                                                                                                           |
 | --------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Node.js 22+ and npm**           | ✅ To run it locally          | CI uses Node 22. Install from [nodejs.org](https://nodejs.org)                                                                                                                                                                |
 | **Groq API key** (`GROQ_API_KEY`) | ✅ **Required, the only key** | The Groq LLM (`openai/gpt-oss-120b`, strict JSON) turns the spoken / typed words into the bill: customer, items, quantities, labour, intent. Without it the app can't build bills. Only the text is sent to Groq, never audio |
 | Browser speech recognition        | Built in, no key              | The mic button (Chrome on Android / desktop)                                                                                                                                                                                  |
 | Wispr Flow app                    | Optional, no key              | For dictating into the text box in any browser (sign in to the app). Pick **Wispr Flow (typing box)** on the landing page to open the box straight away                                                                       |
@@ -130,34 +131,38 @@ Create a **Web Service** from this repo (branch `main`, runtime Node) with:
 
 Each phase folder holds its **plan** (`README.md`) **and its code + tests**. `app/` wires the phases into one app; `api/` holds the one-line entry point of each endpoint. **A phase may import earlier phases, never later ones** (enforced by ESLint).
 
-| Folder                                                 | Code                                                                                                                                                                               | Tests                                      |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| [`phase-0-setup/`](./phase-0-setup/)                   | `@kaambill/shared` (types, Zod schema), seed rate card, server env + `/api/health`, local dev API, test helpers                                                                    | schema, env                                |
-| [`phase-1-ui-ux-design/`](./phase-1-ui-ux-design/)     | Stitch export (`design/`), theme CSS generated from it, tokens, `Icon`, icon-font subset                                                                                           | icons · e2e                                |
-| [`phase-2-voice-core/`](./phase-2-voice-core/)         | Conversation machine (read-back gate), Web Speech (4 s pauses, auto-restart), text box, app language (`useT`), shell (top bar, dock, 4-tab nav, banners)                           | machine, STT · e2e                         |
-| [`phase-3-understanding/`](./phase-3-understanding/)   | Normalizer (Indian numbers, Devanagari 1–100), `/api/extract` client, Groq strict-schema extraction (`LlmProvider`), rate limit, prompt                                            | normalizer, client, API                    |
-| [`phase-4-billing-domain/`](./phase-4-billing-domain/) | Matcher, rate card, bill model, clarifier, messages in 3 languages, billing adapter, journey step bar, S3–S6/S8 screens                                                            | domain, matcher · e2e                      |
-| [`phase-5-output-share/`](./phase-5-output-share/)     | Payment details → payment → invoice (PAID/DUE), UPI link + QR, A6 PDF, share, history, drafts, profile, Home, S1/S7/S9 screens                                                     | output, PDF · e2e (incl. offline)          |
-| [`phase-6-quality-demo/`](./phase-6-quality-demo/)     | Telemetry, 208-sentence eval + resumable runner + results, UI-parity capture, demo pack                                                                                            | telemetry, eval data                       |
-| [`phase-7-domain-sprint/`](./phase-7-domain-sprint/)   | To-do rehearsal (schema, adapter, endpoint), new-domain scaffold + playbook                                                                                                        | rehearsal                                  |
-| [`phase-8-finale/`](./phase-8-finale/)                 | Demo mode (`?demo=1`), finale scripts, pitch                                                                                                                                       | e2e (Wispr Flow box), landing translations |
-| [`app/`](./app/)                                       | `index.html` (landing page at `/`), `landing/` (its CSS + script), `app/index.html` (the app at `/app/`), Vite/PWA config, `main.tsx`, `App.tsx` (wires all phases), static assets | e2e                                        |
-| [`api/`](./api/)                                       | Entry files re-exporting each phase's endpoint (served by `npm start` and `npm run dev:api`)                                                                                       | —                                          |
+| Folder                                                 | Code                                                                                                                                                                               | Tests                                                   |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`phase-0-setup/`](./phase-0-setup/)                   | `@kaambill/shared` (types, Zod schema), seed rate card, server env + `/api/health`, local dev API, test helpers                                                                    | schema, env                                             |
+| [`phase-1-ui-ux-design/`](./phase-1-ui-ux-design/)     | Stitch export (`design/`), theme CSS generated from it, tokens, `Icon`, icon-font subset                                                                                           | icons · e2e                                             |
+| [`phase-2-voice-core/`](./phase-2-voice-core/)         | Conversation machine (read-back gate), Web Speech (4 s pauses, auto-restart), text box, app language (`useT`), shell (top bar, dock, 4-tab nav, banners)                           | machine, STT · e2e                                      |
+| [`phase-3-understanding/`](./phase-3-understanding/)   | Normalizer (Indian numbers, Devanagari 1–100), `/api/extract` client, Groq strict-schema extraction (`LlmProvider`), rate limit, prompt                                            | normalizer, client, API                                 |
+| [`phase-4-billing-domain/`](./phase-4-billing-domain/) | Matcher, rate card, bill model, clarifier, messages in 3 languages, billing adapter, journey step bar, S3–S6/S8 screens                                                            | domain, matcher · e2e                                   |
+| [`phase-5-output-share/`](./phase-5-output-share/)     | Payment details → payment → invoice (PAID/DUE), UPI link + QR, A6 PDF, share, history, drafts, profile, Home, S1/S7/S9 screens                                                     | output, PDF · e2e (incl. offline)                       |
+| [`phase-6-quality-demo/`](./phase-6-quality-demo/)     | Telemetry, 208-sentence eval + resumable runner + results, UI-parity capture, demo pack                                                                                            | telemetry, eval data                                    |
+| [`phase-7-domain-sprint/`](./phase-7-domain-sprint/)   | To-do rehearsal (schema, adapter, endpoint), new-domain scaffold + playbook                                                                                                        | rehearsal                                               |
+| [`phase-8-finale/`](./phase-8-finale/)                 | Demo mode (`?demo=1`), finale scripts, pitch                                                                                                                                       | e2e (browser mic, Wispr Flow box), landing translations |
+| [`app/`](./app/)                                       | `index.html` (landing page at `/`), `landing/` (its CSS + script), `app/index.html` (the app at `/app/`), Vite/PWA config, `main.tsx`, `App.tsx` (wires all phases), static assets | e2e                                                     |
+| [`api/`](./api/)                                       | Entry files re-exporting each phase's endpoint (served by `npm start` and `npm run dev:api`)                                                                                       | —                                                       |
 
-### What stays at the repo root (and why)
+TypeScript: `phase-0-setup/tsconfig.base.json` + a `tsconfig.json` **in every phase folder**, `app/` and `api/` (plus a `tsconfig.server.json` in phases 0, 3 and 7, which have server code). `npm run typecheck` checks them all, or `-- 4` for one phase. Tests: Vitest and Playwright configs in `phase-6-quality-demo/`.
 
-| File                                            | Why it can't move                                                                                                                                                     |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `package.json`, `package-lock.json`             | npm installs and links the workspaces from the root. It holds the scripts and shared tooling; **each phase has its own `package.json`** with its runtime dependencies |
-| `eslint.config.js`                              | ESLint and editors look for it at the root. It's a one-line re-export of `phase-0-setup/eslint.rules.js`                                                              |
-| `README.md`                                     | Entry point; the project-wide docs live in [`docs/`](./docs/)                                                                                                         |
-| `.env`, `.env.example`, `.gitignore`, `.husky/` | Read from the root by Vite, Node, git                                                                                                                                 |
+## Tech stack
 
-TypeScript: `phase-0-setup/tsconfig.base.json` + a `tsconfig.json` (and `tsconfig.server.json`) **in every phase folder**, `app/` and `api/` (`npm run typecheck` checks them all, or `-- 4` for one phase). Tests: Vitest and Playwright configs in `phase-6-quality-demo/`.
+| Layer               | What is used                                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Understanding (LLM) | [Groq](https://groq.com) `openai/gpt-oss-120b` (fallback `openai/gpt-oss-20b`), strict JSON schema, via `groq-sdk` |
+| Voice in            | Browser Web Speech API (mic button), or [Wispr Flow](https://wisprflow.ai) dictating into the text box             |
+| Voice out           | None: the app never speaks                                                                                         |
+| App                 | React 19 · TypeScript · Vite 8 · Tailwind 4 · XState 5 (conversation machine) · PWA (works offline)                |
+| Billing and output  | `fuse.js` (item matching) · `zod` (schemas) · IndexedDB via `idb-keyval` · `qrcode` (UPI QR) · `jspdf` (PDF bill)  |
+| Sharing             | WhatsApp link and Web Share API (the worker always presses Send)                                                   |
+| Server              | One Node process (`npm start`) serving the built landing page, the app and `/api/*`                                |
+| Hosting             | [Render](https://render.com) web service (free plan) at `kaambillapp.onrender.com`                                 |
+| Design              | Google Stitch export, Material Symbols icon subset                                                                 |
+| Quality             | Vitest (unit) · Playwright (end-to-end, including the browser mic and Wispr Flow paths) · ESLint · Prettier · CI   |
 
-## Stack
-
-Groq (`openai/gpt-oss-120b`, strict JSON schema) · browser Web Speech (input only) · Wispr Flow (dictation into the text box) · XState · IndexedDB · `qrcode` + `jspdf` + Web Share API · Vite + React + Tailwind (theme from the Stitch export) · Vitest + Playwright.
+**Not used any more:** Sarvam and Groq Whisper speech-to-text (removed 28 Nov; Wispr Flow and the browser mic cover voice input).
 
 ## License
 
