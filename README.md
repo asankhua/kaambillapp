@@ -8,6 +8,12 @@ KaamBill builds the itemized bill (**₹1,235**), asks at most one question at a
 
 Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 🗣️ **Built hands-free with [Wispr Flow](https://wisprflow.ai)**: specs, prompts and code were dictated with Flow.
 
+## See it working
+
+![KaamBill working prototype: a job is typed, the itemized bill is checked, payment details are filled in and the bill is ready to send on WhatsApp](app/public/kaambill-demo-english.gif)
+
+A screen recording of the real app in demo mode, from job to bill. Also available in [हिंदी](app/public/kaambill-demo-hindi.gif) and [Hinglish](app/public/kaambill-demo-hinglish.gif).
+
 ---
 
 ## How it works
