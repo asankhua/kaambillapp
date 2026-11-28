@@ -34,10 +34,14 @@ if (renderOrigin) {
   process.env.ALLOWED_ORIGINS = allowed.join(",");
 }
 
-// Fail at startup, with the variable names (never the values), instead of on the first request.
-const { getEnv } = await import("../server/env.js");
+// Fail at startup, with the variable names (never the values), only for a malformed setting. A missing
+// GROQ_API_KEY is fine: the app starts and bill extraction shows a "key not set" message.
+const { getEnv, hasGroqKey } = await import("../server/env.js");
 try {
-  getEnv();
+  if (!hasGroqKey(getEnv()))
+    console.warn(
+      "GROQ_API_KEY is not set: KaamBill starts, but bill extraction shows 'key not set'. See .env.example.",
+    );
 } catch (e) {
   console.error((e as Error).message);
   process.exit(1);

@@ -4,10 +4,17 @@
  * 2. Confirms GROQ_API_KEY works with a free call (GET /models) and that the
  *    configured models exist on the account.
  */
-import { describeEnv, getEnv } from "../server/env.js";
+import { describeEnv, getEnv, hasGroqKey } from "../server/env.js";
 
 const env = getEnv();
 console.log("Server env OK:", describeEnv(env));
+if (!hasGroqKey(env)) {
+  console.error(
+    "GROQ_API_KEY is not set. The app still starts, but bill extraction shows 'key not set'.\n" +
+      "Set it in .env (free key: https://console.groq.com/keys) and run this check again.",
+  );
+  process.exit(1);
+}
 
 const res = await fetch("https://api.groq.com/openai/v1/models", {
   headers: { Authorization: `Bearer ${env.GROQ_API_KEY}` },

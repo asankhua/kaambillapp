@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { describeEnv, getEnv } from "./env.js";
+import { describeEnv, getEnv, hasGroqKey } from "./env.js";
 
 const base = { GROQ_API_KEY: "gsk_" + "x".repeat(40) };
 
@@ -19,8 +19,16 @@ describe("server env", () => {
     expect(env.ALLOWED_ORIGINS).toEqual(["http://localhost:5173", "https://kaambill.vercel.app"]);
   });
 
-  it("fails clearly without GROQ_API_KEY, naming the variable only", () => {
-    expect(() => getEnv({})).toThrow(/GROQ_API_KEY/);
+  it("starts without GROQ_API_KEY and reports it as not set (the app must run with no secret keys)", () => {
+    const env = getEnv({});
+    expect(hasGroqKey(env)).toBe(false);
+    expect(JSON.stringify(describeEnv(env))).toMatch(/not set/);
+    expect(hasGroqKey(getEnv({ GROQ_API_KEY: "your_key_here" }))).toBe(false); // a leftover placeholder
+    expect(hasGroqKey(getEnv(base))).toBe(true);
+  });
+
+  it("still rejects a malformed setting, naming the variable only", () => {
+    expect(() => getEnv({ LLM_REASONING_EFFORT: "extreme" })).toThrow(/LLM_REASONING_EFFORT/);
   });
 
   it("never exposes the secret in describeEnv", () => {

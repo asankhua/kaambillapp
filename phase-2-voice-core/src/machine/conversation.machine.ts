@@ -63,6 +63,13 @@ const errorKindOf = (err: unknown): VoiceErrorKind => {
   if (
     err &&
     typeof err === "object" &&
+    "code" in err &&
+    (err as { code?: string }).code === "key_not_set"
+  )
+    return "key_not_set";
+  if (
+    err &&
+    typeof err === "object" &&
     "status" in err &&
     (err as { status: number }).status === 429
   )

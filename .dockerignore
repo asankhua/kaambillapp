@@ -1,0 +1,12 @@
+node_modules
+.git
+.github
+.husky
+.claude
+.DS_Store
+.env
+.env.*
+app/dist
+test-results
+playwright-report
+untitled folder

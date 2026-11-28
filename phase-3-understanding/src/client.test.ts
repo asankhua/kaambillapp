@@ -45,6 +45,18 @@ describe("extract client", () => {
     expect(f4).toHaveBeenCalledTimes(1);
   });
 
+  it("a missing server key is final: carries the code, is not retried", async () => {
+    const f = vi
+      .fn()
+      .mockResolvedValue(new Response(JSON.stringify({ error: "key_not_set" }), { status: 503 }));
+    await expect(extract(turn, {}, f as unknown as typeof fetch)).rejects.toMatchObject({
+      name: "ExtractError",
+      status: 503,
+      code: "key_not_set",
+    });
+    expect(f).toHaveBeenCalledTimes(1);
+  });
+
   it("sends only names/aliases from the catalog and the last 4 turns", async () => {
     const fetchImpl = vi.fn(async () => ok(unknownExtraction()));
     const history = Array.from({ length: 6 }, (_, i) => ({

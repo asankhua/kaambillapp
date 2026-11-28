@@ -24,6 +24,9 @@ const HINGLISH = {
   tryAgain: "Phir try karein",
   offlineSafe: "Aap bolte ya likhte rahiye, bill phone mein surakshit save ho raha hai.",
   busy: "Thoda ruk ke boliye — server busy hai",
+  keyNotSet: "Groq key set nahi hai",
+  keyNotSetSub:
+    "Bill banane ke liye server par GROQ_API_KEY chahiye. .env mein key daaliye (README dekhein), phir dobara try karein.",
 };
 
 const T: Record<UiLangId, typeof HINGLISH> = {
@@ -50,6 +53,9 @@ const T: Record<UiLangId, typeof HINGLISH> = {
     tryAgain: "फिर कोशिश करें",
     offlineSafe: "आप बोलते या लिखते रहिए, बिल फ़ोन में सुरक्षित सेव हो रहा है।",
     busy: "थोड़ा रुककर बोलिए — सर्वर बिज़ी है",
+    keyNotSet: "Groq की key सेट नहीं है",
+    keyNotSetSub:
+      "बिल बनाने के लिए सर्वर पर GROQ_API_KEY चाहिए। .env में key डालिए (README देखें), फिर दोबारा कोशिश कीजिए।",
   },
   english: {
     micOff: "Mic is off — you can type instead",
@@ -74,6 +80,9 @@ const T: Record<UiLangId, typeof HINGLISH> = {
     tryAgain: "Try again",
     offlineSafe: "Keep speaking or typing; the bill is saved safely on your phone.",
     busy: "Wait a moment and speak again — the server is busy",
+    keyNotSet: "Groq key not set",
+    keyNotSetSub:
+      "Building a bill needs GROQ_API_KEY on the server. Add the key to .env (see the README), then try again.",
   },
 };
 
@@ -265,6 +274,30 @@ export function RateLimitedBanner({ onRetry }: { onRetry: () => void }) {
       className="rounded-2xl border border-amber bg-amber-tint p-4 text-amber-text"
     >
       <div className="font-label-lg text-label-lg">{t.busy}</div>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="mt-3 min-h-[48px] rounded-xl bg-white px-4 font-label-md text-label-md"
+      >
+        {t.tryAgain}
+      </button>
+    </div>
+  );
+}
+
+/** The server has no GROQ_API_KEY: the app runs, but it can't turn words into a bill until one is set. */
+export function KeyNotSetBanner({ onRetry }: { onRetry: () => void }) {
+  const t = useT(T);
+  return (
+    <div
+      role="status"
+      data-testid="key-not-set"
+      className="rounded-2xl border border-amber bg-amber-tint p-4 text-amber-text"
+    >
+      <div className="flex items-center gap-2 font-label-lg text-label-lg">
+        <Icon name="key" className="text-[20px]" /> {t.keyNotSet}
+      </div>
+      <p className="mt-1 font-body-md text-body-md">{t.keyNotSetSub}</p>
       <button
         type="button"
         onClick={onRetry}

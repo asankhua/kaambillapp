@@ -41,6 +41,7 @@ import {
   NotUnderstoodBanner,
   OfflineBanner,
   RateLimitedBanner,
+  KeyNotSetBanner,
   TypeInsteadCard,
 } from "../../phase-2-voice-core/src/ui/Banners";
 import { InvoiceCard } from "../../phase-4-billing-domain/src/ui/InvoiceCard";
@@ -540,7 +541,13 @@ function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfil
                 {state === "error" && ctx.error === "rate_limited" && (
                   <RateLimitedBanner onRetry={() => send({ type: "RETRY" })} />
                 )}
-                {((state === "error" && !micBlocked && ctx.error !== "rate_limited") ||
+                {state === "error" && ctx.error === "key_not_set" && (
+                  <KeyNotSetBanner onRetry={() => send({ type: "RETRY" })} />
+                )}
+                {((state === "error" &&
+                  !micBlocked &&
+                  ctx.error !== "rate_limited" &&
+                  ctx.error !== "key_not_set") ||
                   state === "notUnderstood") && (
                   <NotUnderstoodBanner
                     onRetry={() => send({ type: "RETRY" })}

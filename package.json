@@ -30,7 +30,8 @@
     "rehearsal:todo": "node --env-file=.env --import tsx phase-7-domain-sprint/scripts/rehearsal-todo.ts",
     "domain:new": "node phase-7-domain-sprint/scaffold/new.mjs",
     "warmup": "node --import tsx phase-8-finale/scripts/warmup.ts",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "deck": "node phase-8-finale/scripts/build-deck.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

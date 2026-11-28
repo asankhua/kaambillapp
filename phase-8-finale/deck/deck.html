@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>KaamBill: pitch deck</title>
+    <style>
+      /* One 16:9 page per slide. Everything is real text so a reader can extract it (the images only decorate). */
+      @page {
+        size: 1280px 720px;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #14201a;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .slide {
+        width: 1280px;
+        height: 720px;
+        padding: 52px 64px 44px;
+        background: #f7faf6;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        break-after: page;
+      }
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      .kicker {
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #0b7a4b;
+        font-weight: 700;
+        margin: 0 0 10px;
+      }
+      h1,
+      h2 {
+        margin: 0;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+      }
+      h2 {
+        font-size: 40px;
+        max-width: 1100px;
+      }
+      h3 {
+        font-size: 21px;
+        margin: 0 0 8px;
+        color: #0b7a4b;
+      }
+      p,
+      li {
+        font-size: 19px;
+        line-height: 1.42;
+      }
+      ul {
+        margin: 8px 0 0;
+        padding-left: 22px;
+      }
+      li {
+        margin: 0 0 7px;
+      }
+      .foot {
+        position: absolute;
+        left: 64px;
+        right: 64px;
+        bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #5b6b62;
+      }
+      .cols {
+        display: flex;
+        gap: 36px;
+        margin-top: 22px;
+      }
+      .col {
+        flex: 1;
+        min-width: 0;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #dbe6dd;
+        border-radius: 16px;
+        padding: 18px 22px;
+      }
+      .big {
+        font-size: 44px;
+        font-weight: 800;
+        color: #0b7a4b;
+        line-height: 1;
+      }
+      .muted {
+        color: #5b6b62;
+      }
+      .small {
+        font-size: 15px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 16px;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 9px 12px;
+        font-size: 16px;
+        line-height: 1.35;
+        border-bottom: 1px solid #dbe6dd;
+      }
+      th {
+        font-size: 13px;
+        text-transform: uppercase;
+        color: #5b6b62;
+        background: #eef4ee;
+      }
+      td:first-child {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .phones {
+        display: flex;
+        gap: 18px;
+        justify-content: flex-end;
+      }
+      .phones img {
+        height: 470px;
+        border-radius: 22px;
+        border: 5px solid #14201a;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      }
+      .say {
+        background: #0b7a4b;
+        color: #fff;
+        border-radius: 16px;
+        padding: 16px 22px;
+        font-size: 20px;
+        line-height: 1.4;
+        font-style: italic;
+      }
+      .steps {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .step {
+        flex: 1;
+        background: #fff;
+        border: 1px solid #dbe6dd;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 15px;
+        line-height: 1.3;
+      }
+      .step b {
+        display: block;
+        color: #0b7a4b;
+        font-size: 16px;
+        margin-bottom: 2px;
+      }
+      .tight td,
+      .tight th {
+        font-size: 14.5px;
+        padding: 7px 10px;
+        line-height: 1.32;
+      }
+      .tight td:first-child {
+        white-space: normal;
+        width: 190px;
+      }
+      .dense li,
+      .dense p {
+        font-size: 16.5px;
+        line-height: 1.38;
+      }
+      .dense li {
+        margin-bottom: 6px;
+      }
+      .title-slide {
+        background: #0b7a4b;
+        color: #fff;
+        padding-top: 84px;
+      }
+      .title-slide h1 {
+        font-size: 74px;
+        max-width: 1000px;
+      }
+      .title-slide .tag {
+        font-size: 28px;
+        margin: 22px 0 0;
+        max-width: 960px;
+        line-height: 1.35;
+      }
+      .title-slide .kicker {
+        color: #b7f0d2;
+      }
+      .links {
+        margin-top: 44px;
+        font-size: 20px;
+        line-height: 1.7;
+      }
+      .links b {
+        display: inline-block;
+        width: 130px;
+        color: #b7f0d2;
+      }
+      .title-slide .foot {
+        color: #b7f0d2;
+      }
+      .end-slide {
+        background: #0b7a4b;
+        color: #fff;
+      }
+      .end-slide .kicker,
+      .end-slide h3 {
+        color: #b7f0d2;
+      }
+      .end-slide .card {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+      .end-slide .foot {
+        color: #b7f0d2;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1 · Title -->
+    <section class="slide title-slide">
+      <p class="kicker">India Runs on Voice · Scaler × Wispr Flow · Track 04: Small business</p>
+      <h1>KaamBill: Bol ke bill banaiye</h1>
+      <p class="tag">
+        Voice billing for India's electricians, plumbers and technicians. Say one sentence; get an
+        itemized bill with a UPI QR, ready to send on WhatsApp.
+      </p>
+      <div class="links">
+        <div><b>Live app</b> kaambillapp.onrender.com</div>
+        <div><b>Demo video</b> youtu.be/wO_zYQ81DLk</div>
+        <div>
+          <b>Code</b> github.com/asankhua/kaambillapp (public; run it with docker compose up)
+        </div>
+      </div>
+      <div class="foot">
+        <span>Built hands-free with Wispr Flow: specs, prompts and code were dictated.</span>
+        <span>1 / 8</span>
+      </div>
+    </section>
+
+    <!-- 2 · Problem -->
+    <section class="slide">
+      <p class="kicker">1 · The problem and who has it</p>
+      <h2>Solo tradespeople bill on scraps of paper, or not at all</h2>
+      <div class="cols">
+        <div class="col">
+          <h3>Who has the problem</h3>
+          <ul>
+            <li>
+              Independent electricians, plumbers, AC and appliance technicians, carpenters, painters
+              and repair workers. Most work alone with no office staff.
+            </li>
+            <li>
+              They use Android phones and UPI every day, but billing apps (Tally, Zoho, Vyapar)
+              assume a keyboard and English.
+            </li>
+            <li>
+              Only about 10.6% of Indians speak English as a first, second or third language (Census
+              of India 2011): roughly 89 in 100 are left out of English-first software.
+            </li>
+            <li>
+              With dusty, wet or greasy hands they won't type line items. They quote a lump sum out
+              loud or write it on paper.
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>What goes wrong today</h3>
+          <ul>
+            <li><b>No itemized quote:</b> customers haggle over parts at the door.</li>
+            <li>
+              <b>Forgotten add-ons:</b> small fittings, extra wire and visiting charges are left off
+              the bill, so the worker loses that money.
+            </li>
+            <li>
+              <b>Slow payments:</b> no bill and no payment link means days of follow-up calls, and
+              some money is never recovered.
+            </li>
+            <li>
+              <b>No financial record:</b> workers can't show income when they apply for credit such
+              as MUDRA or PM SVANidhi.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 18px">
+        <b>In one line:</b> solo Indian tradespeople lose money, time and credibility because making
+        an itemized bill and collecting payment on site means typing in English-first apps they
+        can't use with busy hands.
+      </div>
+      <div class="foot"><span>KaamBill · pitch deck</span><span>2 / 8</span></div>
+    </section>
+
+    <!-- 3 · Solution -->
+    <section class="slide">
+      <p class="kicker">1 · The solution</p>
+      <h2>Say the job once. KaamBill builds the bill.</h2>
+      <div style="display: flex; gap: 30px; margin-top: 16px">
+        <div style="flex: 1.25; min-width: 0">
+          <div class="say">
+            "Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill bana do"
+            → itemized bill, total ₹1,235
+          </div>
+          <div class="steps">
+            <div class="step"><b>1 Saaman</b>Speak, dictate with Wispr Flow, or type the job</div>
+            <div class="step"><b>2 Jaanch</b>One question at a time, then "haan" to the total</div>
+            <div class="step"><b>3 Details</b>Amount, UPI ID, customer's WhatsApp number</div>
+            <div class="step"><b>4 Payment</b>Customer scans the UPI QR, amount filled in</div>
+            <div class="step"><b>5 Bill</b>PDF marked PAID or DUE; WhatsApp opens</div>
+          </div>
+          <h3 style="margin-top: 18px">Built so a mistake can't reach the customer</h3>
+          <ul>
+            <li>
+              The total is always shown on screen first; nothing moves on until the worker approves
+              it with "haan". The worker presses Send on WhatsApp.
+            </li>
+            <li>
+              Prices come from the worker's own rate card or what they say, never from the AI.
+              Uncertain items turn amber and are asked about one at a time.
+            </li>
+            <li>
+              Hinglish, Hindi or English; built for low-end Android phones; spoken bills queue on
+              the phone when the network drops.
+            </li>
+          </ul>
+        </div>
+        <div class="phones" style="flex: 0 0 auto; align-items: flex-start">
+          <img src="screen-1-check.png" alt="Bill check screen" />
+          <img src="screen-2-upi.png" alt="UPI QR screen" />
+        </div>
+      </div>
+      <div class="foot">
+        <span>Screens: the real app, real Groq extraction</span><span>3 / 8</span>
+      </div>
+    </section>
+
+    <!-- 4 · Evidence -->
+    <section class="slide">
+      <p class="kicker">Working prototype</p>
+      <h2>It works end to end, and we measured it on real AI calls</h2>
+      <div style="display: flex; gap: 22px; margin-top: 22px">
+        <div class="card" style="flex: 1">
+          <div class="big">99.3%</div>
+          <p class="muted" style="margin: 8px 0 0">
+            field accuracy (1,661 of 1,672 fields) on the sentences scored so far
+          </p>
+        </div>
+        <div class="card" style="flex: 1">
+          <div class="big">73 / 75</div>
+          <p class="muted" style="margin: 8px 0 0">
+            bill totals exactly right (Groq → on-device normalizer → rate-card matcher → bill)
+          </p>
+        </div>
+        <div class="card" style="flex: 1">
+          <div class="big">1.35 s</div>
+          <p class="muted" style="margin: 8px 0 0">
+            median extraction time (90th percentile 2.4 s); about 0.4 clarifying questions per new
+            bill
+          </p>
+        </div>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <h3>By language</h3>
+          <ul>
+            <li>Hinglish: 99.3% field accuracy</li>
+            <li>Hindi (Devanagari): 98.9%</li>
+            <li>English (India): 99.8%</li>
+          </ul>
+          <p class="small muted" style="margin-top: 10px">
+            Honest scope: 125 of 208 test sentences are scored so far (Groq free-tier quota); the
+            remaining 83 are queued. Results are in the repository
+            (phase-6-quality-demo/eval/results).
+          </p>
+        </div>
+        <div class="col">
+          <h3>What you can try today</h3>
+          <ul>
+            <li>
+              Live link: kaambillapp.onrender.com (landing page, app, demo mode at /app/?demo=1)
+            </li>
+            <li>Demo video: youtu.be/wO_zYQ81DLk</li>
+            <li>
+              One command from the public repository: docker compose up --build, then open
+              localhost:3000. No key needed to start.
+            </li>
+            <li>
+              269 unit tests and 34 end-to-end tests pass, including the Wispr Flow and browser-mic
+              paths.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot">
+        <span>Eval: openai/gpt-oss-120b, strict JSON schema</span><span>4 / 8</span>
+      </div>
+    </section>
+
+    <!-- 5 · Users -->
+    <section class="slide">
+      <p class="kicker">2 · Who it is for</p>
+      <h2>Millions of one-person trades, no one to do the billing</h2>
+      <table>
+        <tr>
+          <th>Level</th>
+          <th>Who</th>
+          <th>How many</th>
+          <th>Basis</th>
+        </tr>
+        <tr>
+          <td>Whole sector</td>
+          <td>All unincorporated non-farm enterprises in India</td>
+          <td>About 7.3 crore establishments, about 12 crore workers</td>
+          <td>NSO, Annual Survey of Unincorporated Sector Enterprises (ASUSE) 2023-24, MoSPI</td>
+        </tr>
+        <tr>
+          <td>Addressable</td>
+          <td>Service enterprises doing repair, installation and home-service trade work</td>
+          <td>About 1 to 1.5 crore</td>
+          <td>
+            Our estimate: about a third of enterprises are in services, and about half of those are
+            repair, installation and home-service trades
+          </td>
+        </tr>
+        <tr>
+          <td>First market</td>
+          <td>
+            Solo electricians, plumbers and AC technicians with smartphones in Hindi-belt cities
+          </td>
+          <td>About 10 to 20 lakh</td>
+          <td>Our estimate: the first segment for the Hinglish launch</td>
+        </tr>
+      </table>
+      <div class="cols">
+        <div class="col">
+          <h3>Primary users</h3>
+          <ul>
+            <li>Solo service workers and micro-contractors: most are one person with no staff.</li>
+            <li>
+              They already run their business on phone calls, WhatsApp voice notes and UPI, so
+              speaking a job is a habit, not something new to learn.
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Secondary users</h3>
+          <ul>
+            <li>
+              Households and small businesses that hire them and today get no itemized record of
+              what they paid for.
+            </li>
+          </ul>
+          <p class="small muted">
+            The sector figure is official (MoSPI); the addressable and first-market rows are our own
+            estimates from the stated assumptions.
+          </p>
+        </div>
+      </div>
+      <div class="foot">
+        <span>Sources: Census of India 2011; NSO ASUSE 2023-24</span><span>5 / 8</span>
+      </div>
+    </section>
+
+    <!-- 6 · Dependencies -->
+    <section class="slide tight">
+      <p class="kicker">3 · What it depends on</p>
+      <h2>Every outside service has a fallback</h2>
+      <table>
+        <tr>
+          <th>Depends on</th>
+          <th>Used for</th>
+          <th>If it gets costly or stops</th>
+        </tr>
+        <tr>
+          <td>Groq language model<br /><span class="small muted">openai/gpt-oss-120b</span></td>
+          <td>
+            Turns the words into a structured bill (customer, items, quantities, labour). Only text
+            is sent, never audio.
+          </td>
+          <td>
+            Retries once on the smaller gpt-oss-20b after a rate limit or timeout. The model sits
+            behind a small provider interface, so moving to another host is a contained change.
+            Offline, jobs queue on the phone. Totals, rates, QR and PDF are computed on the device,
+            so saved bills keep working.
+          </td>
+        </tr>
+        <tr>
+          <td>Wispr Flow<br /><span class="small muted">default voice input</span></td>
+          <td>
+            Dictation into the app's text box. The user's own app: no API, no key, nothing sent to
+            us.
+          </td>
+          <td>
+            Typing works exactly the same way, and the built-in browser mic is the alternative.
+            KaamBill never needs Wispr's servers.
+          </td>
+        </tr>
+        <tr>
+          <td>Browser speech recognition<br /><span class="small muted">optional mic</span></td>
+          <td>
+            The mic button (Chrome and other Chromium browsers). In Chrome the audio goes to Google.
+          </td>
+          <td>
+            If a browser lacks it or there is no network, the text box and Wispr Flow still work.
+          </td>
+        </tr>
+        <tr>
+          <td>UPI link and QR, WhatsApp link</td>
+          <td>
+            Collecting payment and sharing the bill. Open standards: no payment gateway or WhatsApp
+            API.
+          </td>
+          <td>
+            Nothing to pay or lose. KaamBill can't see payments, so the worker confirms "paid".
+          </td>
+        </tr>
+        <tr>
+          <td>Hosting<br /><span class="small muted">Render free plan</span></td>
+          <td>Serves the landing page, the app and the API from one Node process.</td>
+          <td>
+            Runs anywhere with docker compose up. Data stays on the worker's phone, so there is no
+            database to run or lose.
+          </td>
+        </tr>
+      </table>
+      <p class="small" style="margin: 10px 0 0; line-height: 1.38">
+        <b>Cost to run (our estimate):</b> about 2,800 tokens per bill (measured average 2,813).
+        Even if every token were billed at the output price of about $0.60 per million (Groq list
+        price, to re-check at launch) that is under ₹0.15 per bill, or under ₹20 a month for 5 bills
+        a day. The server also limits requests per IP. Only one API key is needed (Groq); the app
+        starts without it and shows "key not set".
+      </p>
+      <div class="foot"><span>KaamBill · pitch deck</span><span>6 / 8</span></div>
+    </section>
+
+    <!-- 7 · Launch plan -->
+    <section class="slide dense">
+      <p class="kicker">4 · Launch plan</p>
+      <h2>Start at the parts counter; every bill spreads it</h2>
+      <div class="cols" style="margin-top: 16px">
+        <div class="col card">
+          <h3>1 · First users</h3>
+          <ul>
+            <li>
+              Electrical, plumbing and hardware shops in one or two Hindi-belt cities: workers are
+              at the counter for parts, so a 60-second demo fits.
+            </li>
+            <li>
+              A counter card with a QR to the app; trade associations and workers' WhatsApp groups.
+            </li>
+            <li>No app store: it opens in the browser and installs to the home screen.</li>
+            <li>Start with the first 100 workers; watch real bills and fix what breaks.</li>
+          </ul>
+        </div>
+        <div class="col card">
+          <h3>2 · Growth</h3>
+          <ul>
+            <li>
+              Every bill goes to a customer: a "made with KaamBill" line and link on the bill
+              (planned) lets people who hire tradespeople find it.
+            </li>
+            <li>
+              Worker-to-worker referral; dealers gain repeat visits, so they keep recommending it.
+            </li>
+            <li>More languages only once Hinglish, Hindi and English are solid.</li>
+          </ul>
+        </div>
+        <div class="col card">
+          <h3>3 · Money</h3>
+          <ul>
+            <li>The core voice bill stays free.</li>
+            <li>
+              Paid tier, to be tested at about ₹49 to ₹99 a month: GST invoices, income summaries
+              for MUDRA and PM SVANidhi applications, team accounts.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 14px; padding: 12px 20px">
+        <h3 style="margin-bottom: 4px">How we will know it is working (targets)</h3>
+        <p style="margin: 0">
+          60% of active users make 5 or more voice bills a week · under 25 seconds from tapping the
+          mic to the WhatsApp share · over 90% first-pass accuracy · over 50% of bills paid through
+          the UPI link within 24 hours.
+        </p>
+      </div>
+      <div class="foot">
+        <span>Items marked planned or to be tested are not built or proven yet</span
+        ><span>7 / 8</span>
+      </div>
+    </section>
+
+    <!-- 8 · Close -->
+    <section class="slide end-slide">
+      <p class="kicker">Try it</p>
+      <h2>Voice-first, and never sends without the worker</h2>
+      <div class="cols" style="margin-top: 30px">
+        <div class="col card">
+          <h3>Links</h3>
+          <ul>
+            <li>Live app: kaambillapp.onrender.com</li>
+            <li>Demo mode (skips set-up): kaambillapp.onrender.com/app/?demo=1</li>
+            <li>Demo video: youtu.be/wO_zYQ81DLk</li>
+            <li>Code: github.com/asankhua/kaambillapp</li>
+          </ul>
+        </div>
+        <div class="col card">
+          <h3>Run it yourself</h3>
+          <ul>
+            <li>docker compose up --build, then open localhost:3000</li>
+            <li>
+              No .env and no secret key needed to start. Set GROQ_API_KEY to turn bill extraction on
+              (see .env.example).
+            </li>
+          </ul>
+        </div>
+        <div class="col card">
+          <h3>Next</h3>
+          <ul>
+            <li>Score the remaining 83 eval sentences; user tests with real tradespeople.</li>
+            <li>GST invoice mode, automatic UPI payment status, exportable income summary.</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 26px; font-size: 22px">
+        KaamBill was built hands-free with Wispr Flow, and workers can dictate into the app with it
+        too, with no API key and no extra setup.
+      </p>
+      <div class="foot"><span>Ashish Kumar Sankhua · MIT licensed</span><span>8 / 8</span></div>
+    </section>
+  </body>
+</html>

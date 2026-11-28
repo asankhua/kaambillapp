@@ -10,8 +10,19 @@ export class ExtractError extends Error {
   constructor(
     message: string,
     readonly status: number,
+    /** The server's `error` code when it sent one, e.g. "key_not_set" (no GROQ_API_KEY on the server). */
+    readonly code?: string,
   ) {
     super(message);
+  }
+}
+
+async function errorCode(res: Response): Promise<string | undefined> {
+  try {
+    const body = (await res.json()) as { error?: unknown };
+    return typeof body.error === "string" ? body.error : undefined;
+  } catch {
+    return undefined;
   }
 }
 
@@ -37,10 +48,14 @@ export async function postStructured<T>(
         signal: ctrl.signal,
       });
       if (res.ok) return (await res.json()) as T;
-      if (res.status < 500) throw new ExtractError(`${path} failed: ${res.status}`, res.status);
-      lastError = new ExtractError(`${path} failed: ${res.status}`, res.status);
+      const code = await errorCode(res);
+      const err = new ExtractError(`${path} failed: ${res.status}`, res.status, code);
+      // 4xx and a missing server key are final: retrying would give the same answer.
+      if (res.status < 500 || code === "key_not_set") throw err;
+      lastError = err;
     } catch (err) {
-      if (err instanceof ExtractError && err.status < 500) throw err;
+      if (err instanceof ExtractError && (err.status < 500 || err.code === "key_not_set"))
+        throw err;
       lastError = err;
     } finally {
       clearTimeout(timer);

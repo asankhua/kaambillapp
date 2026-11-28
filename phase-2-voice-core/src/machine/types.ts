@@ -62,4 +62,11 @@ export interface DomainAdapter<TDraft, TOutput> {
 
 /** Errors the machine distinguishes (each maps to a screen). */
 export type VoiceErrorKind =
-  "mic_blocked" | "no_speech" | "unsupported" | "network" | "offline" | "rate_limited" | "unknown";
+  | "mic_blocked"
+  | "no_speech"
+  | "unsupported"
+  | "network"
+  | "offline"
+  | "rate_limited"
+  | "key_not_set" // the server has no GROQ_API_KEY
+  | "unknown";

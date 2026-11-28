@@ -16,6 +16,8 @@ Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 
 | The app              | [kaambillapp.onrender.com/app/](https://kaambillapp.onrender.com/app/)                              |
 | The app in demo mode | [kaambillapp.onrender.com/app/?demo=1](https://kaambillapp.onrender.com/app/?demo=1) (skips set-up) |
 | Health check         | [kaambillapp.onrender.com/api/health](https://kaambillapp.onrender.com/api/health)                  |
+| Demo video (3 min)   | [youtu.be/wO_zYQ81DLk](https://youtu.be/wO_zYQ81DLk)                                                |
+| Pitch deck (PDF)     | [`docs/KaamBill-pitch-deck.pdf`](./docs/KaamBill-pitch-deck.pdf)                                    |
 
 Hosted on Render's free plan, which puts an idle service to sleep: the first visit after a quiet spell can take a while to load.
 
@@ -51,20 +53,31 @@ A screen recording of the real app in demo mode, from job to bill. Also availabl
 
 ## What you need
 
-|                                   | Needed?                       | Why                                                                                                                                                                                                                           |
-| --------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Node.js 22+ and npm**           | ✅ To run it locally          | CI uses Node 22. Install from [nodejs.org](https://nodejs.org)                                                                                                                                                                |
-| **Groq API key** (`GROQ_API_KEY`) | ✅ **Required, the only key** | The Groq LLM (`openai/gpt-oss-120b`, strict JSON) turns the spoken / typed words into the bill: customer, items, quantities, labour, intent. Without it the app can't build bills. Only the text is sent to Groq, never audio |
-| **Wispr Flow app**                | Default, no key               | Dictates into the text box (sign in to the Wispr Flow app). The app and the landing page's **Wispr Flow (default)** choice open the box focused straight away                                                                 |
-| Browser speech recognition        | Optional, built in, no key    | The mic button (Chrome on Android / desktop). Choose **Browser mic (optional)** on the landing page                                                                                                                           |
-| Text-to-speech                    | ❌ Not used                   | The app never speaks                                                                                                                                                                                                          |
-| Render account                    | For hosting                   | Runs the one Node service (`npm start`): landing page, app and `/api`                                                                                                                                                         |
+|                                   | Needed?                              | Why                                                                                                                                                                                                                                                                                              |
+| --------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Node.js 22+ and npm**           | ✅ To run it locally                 | CI uses Node 22. Install from [nodejs.org](https://nodejs.org)                                                                                                                                                                                                                                   |
+| **Groq API key** (`GROQ_API_KEY`) | ✅ **The only key** (to build bills) | The Groq LLM (`openai/gpt-oss-120b`, strict JSON) turns the spoken / typed words into the bill: customer, items, quantities, labour, intent. The app **starts and shows its screens without it**; building a bill then shows a "key not set" message. Only the text is sent to Groq, never audio |
+| **Docker** (optional)             | Alternative to Node                  | `docker compose up --build` runs everything on http://localhost:3000, no Node install needed                                                                                                                                                                                                     |
+| **Wispr Flow app**                | Default, no key                      | Dictates into the text box (sign in to the Wispr Flow app). The app and the landing page's **Wispr Flow (default)** choice open the box focused straight away                                                                                                                                    |
+| Browser speech recognition        | Optional, built in, no key           | The mic button (Chrome on Android / desktop). Choose **Browser mic (optional)** on the landing page                                                                                                                                                                                              |
+| Text-to-speech                    | ❌ Not used                          | The app never speaks                                                                                                                                                                                                                                                                             |
+| Render account                    | For hosting                          | Runs the one Node service (`npm start`): landing page, app and `/api`                                                                                                                                                                                                                            |
 
 ## Quick start
 
+### Run it with Docker (one command, no key needed)
+
+```bash
+docker compose up --build   # then open http://localhost:3000
+```
+
+The landing page is at http://localhost:3000/ and the live app at http://localhost:3000/app/ (add `?demo=1` to skip set-up). **No `.env` and no secret key are needed to start.** Without a Groq key every screen works, and building a bill shows a "Groq key not set" message. To turn bill extraction on, copy `.env.example` to `.env` and set `GROQ_API_KEY` (free key at [console.groq.com/keys](https://console.groq.com/keys)), then run the same command. The port is set in [`docker-compose.yml`](./docker-compose.yml) (`3000:3000`).
+
+### Run it with Node
+
 ```bash
 npm install
-cp .env.example .env       # then set GROQ_API_KEY (the only required variable)
+cp .env.example .env       # then set GROQ_API_KEY (needed to build bills; the app starts without it)
 npm run check:env          # validates the env and confirms the Groq key works (prints no secrets)
 npm run dev                # landing page on http://localhost:5173, app on /app/ + local API on :3000 (real Groq)
 ```

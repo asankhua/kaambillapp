@@ -12,9 +12,12 @@ const csv = z.string().transform((s) =>
 );
 
 const EnvSchema = z.object({
+  // Optional on purpose: the app must start and show its screens without any secret key. Without a
+  // key, bill extraction answers "key_not_set" and the app shows a "key not set" message.
   GROQ_API_KEY: z
     .string()
-    .min(20, "GROQ_API_KEY is missing or too short (get one at console.groq.com/keys)"),
+    .default("")
+    .transform((v) => v.trim()),
   LLM_MODEL: z.string().default("openai/gpt-oss-120b"),
   LLM_FALLBACK_MODEL: z.string().default("openai/gpt-oss-20b"),
   LLM_REASONING_EFFORT: z.enum(["low", "medium", "high"]).default("low"),
@@ -47,10 +50,15 @@ export function getEnv(source: NodeJS.ProcessEnv = process.env): ServerEnv {
   return parsed.data;
 }
 
+/** True when a Groq key is configured (a shorter value is treated as a leftover placeholder). */
+export function hasGroqKey(env: Pick<ServerEnv, "GROQ_API_KEY">): boolean {
+  return env.GROQ_API_KEY.length >= 20;
+}
+
 /** Safe summary for logs / health checks: which settings are present, never the secrets. */
 export function describeEnv(env: ServerEnv) {
   return {
-    groqKey: env.GROQ_API_KEY ? "set" : "missing",
+    groqKey: hasGroqKey(env) ? "set" : "not set (bill extraction shows a 'key not set' message)",
     llmModel: env.LLM_MODEL,
     llmFallbackModel: env.LLM_FALLBACK_MODEL,
     reasoningEffort: env.LLM_REASONING_EFFORT,
