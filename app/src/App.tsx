@@ -206,6 +206,11 @@ function Gate({ stores }: { stores: Stores }) {
   return <BillingApp stores={stores} profile={profile} />;
 }
 
+/** Landing page "Wispr Flow" option: `?box=text` opens the typing box on load. */
+const boxParamOpen =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("box") === "text";
+
 function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfile }) {
   const store = stores.rateCard;
   const [resend, setResend] = useState<FinalBill | null>(null);
@@ -318,10 +323,11 @@ function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfil
   // "Likh Ke" tab. Hidden on the share/payment screens (nothing to type there) and while listening.
   // The text box opens only when the worker asks to type ("Likh ke daalein", "Likh ke" on a question,
   // "+ Item jodein"); it then stays open for this bill, until closed (×) or the bill is done.
-  const [textOpen, setTextOpen] = useState(false);
+  // Landing page "Wispr Flow" option (?box=text): the box is open from the start, so Flow can dictate into it.
+  const [textOpen, setTextOpen] = useState(boxParamOpen);
   const showText = textOpen && state !== "sharePreview" && state !== "listening" && !resend;
   const onBillTabs = tab === "boliye";
-  const [focusText, setFocusText] = useState(0);
+  const [focusText, setFocusText] = useState(boxParamOpen ? 1 : 0);
   // The dock's height changes (text box shown/hidden, listening card, payment screens): track it.
   const dockRef = useRef<HTMLDivElement>(null);
   const [dockHeight, setDockHeight] = useState(320);

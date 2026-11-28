@@ -8,8 +8,16 @@
  */
 
 export const STT_STORAGE_KEY = "kb.stt";
-export const STT_ENGINES = ["webspeech", "groq-whisper", "sarvam"] as const;
+export const STT_ENGINES = ["webspeech", "groq-whisper", "sarvam", "wispr"] as const;
 export type SttEngine = (typeof STT_ENGINES)[number];
+
+/**
+ * Wispr Flow is not an engine the app can call (it has no API). It is a desktop dictation app that types
+ * into whatever text box has focus, so "wispr" opens the app's text box on load and the mic stays as usual.
+ */
+function appUrl(engine: SttEngine): string {
+  return engine === "wispr" ? "/app/?stt=webspeech&box=text" : `/app/?stt=${engine}`;
+}
 
 function readStored(): SttEngine {
   try {
@@ -30,7 +38,7 @@ function writeStored(engine: SttEngine) {
 
 /** Point the live app (iframe and full-screen link) at the chosen engine. */
 function applyEngine(engine: SttEngine) {
-  const url = `/app/?stt=${engine}`;
+  const url = appUrl(engine);
   const frame = document.querySelector<HTMLIFrameElement>(".phone-screen");
   // Only reload the app when the engine actually changes; a reload restarts the app.
   if (frame && frame.getAttribute("src") !== url) frame.src = url;
