@@ -60,6 +60,23 @@ npm run dev                # landing page on http://localhost:5173, app on /app/
 
 Try it: open http://localhost:5173/app/?demo=1 → **Likh ke daalein** → type the sentence above → "Haan, sahi hai" → "Haan, bhejo" → UPI → "Paisa mil gaya ✓".
 
+### Run it locally with an AI coding assistant
+
+Not comfortable with the terminal? Paste this prompt into Cursor (or any coding assistant) to set up and run KaamBill on your computer:
+
+```text
+Set up and run the KaamBill app on my computer.
+
+1. Clone https://github.com/asankhua/kaambillapp and open the folder (or use it if I already have it).
+2. Run `npm install`.
+3. Create `.env` by copying `.env.example`. Set `GROQ_API_KEY` to my Groq key (free key at https://console.groq.com). Do not print the key or commit it. `SARVAM_API_KEY` is optional.
+4. Run `npm run check:env` and fix anything it reports.
+5. Run `npm run dev` and leave it running.
+6. Tell me these links when it is up:
+   - Landing page: http://localhost:5173/
+   - Live app (demo, skips set-up): http://localhost:5173/app/?demo=1
+```
+
 | Command                                                          | What it does                                                                                                                                                                                                                                                                                             |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run dev:web` / `npm run dev:api`                            | Only the app (Vite) / only the local API (serves `api/*.ts` like `vercel dev`, no Vercel login)                                                                                                                                                                                                          |
