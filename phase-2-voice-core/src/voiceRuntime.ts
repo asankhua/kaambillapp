@@ -35,7 +35,7 @@ export function createVoiceRuntime<TDraft, TOutput>(
       currentLang = l;
     },
     sttId: stt.id,
-    /** Rate-card names as spelling hints for engines that support them (Whisper prompt). */
+    /** Rate-card names as spelling hints for engines that support them. */
     setHints: (words: string[]) => stt.setHints?.(words),
   };
 }

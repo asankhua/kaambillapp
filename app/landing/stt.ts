@@ -1,22 +1,18 @@
 /**
- * Speech engine for the live app on the landing page: browser Web Speech (default), Groq Whisper or Sarvam AI.
+ * Voice input for the live app on the landing page: the browser mic (Web Speech, default) or Wispr Flow.
  *
- * The app reads its engine from the `?stt=` URL parameter (phase-8-finale/src/stt/selectSttProvider.ts),
- * so the choice is passed to the embedded iframe and to the "Open full screen" link. It is also stored
- * in localStorage (`kb.stt`) so the next visit keeps it. The param is always sent, so an env default
- * (VITE_STT_PROVIDER) never overrides what the dropdown shows.
+ * Wispr Flow is not something the app can call (it has no API). It is a desktop dictation app that types
+ * into whatever text box has focus, so choosing it opens the app's typing box on load (`?box=text`).
+ * The choice is passed to the embedded iframe and to the "Open full screen" link, and remembered in
+ * localStorage (`kb.stt`). Values stored by older versions ("sarvam", "groq-whisper") fall back to the mic.
  */
 
 export const STT_STORAGE_KEY = "kb.stt";
-export const STT_ENGINES = ["webspeech", "groq-whisper", "sarvam", "wispr"] as const;
+export const STT_ENGINES = ["webspeech", "wispr"] as const;
 export type SttEngine = (typeof STT_ENGINES)[number];
 
-/**
- * Wispr Flow is not an engine the app can call (it has no API). It is a desktop dictation app that types
- * into whatever text box has focus, so "wispr" opens the app's text box on load and the mic stays as usual.
- */
 function appUrl(engine: SttEngine): string {
-  return engine === "wispr" ? "/app/?stt=webspeech&box=text" : `/app/?stt=${engine}`;
+  return engine === "wispr" ? "/app/?box=text" : "/app/";
 }
 
 function readStored(): SttEngine {
@@ -36,11 +32,11 @@ function writeStored(engine: SttEngine) {
   }
 }
 
-/** Point the live app (iframe and full-screen link) at the chosen engine. */
+/** Point the live app (iframe and full-screen link) at the chosen input. */
 function applyEngine(engine: SttEngine) {
   const url = appUrl(engine);
   const frame = document.querySelector<HTMLIFrameElement>(".phone-screen");
-  // Only reload the app when the engine actually changes; a reload restarts the app.
+  // Only reload the app when the choice actually changes; a reload restarts the app.
   if (frame && frame.getAttribute("src") !== url) frame.src = url;
   const full = document.getElementById("open-full") as HTMLAnchorElement | null;
   if (full) full.href = url;
@@ -51,8 +47,7 @@ function applyEngine(engine: SttEngine) {
 export function initSttPicker() {
   const select = document.getElementById("stt-select") as HTMLSelectElement | null;
   if (!select) return;
-  const start = readStored();
-  applyEngine(start);
+  applyEngine(readStored());
   select.addEventListener("change", () => {
     const engine = (STT_ENGINES as readonly string[]).includes(select.value)
       ? (select.value as SttEngine)

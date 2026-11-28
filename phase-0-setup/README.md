@@ -70,18 +70,18 @@
 
 ## 8. Progress (21 Nov)
 
-| Item                                                                                                                          | Status                                                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Repo with phase folders (`phase-0-setup` = `@kaambill/shared` workspace; `app/`; `api/`)                                      | ✅                                                                                             |
-| ESLint (incl. **core → domain import ban**, verified) + Prettier + lint-staged pre-commit + GitHub Actions CI                 | ✅                                                                                             |
-| Empty PWA builds (69 KB gzipped JS, manifest, service worker, icons)                                                          | ✅                                                                                             |
-| `.env` → symlink to `r2/.env`; `phase-0-setup/server/env.ts` Zod check; `phase-0-setup/server/health.ts`; `npm run check:env` | ✅ Groq key verified; `openai/gpt-oss-120b`, `gpt-oss-20b`, `whisper-large-v3-turbo` available |
-| Shared types, seed rate card (15), seed eval (30) + 14 tests                                                                  | ✅                                                                                             |
-| Stitch export in `phase-1-ui-ux-design/design/` (single copy); Home imports the toolbox illustration from it                  | ✅                                                                                             |
-| **Team locked on Scaler dashboard**                                                                                           | ⬜ you                                                                                         |
-| **Vercel deploy + install on an Android phone**                                                                               | ⬜ you (`npx vercel`, then add server env vars)                                                |
-| **Push to GitHub** (CI runs on push)                                                                                          | ⬜ you                                                                                         |
-| Wispr Flow 🎥 clip                                                                                                            | ⬜ you                                                                                         |
+| Item                                                                                                                          | Status                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Repo with phase folders (`phase-0-setup` = `@kaambill/shared` workspace; `app/`; `api/`)                                      | ✅                                                                   |
+| ESLint (incl. **core → domain import ban**, verified) + Prettier + lint-staged pre-commit + GitHub Actions CI                 | ✅                                                                   |
+| Empty PWA builds (69 KB gzipped JS, manifest, service worker, icons)                                                          | ✅                                                                   |
+| `.env` → symlink to `r2/.env`; `phase-0-setup/server/env.ts` Zod check; `phase-0-setup/server/health.ts`; `npm run check:env` | ✅ Groq key verified; `openai/gpt-oss-120b`, `gpt-oss-20b` available |
+| Shared types, seed rate card (15), seed eval (30) + 14 tests                                                                  | ✅                                                                   |
+| Stitch export in `phase-1-ui-ux-design/design/` (single copy); Home imports the toolbox illustration from it                  | ✅                                                                   |
+| **Team locked on Scaler dashboard**                                                                                           | ⬜ you                                                               |
+| **Vercel deploy + install on an Android phone**                                                                               | ⬜ you (`npx vercel`, then add server env vars)                      |
+| **Push to GitHub** (CI runs on push)                                                                                          | ⬜ you                                                               |
+| Wispr Flow 🎥 clip                                                                                                            | ⬜ you                                                               |
 
 ## 9. Exit Checklist
 

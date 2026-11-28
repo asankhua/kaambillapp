@@ -7,6 +7,8 @@
 >
 > This document describes **how** the system is built to satisfy the problem statement.
 >
+> **Update (28 Nov): speech-to-text was simplified.** Groq Whisper (the second pass and `/api/stt`), Sarvam AI, IndicWhisper, the `VITE_STT_PROVIDER` / `?stt=` engine selector and the `VOICE_PROVIDER` / `SARVAM_*` / `GROQ_STT_MODEL` settings were **removed**. The mic uses the browser's Web Speech; **Wispr Flow** types into the text box (the landing page can open that box directly with `?box=text`). The only Groq call left is `/api/extract` (bill extraction). The sections below that describe the removed engines are kept as design history. The app is hosted on Render (`npm start`), not Vercel.
+
 > **Current state (21 Nov, the 8:05 PM build; persona: electricians, plumbers, AC technicians).** A kirana-store variant was tried at 8:08 PM and fully reverted; this doc describes the tradesperson app.
 >
 > | Decision (21 Nov)                                                                                                                                                                                          | Where      |

@@ -29,7 +29,6 @@
     "eval:extract": "node --env-file=.env --import tsx phase-6-quality-demo/eval/run-extract.ts",
     "rehearsal:todo": "node --env-file=.env --import tsx phase-7-domain-sprint/scripts/rehearsal-todo.ts",
     "domain:new": "node phase-7-domain-sprint/scaffold/new.mjs",
-    "stt:smoke": "node --env-file=.env --import tsx phase-8-finale/scripts/stt-smoke.ts",
     "warmup": "node --import tsx phase-8-finale/scripts/warmup.ts",
     "prepare": "husky || true"
   },

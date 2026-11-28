@@ -33,7 +33,7 @@ import {
   type Telemetry,
 } from "../../phase-6-quality-demo/src/telemetry";
 import { isDemo } from "../../phase-8-finale/src/demo";
-import { selectSttProvider } from "../../phase-8-finale/src/stt/selectSttProvider";
+import { WebSpeechProvider } from "../../phase-2-voice-core/src/stt/WebSpeechProvider";
 import {
   MicBlockedBanner,
   NoiseTip,
@@ -242,7 +242,7 @@ function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfil
         onHistory: (a) =>
           handleHistoryCommand(stores.history, a, (b) => setResend(b), REPLY_LANG[currentLang]),
       }),
-      selectSttProvider(), // Phase 8: Web Speech by default, Groq Whisper with ?stt=groq-whisper
+      new WebSpeechProvider(), // the mic uses the browser's speech recognition; Wispr Flow types into the text box
     ),
   );
   const bills = useSyncExternalStore(stores.history.subscribe, stores.history.list);

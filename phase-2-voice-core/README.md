@@ -12,7 +12,7 @@
 
 ## 1. Tasks
 
-### 1.1 Audio capture and voice-activity detection (Web Speech end-of-speech here; the energy VAD for Whisper is in `phase-8-finale/src/audio/`)
+### 1.1 Audio capture and voice-activity detection (Web Speech end-of-speech)
 
 - [ ] `getUserMedia({ audio: { noiseSuppression: true, echoCancellation: true, autoGainControl: true } })`.
 - [ ] Silero VAD via `@ricky0123/vad-web`, with the end-of-speech silence set to **1500 ms** ([`architecture.md` §5.1](../docs/architecture.md)).
@@ -31,8 +31,7 @@
   }
   ```
 - [ ] `WebSpeechProvider`: `webkitSpeechRecognition`, `lang = "hi-IN"`, `interimResults = true`, `continuous = true`; map `confidence` to `sttConfidence`.
-- [ ] Brand-name hints: pass the rate card names in as a list the provider can use (a no-op for Web Speech; used by Whisper later).
-- [ ] Stub classes `GroqWhisperProvider` and `SarvamProvider` (only if needed) that throw `NotImplemented` (Phase 8).
+- [ ] Brand-name hints: pass the rate card names in as a list the provider can use (a no-op for Web Speech).
 
 ### 1.3 Text input path (`src/text/`)
 

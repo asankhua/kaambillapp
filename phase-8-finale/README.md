@@ -1,5 +1,7 @@
 # Phase 8: Finale (On Campus)
 
+> **Update (28 Nov):** the cloud speech-to-text work below (Groq Whisper, the Whisper second pass, Sarvam AI, `/api/stt`, the voice detector and the engine selector) was **removed**. The mic uses the browser's speech recognition and **Wispr Flow** dictates into the text box; the only Groq call left is bill extraction. The progress table records what was built at the time. What remains in this folder: demo mode, `scripts/warmup.ts`, the landing-translation test and the e2e tests.
+
 |                |                                                                                                                                                    |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Dates**      | 2 Dec (shortlist) → **13 Dec 2026 (finale)**                                                                                                       |
@@ -97,36 +99,22 @@ KaamBill supports **only Hinglish, Hindi (Devanagari) and English**. No other la
 
 ## Code in this folder
 
-**Config in this folder:** [`package.json`](./package.json) · [`tsconfig.json`](./tsconfig.json) · [`tsconfig.server.json`](./tsconfig.server.json)
+**Config in this folder:** [`package.json`](./package.json) · [`tsconfig.json`](./tsconfig.json)
 
 Run this phase's tests: `npm run test:phase -- 8` (add `--unit` to skip the browser tests).
-Endpoint: `POST /api/stt` (entry file in [`../api/`](../api/)).
 
 **Browser code (`src/`)**
 
-- [`src/audio/vad.test.ts`](./src/audio/vad.test.ts) 🧪
-- [`src/audio/vad.ts`](./src/audio/vad.ts)
 - [`src/demo.ts`](./src/demo.ts)
-- [`src/stt/GroqWhisperProvider.ts`](./src/stt/GroqWhisperProvider.ts)
-- [`src/stt/SecondPassProvider.test.ts`](./src/stt/SecondPassProvider.test.ts) 🧪
-- [`src/stt/SecondPassProvider.ts`](./src/stt/SecondPassProvider.ts)
-- [`src/stt/selectSttProvider.ts`](./src/stt/selectSttProvider.ts)
+- [`src/landingTranslations.test.ts`](./src/landingTranslations.test.ts) 🧪
 
-**Server code (`server/`, served via `api/`)**
+**Browser tests (`e2e/`)**
 
-- [`server/stt.ts`](./server/stt.ts)
-- [`server/whisper.test.ts`](./server/whisper.test.ts) 🧪
-- [`server/whisper.ts`](./server/whisper.ts)
+- [`e2e/languages.spec.ts`](./e2e/languages.spec.ts) 🧪
+- [`e2e/wispr.spec.ts`](./e2e/wispr.spec.ts) 🧪
 
 **Scripts**
 
-- [`scripts/stt-smoke.ts`](./scripts/stt-smoke.ts)
 - [`scripts/warmup.ts`](./scripts/warmup.ts)
-
-**End-to-end tests**
-
-- [`e2e/languages.spec.ts`](./e2e/languages.spec.ts) 🧪
-
-🧪 = test file.
 
 <!-- code-index:end -->

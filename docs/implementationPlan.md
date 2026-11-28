@@ -1,5 +1,7 @@
 # KaamBill — Implementation Plan
 
+> **Update (28 Nov): speech-to-text was simplified.** Groq Whisper (the second pass and `/api/stt`), Sarvam AI, IndicWhisper, the `VITE_STT_PROVIDER` / `?stt=` engine selector and the `VOICE_PROVIDER` / `SARVAM_*` / `GROQ_STT_MODEL` settings were **removed**. The mic uses the browser's Web Speech; **Wispr Flow** types into the text box (the landing page can open that box directly with `?box=text`). The only Groq call left is `/api/extract` (bill extraction). The sections below that describe the removed engines are kept as design history. The app is hosted on Render (`npm start`), not Vercel.
+
 > Related documents in this folder:
 >
 > - [`problemStatement.md`](./problemStatement.md): the problem, constraints, prototype scope and success metrics.

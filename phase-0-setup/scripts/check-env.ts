@@ -18,7 +18,7 @@ if (!res.ok) {
 }
 const body = (await res.json()) as { data: { id: string }[] };
 const ids = new Set(body.data.map((m) => m.id));
-for (const model of [env.LLM_MODEL, env.LLM_FALLBACK_MODEL, env.GROQ_STT_MODEL]) {
+for (const model of [env.LLM_MODEL, env.LLM_FALLBACK_MODEL]) {
   console.log(`${ids.has(model) ? "✅" : "❌"} model available: ${model}`);
 }
 console.log("Groq key check OK.");

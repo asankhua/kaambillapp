@@ -16,7 +16,7 @@ export interface SttProvider {
   isSupported(): boolean;
   start(lang: string, cb: SttCallbacks): void;
   stop(): void;
-  /** Rate-card brand names, for engines that accept hints (Whisper initial_prompt). No-op for Web Speech. */
+  /** Rate-card brand names, for engines that accept hints. A no-op for browser Web Speech. */
   setHints?(words: string[]): void;
 }
 

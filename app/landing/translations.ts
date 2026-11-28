@@ -464,13 +464,11 @@ export const TRANSLATIONS: Record<string, { hindi: string; hinglish: string }> =
     hinglish:
       "Phone ki screen ke liye bana hai. Phone par behtar experience ke liye app ko full screen mein kholein.",
   },
-  "Voice engine for the live app. Groq Whisper and Sarvam AI run on the KaamBill server and need its API keys.":
-    {
-      hindi:
-        "लाइव ऐप के लिए वॉइस इंजन चुनिए। Groq Whisper और Sarvam AI KaamBill सर्वर पर चलते हैं और उनकी API keys चाहिए।",
-      hinglish:
-        "Live app ke liye voice engine chuniye. Groq Whisper aur Sarvam AI KaamBill server par chalte hain aur unki API keys chahiye.",
-    },
+  "Voice input for the live app: the browser mic, or dictate into the text box with Wispr Flow.": {
+    hindi: "लाइव ऐप के लिए वॉइस इनपुट चुनिए: ब्राउज़र का माइक, या Wispr Flow से टेक्स्ट बॉक्स में बोलकर लिखिए।",
+    hinglish:
+      "Live app ke liye voice input chuniye: browser ka mic, ya Wispr Flow se text box mein bolkar likhiye.",
+  },
   Questions: { hindi: "सवाल", hinglish: "Sawaal" },
   "Frequently asked": {
     hindi: "अक्सर पूछे जाने वाले सवाल",
