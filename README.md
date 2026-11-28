@@ -6,6 +6,8 @@
 
 KaamBill builds the itemized bill (**₹1,235**), asks at most one question at a time, shows the total for a final "_haan_", takes the payment details, shows the UPI QR, and opens WhatsApp with the PDF bill. **The worker always presses Send.**
 
+**▶ Live app: [kaambillapp.onrender.com](https://kaambillapp.onrender.com/) · 🎬 Demo video: [youtu.be/wO_zYQ81DLk](https://youtu.be/wO_zYQ81DLk) · 📄 [Pitch deck (PDF)](./docs/KaamBill-pitch-deck.pdf) · 🐳 Run it: `docker compose up --build`, then open http://localhost:3000**
+
 Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 🗣️ **Built hands-free with [Wispr Flow](https://wisprflow.ai)**: specs, prompts and code were dictated with Flow.
 
 ## Live demo
@@ -16,7 +18,7 @@ Built for **India Runs on Voice** (Scaler × Wispr Flow), Small business track. 
 | The app              | [kaambillapp.onrender.com/app/](https://kaambillapp.onrender.com/app/)                              |
 | The app in demo mode | [kaambillapp.onrender.com/app/?demo=1](https://kaambillapp.onrender.com/app/?demo=1) (skips set-up) |
 | Health check         | [kaambillapp.onrender.com/api/health](https://kaambillapp.onrender.com/api/health)                  |
-| Demo video (3 min)   | [youtu.be/wO_zYQ81DLk](https://youtu.be/wO_zYQ81DLk)                                                |
+| Demo video (YouTube) | [youtu.be/wO_zYQ81DLk](https://youtu.be/wO_zYQ81DLk)                                                |
 | Pitch deck (PDF)     | [`docs/KaamBill-pitch-deck.pdf`](./docs/KaamBill-pitch-deck.pdf)                                    |
 
 Hosted on Render's free plan, which puts an idle service to sleep: the first visit after a quiet spell can take a while to load.
