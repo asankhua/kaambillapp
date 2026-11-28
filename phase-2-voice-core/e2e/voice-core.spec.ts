@@ -108,6 +108,9 @@ test("two different inputs: the mic = KaamBill listens; the text box above it = 
     };
   });
   await onboard(page);
+  // Wispr Flow is the default (typing box open from the start); the optional browser mic starts with it closed
+  await expect(page.getByPlaceholder("Likhein ya Wispr Flow se boliye...")).toBeFocused();
+  await page.goto("/app/?box=mic");
   // Mic: KaamBill's own speech recognition starts (a web page can't launch Wispr Flow)
   await page.getByRole("button", { name: /Bolne ke liye dabaiye/ }).click();
   await expect

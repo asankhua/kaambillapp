@@ -33,7 +33,7 @@ A screen recording of the real app in demo mode, from job to bill. Also availabl
 
 | #   | Step               | What the worker does                                                                                                                                                      |
 | --- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Saaman** (items) | Taps the mic and speaks, or taps **"Likh ke daalein"** to type / dictate with Wispr Flow                                                                                  |
+| 1   | **Saaman** (items) | Dictates with **Wispr Flow** into the text box (open from the start), or types. The mic button is the optional alternative                                                |
 | 2   | **Jaanch** (check) | Answers one question at a time (a missing price, an unsure quantity), then confirms the total with "haan"                                                                 |
 | 3   | **Details**        | Checks the amount and their UPI ID, adds the customer's WhatsApp number, picks UPI / Cash / Baad mein (later)                                                             |
 | 4   | **Payment**        | The customer scans the QR (amount filled in) → the worker taps "Paisa mil gaya ✓" (or "Cash mila ✓"). KaamBill can't see payments, so "paid" is the worker's confirmation |
@@ -41,8 +41,8 @@ A screen recording of the real app in demo mode, from job to bill. Also availabl
 
 **Voice in, screen out:**
 
-- **Mic button = KaamBill listens** (the phone browser's speech recognition, live transcript). Pauses are fine: the turn ends after **4 s** without new words or on **"Ruk jaiye"**.
-- **Text box = typing or Wispr Flow.** Hidden until "Likh ke daalein" is tapped. A web page can't launch Wispr Flow itself (no API or link exists), so Flow is used from its own keyboard / shortcut inside the box.
+- **Wispr Flow is the default.** The app opens with its text box focused, so Flow (sign in to the Wispr Flow app) dictates straight into it. A web page can't launch Wispr Flow itself (no API or link exists), so Flow is used from its own keyboard / shortcut inside the box. Typing works the same way.
+- **Browser mic is optional.** The mic button under the box listens with the phone browser's speech recognition (live transcript). Pauses are fine: the turn ends after **4 s** without new words or on **"Ruk jaiye"**. On the landing page choose **Browser mic (optional)** (the app then opens with `?box=mic`, box closed until "Likh ke daalein").
 - **No text-to-speech:** the app never speaks; questions and the read-back are on screen.
 
 **App language:** Hinglish (default) · हिंदी · English, chosen in the top bar. It switches every screen text, the mic language and the app's messages together. Only these three languages are supported.
@@ -55,8 +55,8 @@ A screen recording of the real app in demo mode, from job to bill. Also availabl
 | --------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Node.js 22+ and npm**           | ✅ To run it locally          | CI uses Node 22. Install from [nodejs.org](https://nodejs.org)                                                                                                                                                                |
 | **Groq API key** (`GROQ_API_KEY`) | ✅ **Required, the only key** | The Groq LLM (`openai/gpt-oss-120b`, strict JSON) turns the spoken / typed words into the bill: customer, items, quantities, labour, intent. Without it the app can't build bills. Only the text is sent to Groq, never audio |
-| Browser speech recognition        | Built in, no key              | The mic button (Chrome on Android / desktop)                                                                                                                                                                                  |
-| Wispr Flow app                    | Optional, no key              | For dictating into the text box in any browser (sign in to the app). Pick **Wispr Flow (typing box)** on the landing page to open the box straight away                                                                       |
+| **Wispr Flow app**                | Default, no key               | Dictates into the text box (sign in to the Wispr Flow app). The app and the landing page's **Wispr Flow (default)** choice open the box focused straight away                                                                 |
+| Browser speech recognition        | Optional, built in, no key    | The mic button (Chrome on Android / desktop). Choose **Browser mic (optional)** on the landing page                                                                                                                           |
 | Text-to-speech                    | ❌ Not used                   | The app never speaks                                                                                                                                                                                                          |
 | Render account                    | For hosting                   | Runs the one Node service (`npm start`): landing page, app and `/api`                                                                                                                                                         |
 
@@ -69,7 +69,7 @@ npm run check:env          # validates the env and confirms the Groq key works (
 npm run dev                # landing page on http://localhost:5173, app on /app/ + local API on :3000 (real Groq)
 ```
 
-Try it: open http://localhost:5173/app/?demo=1 → **Likh ke daalein** → type the sentence above → "Haan, sahi hai" → "Haan, bhejo" → UPI → "Paisa mil gaya ✓".
+Try it: open http://localhost:5173/app/?demo=1 → type (or dictate with Wispr Flow into) the box → the sentence above → "Haan, sahi hai" → "Haan, bhejo" → UPI → "Paisa mil gaya ✓".
 
 ### Run it locally with an AI coding assistant
 
@@ -149,20 +149,20 @@ TypeScript: `phase-0-setup/tsconfig.base.json` + a `tsconfig.json` **in every ph
 
 ## Tech stack
 
-| Layer               | What is used                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Understanding (LLM) | [Groq](https://groq.com) `openai/gpt-oss-120b` (fallback `openai/gpt-oss-20b`), strict JSON schema, via `groq-sdk` |
-| Voice in            | Browser Web Speech API (mic button), or [Wispr Flow](https://wisprflow.ai) dictating into the text box             |
-| Voice out           | None: the app never speaks                                                                                         |
-| App                 | React 19 · TypeScript · Vite 8 · Tailwind 4 · XState 5 (conversation machine) · PWA (works offline)                |
-| Billing and output  | `fuse.js` (item matching) · `zod` (schemas) · IndexedDB via `idb-keyval` · `qrcode` (UPI QR) · `jspdf` (PDF bill)  |
-| Sharing             | WhatsApp link and Web Share API (the worker always presses Send)                                                   |
-| Server              | One Node process (`npm start`) serving the built landing page, the app and `/api/*`                                |
-| Hosting             | [Render](https://render.com) web service (free plan) at `kaambillapp.onrender.com`                                 |
-| Design              | Google Stitch export, Material Symbols icon subset                                                                 |
-| Quality             | Vitest (unit) · Playwright (end-to-end, including the browser mic and Wispr Flow paths) · ESLint · Prettier · CI   |
+| Layer               | What is used                                                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Understanding (LLM) | [Groq](https://groq.com) `openai/gpt-oss-120b` (fallback `openai/gpt-oss-20b`), strict JSON schema, via `groq-sdk`     |
+| Voice in            | [Wispr Flow](https://wisprflow.ai) dictating into the text box (default), or the browser Web Speech API (optional mic) |
+| Voice out           | None: the app never speaks                                                                                             |
+| App                 | React 19 · TypeScript · Vite 8 · Tailwind 4 · XState 5 (conversation machine) · PWA (works offline)                    |
+| Billing and output  | `fuse.js` (item matching) · `zod` (schemas) · IndexedDB via `idb-keyval` · `qrcode` (UPI QR) · `jspdf` (PDF bill)      |
+| Sharing             | WhatsApp link and Web Share API (the worker always presses Send)                                                       |
+| Server              | One Node process (`npm start`) serving the built landing page, the app and `/api/*`                                    |
+| Hosting             | [Render](https://render.com) web service (free plan) at `kaambillapp.onrender.com`                                     |
+| Design              | Google Stitch export, Material Symbols icon subset                                                                     |
+| Quality             | Vitest (unit) · Playwright (end-to-end, including the browser mic and Wispr Flow paths) · ESLint · Prettier · CI       |
 
-**Not used any more:** Sarvam and Groq Whisper speech-to-text (removed 28 Nov; Wispr Flow and the browser mic cover voice input).
+**Not used any more:** Sarvam and Groq Whisper speech-to-text (removed 28 Nov; Wispr Flow is the default and the browser mic is optional).
 
 ## License
 

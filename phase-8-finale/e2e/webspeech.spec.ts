@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { mockExtract, onboard } from "../../phase-0-setup/testing/fixtures";
 
-// Landing page "Browser mic (Web Speech)" option (the default): the mic button listens with the browser's
+// Landing page "Browser mic (optional)" choice (the app opens with ?box=mic): the mic button listens with the browser's
 // SpeechRecognition, and the spoken sentence becomes a bill. Chromium's real recognizer needs a microphone
 // and Google's servers, so a fake recognizer stands in for it and says the sentence when it starts.
 
@@ -41,7 +41,7 @@ test("browser mic: the spoken sentence becomes a bill, without any speech-to-tex
   }, SENTENCE);
   await mockExtract(page);
   await onboard(page);
-  await page.goto("/app/");
+  await page.goto("/app/?box=mic");
 
   await page.getByRole("button", { name: /Bolne ke liye dabaiye/ }).click();
   // The turn ends by itself after the 4 s pause, then the bill is built from the heard words
@@ -62,7 +62,7 @@ test("without browser speech recognition the mic says so and the typing box stil
   });
   await mockExtract(page);
   await onboard(page);
-  await page.goto("/app/?box=text");
+  await page.goto("/app/"); // Wispr Flow default: the typing box is open
   await expect(page.getByPlaceholder("Likhein ya Wispr Flow se boliye...")).toBeFocused();
   await page.keyboard.insertText(SENTENCE);
   await page.getByRole("button", { name: "Bhejein" }).click();

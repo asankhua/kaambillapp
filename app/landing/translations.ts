@@ -444,9 +444,9 @@ export const TRANSLATIONS: Record<string, { hindi: string; hinglish: string }> =
     hindi: "3 स्टेप का सेट-अप पूरा कीजिए (आपका नाम, UPI ID, रेट कार्ड)।",
     hinglish: "3-step ka set-up poora kijiye (aapka naam, UPI ID, rate card).",
   },
-  "Tap the mic, or tap “Type it in” and paste an example sentence.": {
-    hindi: "माइक दबाइए, या “लिख के डालें” दबाकर कोई उदाहरण वाक्य पेस्ट कीजिए।",
-    hinglish: "Mic dabaiye, ya “Likh ke daalein” dabakar koi example sentence paste kijiye.",
+  "Dictate with Wispr Flow into the text box, or type an example sentence.": {
+    hindi: "Wispr Flow से टेक्स्ट बॉक्स में बोलकर लिखिए, या कोई उदाहरण वाक्य टाइप कीजिए।",
+    hinglish: "Wispr Flow se text box mein bolkar likhiye, ya koi example sentence type kijiye.",
   },
   "Check the total, say “yes”, and continue to the UPI QR.": {
     hindi: "कुल रकम जाँचिए, “हाँ” कहिए, और UPI QR तक आगे बढ़िए।",
@@ -464,11 +464,13 @@ export const TRANSLATIONS: Record<string, { hindi: string; hinglish: string }> =
     hinglish:
       "Phone ki screen ke liye bana hai. Phone par behtar experience ke liye app ko full screen mein kholein.",
   },
-  "Voice input for the live app: the browser mic, or dictate into the text box with Wispr Flow.": {
-    hindi: "लाइव ऐप के लिए वॉइस इनपुट चुनिए: ब्राउज़र का माइक, या Wispr Flow से टेक्स्ट बॉक्स में बोलकर लिखिए।",
-    hinglish:
-      "Live app ke liye voice input chuniye: browser ka mic, ya Wispr Flow se text box mein bolkar likhiye.",
-  },
+  "Voice input for the live app: Wispr Flow dictates into the text box by default; the browser mic is optional.":
+    {
+      hindi:
+        "लाइव ऐप के लिए वॉइस इनपुट: Wispr Flow डिफ़ॉल्ट रूप से टेक्स्ट बॉक्स में बोलकर लिखता है; ब्राउज़र का माइक वैकल्पिक है।",
+      hinglish:
+        "Live app ke liye voice input: Wispr Flow default roop se text box mein bolkar likhta hai; browser ka mic optional hai.",
+    },
   Questions: { hindi: "सवाल", hinglish: "Sawaal" },
   "Frequently asked": {
     hindi: "अक्सर पूछे जाने वाले सवाल",

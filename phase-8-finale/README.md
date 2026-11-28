@@ -1,6 +1,6 @@
 # Phase 8: Finale (On Campus)
 
-> **Update (28 Nov):** the cloud speech-to-text work below (Groq Whisper, the Whisper second pass, Sarvam AI, `/api/stt`, the voice detector and the engine selector) was **removed**. The mic uses the browser's speech recognition and **Wispr Flow** dictates into the text box; the only Groq call left is bill extraction. The progress table records what was built at the time. What remains in this folder: demo mode, `scripts/warmup.ts`, the landing-translation test and the e2e tests.
+> **Update (28 Nov):** the cloud speech-to-text work below (Groq Whisper, the Whisper second pass, Sarvam AI, `/api/stt`, the voice detector and the engine selector) was **removed**. **Wispr Flow is the default input** (the app opens with its text box focused) and the browser mic is optional (`?box=mic`); the only Groq call left is bill extraction. The progress table records what was built at the time. What remains in this folder: demo mode, `scripts/warmup.ts`, the landing-translation test and the e2e tests.
 
 |                |                                                                                                                                                    |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |

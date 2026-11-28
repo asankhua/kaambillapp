@@ -589,27 +589,27 @@
             </p>
             <ol class="try-steps">
               <li>Complete the 3-step set-up (your name, UPI ID, rate card).</li>
-              <li>Tap the mic, or tap “Type it in” and paste an example sentence.</li>
+              <li>Dictate with Wispr Flow into the text box, or type an example sentence.</li>
               <li>Check the total, say “yes”, and continue to the UPI QR.</li>
             </ol>
             <div class="stt-row">
               <div class="lang-picker stt-picker">
                 <span class="material-symbols-outlined" aria-hidden="true">mic</span>
                 <select id="stt-select" aria-label="Voice input">
-                  <option value="webspeech">Browser mic (Web Speech)</option>
-                  <option value="wispr">Wispr Flow (typing box)</option>
+                  <option value="wispr">Wispr Flow (default)</option>
+                  <option value="webspeech">Browser mic (optional)</option>
                 </select>
               </div>
               <p class="stt-note">
-                Voice input for the live app: the browser mic, or dictate into the text box with
-                Wispr Flow.
+                Voice input for the live app: Wispr Flow dictates into the text box by default; the
+                browser mic is optional.
               </p>
             </div>
             <div class="cta-row">
               <a
                 id="open-full"
                 class="btn btn-light btn-lg"
-                href="/app/"
+                href="/app/?box=text"
                 target="_blank"
                 rel="noopener"
               >
@@ -627,7 +627,7 @@
             <div class="phone-notch" aria-hidden="true"></div>
             <iframe
               class="phone-screen"
-              src="/app/"
+              src="/app/?box=text"
               title="KaamBill: live voice billing app"
               loading="lazy"
               allow="microphone; clipboard-write"

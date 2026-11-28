@@ -1,26 +1,29 @@
 /**
- * Voice input for the live app on the landing page: the browser mic (Web Speech, default) or Wispr Flow.
+ * Voice input for the live app on the landing page: Wispr Flow (default) or the browser mic (optional).
  *
- * Wispr Flow is not something the app can call (it has no API). It is a desktop dictation app that types
- * into whatever text box has focus, so choosing it opens the app's typing box on load (`?box=text`).
+ * Wispr Flow is not something the app can call (it has no API). It is a dictation app that types into
+ * whatever text box has focus, so it is the default: the app opens with its typing box focused
+ * (`?box=text`). The optional browser mic (Web Speech) starts with the box closed (`?box=mic`).
  * The choice is passed to the embedded iframe and to the "Open full screen" link, and remembered in
- * localStorage (`kb.stt`). Values stored by older versions ("sarvam", "groq-whisper") fall back to the mic.
+ * localStorage (`kb.stt`, also read by the app when it is opened without a parameter). Values stored by
+ * older versions ("sarvam", "groq-whisper") fall back to the default, Wispr Flow.
  */
 
 export const STT_STORAGE_KEY = "kb.stt";
-export const STT_ENGINES = ["webspeech", "wispr"] as const;
+export const STT_ENGINES = ["wispr", "webspeech"] as const;
 export type SttEngine = (typeof STT_ENGINES)[number];
+export const DEFAULT_ENGINE: SttEngine = "wispr";
 
 function appUrl(engine: SttEngine): string {
-  return engine === "wispr" ? "/app/?box=text" : "/app/";
+  return engine === "webspeech" ? "/app/?box=mic" : "/app/?box=text";
 }
 
 function readStored(): SttEngine {
   try {
     const v = localStorage.getItem(STT_STORAGE_KEY);
-    return (STT_ENGINES as readonly string[]).includes(v ?? "") ? (v as SttEngine) : "webspeech";
+    return (STT_ENGINES as readonly string[]).includes(v ?? "") ? (v as SttEngine) : DEFAULT_ENGINE;
   } catch {
-    return "webspeech";
+    return DEFAULT_ENGINE;
   }
 }
 
@@ -51,7 +54,7 @@ export function initSttPicker() {
   select.addEventListener("change", () => {
     const engine = (STT_ENGINES as readonly string[]).includes(select.value)
       ? (select.value as SttEngine)
-      : "webspeech";
+      : DEFAULT_ENGINE;
     writeStored(engine);
     applyEngine(engine);
   });

@@ -206,10 +206,24 @@ function Gate({ stores }: { stores: Stores }) {
   return <BillingApp stores={stores} profile={profile} />;
 }
 
-/** Landing page "Wispr Flow" option: `?box=text` opens the typing box on load. */
-const boxParamOpen =
-  typeof window !== "undefined" &&
-  new URLSearchParams(window.location.search).get("box") === "text";
+/**
+ * Wispr Flow is the default way to speak to KaamBill: the typing box is open and focused from the start,
+ * and Flow (a dictation app that types into the focused field) dictates into it. The browser mic is the
+ * optional alternative: `?box=mic` (landing page "Browser mic" option) starts with the box closed.
+ * No parameter: follow the landing page's saved choice (`kb.stt`), else Wispr Flow.
+ */
+function boxOpenByDefault(): boolean {
+  if (typeof window === "undefined") return true;
+  const param = new URLSearchParams(window.location.search).get("box");
+  if (param === "mic") return false;
+  if (param === "text") return true;
+  try {
+    return window.localStorage.getItem("kb.stt") !== "webspeech";
+  } catch {
+    return true;
+  }
+}
+const boxParamOpen = boxOpenByDefault();
 
 function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfile }) {
   const store = stores.rateCard;
@@ -321,9 +335,9 @@ function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfil
     ctx.error === "mic_blocked" || ctx.error === "unsupported" || !runtime.sttSupported;
   // The text box (typing or Wispr Flow) sits above the mic on the Boliye screen; there is no separate
   // "Likh Ke" tab. Hidden on the share/payment screens (nothing to type there) and while listening.
-  // The text box opens only when the worker asks to type ("Likh ke daalein", "Likh ke" on a question,
-  // "+ Item jodein"); it then stays open for this bill, until closed (×) or the bill is done.
-  // Landing page "Wispr Flow" option (?box=text): the box is open from the start, so Flow can dictate into it.
+  // Wispr Flow is the default: the box is open from the start so Flow can dictate into it. With the optional
+  // browser mic (?box=mic) it opens only when the worker asks to type ("Likh ke daalein", "Likh ke" on a
+  // question, "+ Item jodein"). Either way it stays open for this bill, until closed (×) or the bill is done.
   const [textOpen, setTextOpen] = useState(boxParamOpen);
   const showText = textOpen && state !== "sharePreview" && state !== "listening" && !resend;
   const onBillTabs = tab === "boliye";
@@ -482,7 +496,7 @@ function BillingApp({ stores, profile }: { stores: Stores; profile: WorkerProfil
                 onEditPayee={() => setTab("khata")}
                 onShared={(r, ph) => onShared(ctx.output!, r, ph)}
                 onDone={() => {
-                  setTextOpen(false);
+                  setTextOpen(boxParamOpen); // back to the default input for the next bill
                   send({ type: "SHARED" });
                 }}
               />
