@@ -149,6 +149,18 @@ export function App() {
     setLangState(l);
     localStorage.setItem(LANG_STORAGE_KEY, l);
   };
+  // The landing page embeds this app in an iframe and has its own language switch. It writes the same
+  // localStorage key, which fires a `storage` event here: follow it so the page and the app agree.
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== LANG_STORAGE_KEY) return;
+      const l = storedUiLang();
+      currentLang = l;
+      setLangState(l);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
   useEffect(() => {
     // Load the stores ONCE. React's dev mode runs this effect twice; without the `alive` guard two
     // store sets were created and the bill engine kept the first while Home showed the second, so a

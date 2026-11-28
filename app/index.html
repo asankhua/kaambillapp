@@ -5,12 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B7A4B" />
-    <title>KaamBill: Bol ke bill banaiye | Voice billing for Indian tradespeople</title>
+    <title>KaamBill: Voice billing for Indian tradespeople</title>
     <meta
       name="description"
       content="KaamBill turns a 15-second spoken job summary in Hinglish, Hindi or English into an itemized bill with a UPI payment QR, shared on WhatsApp. Built for India's electricians, plumbers, AC technicians and repair workers."
     />
-    <meta property="og:title" content="KaamBill: Bol ke bill banaiye" />
+    <meta property="og:title" content="KaamBill: Make a bill by speaking" />
     <meta
       property="og:description"
       content="Speak the job. Get an itemized bill and a UPI QR. Voice billing for India's solo tradespeople."
@@ -19,11 +19,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=ac_unit,account_balance,arrow_forward,bolt,cable,chat,check_circle,download,electrical_services,engineering,error,fact_check,group,hardware,hearing,history,keyboard,language,lock,mic,open_in_new,payments,plumbing,qr_code_2,receipt_long,record_voice_over,schedule,share,touch_app,translate,trending_up,verified_user,wifi_off&display=block"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=ac_unit,account_balance,account_balance_wallet,arrow_downward,arrow_forward,bolt,cable,chat,check_circle,download,electrical_services,engineering,error,fact_check,group,hardware,hearing,history,keyboard,language,lock,mic,open_in_new,payments,plumbing,qr_code_2,receipt_long,record_voice_over,schedule,send,share,touch_app,translate,trending_up,verified_user,wifi_off&display=block"
       rel="stylesheet"
     />
     <script type="application/ld+json">
@@ -67,6 +67,14 @@
           <a href="#faq">FAQ</a>
           <a class="btn btn-primary btn-sm" href="#try">Try it live</a>
         </nav>
+        <div class="lang-picker">
+          <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+          <select id="lang-select" aria-label="Language">
+            <option value="english" lang="en">English</option>
+            <option value="hindi" lang="hi">हिंदी</option>
+            <option value="hinglish" lang="hi-Latn">Hinglish</option>
+          </select>
+        </div>
       </div>
     </header>
 
@@ -80,8 +88,8 @@
               Voice billing for India's tradespeople
             </p>
             <h1>
-              Bol ke bill banaiye.<br />
-              <span class="accent">Speak the job. Get paid.</span>
+              Speak the job.<br />
+              <span class="accent">Get the bill. Get paid.</span>
             </h1>
             <p class="lead">
               An electrician, plumber or AC technician says one sentence in Hinglish, Hindi or
@@ -115,8 +123,8 @@
             <figure class="speech">
               <span class="speech-icon material-symbols-outlined" aria-hidden="true">mic</span>
               <blockquote>
-                “Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill bana
-                do.”
+                “Verma ji's house, 2 Havells MCB, 15 meter Finolex wire and 500 labour, make the
+                bill.”
               </blockquote>
               <figcaption>Worker speaks · about 15 seconds</figcaption>
             </figure>
@@ -183,12 +191,11 @@
         <div class="container">
           <div class="section-head">
             <p class="kicker">The pain point</p>
-            <h2>India's tradespeople work with their hands. Billing apps need both.</h2>
+            <h2>Billing apps need a keyboard and English. Tradespeople have neither.</h2>
             <p class="section-lead">
-              Most independent electricians, plumbers, AC and appliance technicians, carpenters and
-              painters work alone, with no office staff. They use Android phones and UPI every day,
-              but billing apps such as Tally, Zoho or Vyapar assume a keyboard and English. So they
-              quote a lump sum out loud, or scribble it on a scrap of paper.
+              Solo electricians, plumbers, AC technicians and painters work alone. They run on
+              Android and UPI, but apps like Tally, Zoho and Vyapar still ask for typing. So they
+              quote a lump sum out loud, or scribble it on paper.
             </p>
           </div>
 
@@ -198,29 +205,21 @@
                 >receipt_long</span
               >
               <h3>No itemized quote</h3>
-              <p>
-                Customers haggle over parts at the door because they can't see what each part cost.
-              </p>
+              <p>Customers haggle because they can't see what each part cost.</p>
             </article>
             <article class="card">
               <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
                 >cable</span
               >
               <h3>Forgotten add-ons</h3>
-              <p>
-                Small fittings, extra wire and visiting charges get left off the bill, and the
-                worker loses that money.
-              </p>
+              <p>Extra wire, fittings and visiting charges get left off the bill.</p>
             </article>
             <article class="card">
               <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
                 >schedule</span
               >
               <h3>Slow payments</h3>
-              <p>
-                With no bill and no payment link, collection means days of follow-up calls, and some
-                money is never recovered.
-              </p>
+              <p>No bill and no payment link means days of follow-up calls.</p>
             </article>
             <article class="card">
               <span class="icon-badge warn material-symbols-outlined" aria-hidden="true"
@@ -228,8 +227,7 @@
               >
               <h3>No financial record</h3>
               <p>
-                Income isn't written down anywhere, so workers can't show it when they apply for
-                credit such as MUDRA or PM SVANidhi.
+                Without a record of income, credit such as MUDRA or PM SVANidhi is out of reach.
               </p>
             </article>
           </div>
@@ -238,30 +236,22 @@
             <div>
               <h3 class="split-title">Why existing tools don't work</h3>
               <ul class="check-list bad">
+                <li><b>Typing-heavy screens.</b> Dropdowns and forms don't suit busy hands.</li>
                 <li>
-                  <b>Typing-heavy screens.</b> Dropdowns and one-item-at-a-time forms don't suit
-                  busy hands and a rushed schedule.
+                  <b>Mixed languages.</b> “dedh hazaar” and “do inch CPVC elbow” are slow to type.
                 </li>
+                <li><b>Accounting jargon.</b> “SKU” and “ledger” mean nothing on site.</li>
                 <li>
-                  <b>Language mismatch.</b> Workers mix languages mid-sentence: “dedh hazaar”, “do
-                  inch CPVC elbow”. Typing that is slow and error-prone.
-                </li>
-                <li>
-                  <b>Accounting jargon.</b> “SKU”, “subtotal” and “ledger” mean nothing on the job
-                  site.
-                </li>
-                <li>
-                  <b>A keyboard mic isn't enough.</b> It only transcribes. What's missing is
-                  software that <i>understands</i> a whole spoken job summary.
+                  <b>A keyboard mic only transcribes.</b> Workers need software that understands the
+                  whole job.
                 </li>
               </ul>
             </div>
             <aside class="callout">
               <p class="callout-label">The problem in one line</p>
               <p>
-                Solo Indian tradespeople lose money, time and credibility because creating an
-                itemized bill and collecting payment on the job site means typing in English-first
-                apps they can't use with busy hands.
+                Solo tradespeople lose money, time and credibility because billing means typing in
+                English-first apps.
               </p>
             </aside>
           </div>
@@ -273,88 +263,37 @@
         <div class="container">
           <div class="section-head">
             <p class="kicker">The solution</p>
-            <h2>Voice in. A bill the customer can trust out.</h2>
+            <h2>Speak the job. Get a bill the customer trusts.</h2>
             <p class="section-lead">
-              Speaking is how these workers already run their business: phone calls and WhatsApp
-              voice notes. KaamBill builds on that habit, with checks so a misheard amount never
-              reaches a customer.
+              These workers already run their business by voice: calls and WhatsApp voice notes.
+              KaamBill builds on that habit, and checks the amount before anything is sent.
             </p>
           </div>
 
-          <div class="card-grid three">
+          <div class="card-grid four">
             <article class="card">
               <span class="icon-badge material-symbols-outlined" aria-hidden="true">mic</span>
-              <h3>Hands-free by design</h3>
-              <p>
-                Tap the mic and describe the job while packing up your tools. The screen is only for
-                checking and fixing.
-              </p>
+              <h3>Hands-free</h3>
+              <p>Tap the mic and describe the job. The screen is only for checking.</p>
             </article>
             <article class="card">
               <span class="icon-badge material-symbols-outlined" aria-hidden="true">translate</span>
               <h3>Understands how you talk</h3>
-              <p>
-                Hinglish, Hindi or English, brand names, units and Indian number words included.
-                Switch the app language any time.
-              </p>
+              <p>Hinglish, Hindi or English, with brand names, units and number words.</p>
             </article>
             <article class="card">
               <span class="icon-badge material-symbols-outlined" aria-hidden="true"
                 >fact_check</span
               >
-              <h3>Accuracy before speed</h3>
-              <p>
-                KaamBill asks at most one question at a time, shows the total on screen, and sends
-                nothing until you approve it with “haan”.
-              </p>
+              <h3>Nothing sent unchecked</h3>
+              <p>KaamBill shows the total and sends nothing until you say “yes”.</p>
             </article>
             <article class="card">
               <span class="icon-badge material-symbols-outlined" aria-hidden="true">qr_code_2</span>
               <h3>Get paid on the spot</h3>
-              <p>
-                A UPI QR with the amount filled in. The customer scans, you tap “Paisa mil gaya”,
-                and the bill says PAID.
-              </p>
-            </article>
-            <article class="card">
-              <span class="icon-badge material-symbols-outlined" aria-hidden="true">share</span>
-              <h3>One tap to WhatsApp</h3>
-              <p>
-                A clean PDF bill opens in WhatsApp, ready to send. You always press Send yourself.
-              </p>
-            </article>
-            <article class="card">
-              <span class="icon-badge material-symbols-outlined" aria-hidden="true">lock</span>
-              <h3>Private and honest</h3>
-              <p>
-                Customer names and numbers stay on your phone. Output is a simple Bill or Estimate,
-                never passed off as a GST invoice.
-              </p>
+              <p>A UPI QR with the amount filled in. You confirm when the money arrives.</p>
             </article>
           </div>
-
-          <ul class="pill-row" aria-label="Also included">
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>Type or
-              dictate with Wispr Flow
-            </li>
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">wifi_off</span>Works on
-              patchy data
-            </li>
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">history</span>Bill history
-              and drafts
-            </li>
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">payments</span>Editable
-              rate card
-            </li>
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">hearing</span>Copes with
-              noisy sites
-            </li>
-          </ul>
         </div>
       </section>
 
@@ -363,11 +302,10 @@
         <div class="container">
           <div class="section-head">
             <p class="kicker">Impact in real-world India</p>
-            <h2>Small bills, large consequences for India's informal economy.</h2>
+            <h2>Small bills, large effects on India's informal economy.</h2>
             <p class="section-lead">
-              Most of India's unincorporated businesses are run by one person with nobody else to do
-              the billing. Making a proper bill effortless changes what that person earns, collects
-              and can prove.
+              Most unincorporated businesses in India are run by one person who does all the
+              billing. A proper bill, made easily, changes what they earn, collect and can prove.
             </p>
           </div>
 
@@ -376,41 +314,29 @@
               <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
                 >trending_up</span
               >
-              <h3>More of the money earned</h3>
-              <p>
-                Itemizing as you speak catches the extra wire, the fittings and the visiting charge
-                that used to be forgotten.
-              </p>
+              <h3>More money earned</h3>
+              <p>Itemizing as you speak catches the extra wire, fittings and visiting charges.</p>
             </article>
             <article class="card impact">
               <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
                 >payments</span
               >
               <h3>Faster collections</h3>
-              <p>
-                A UPI QR on the spot replaces days of follow-up calls and the money that is never
-                recovered.
-              </p>
+              <p>A UPI QR on the spot replaces days of follow-up calls.</p>
             </article>
             <article class="card impact">
               <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
                 >account_balance</span
               >
               <h3>A step toward formal credit</h3>
-              <p>
-                Every bill becomes a record of income, groundwork for schemes such as MUDRA and PM
-                SVANidhi.
-              </p>
+              <p>Every bill is a record of income, a base for MUDRA and PM SVANidhi.</p>
             </article>
             <article class="card impact">
               <span class="icon-badge good material-symbols-outlined" aria-hidden="true"
                 >group</span
               >
               <h3>Clarity for households</h3>
-              <p>
-                Customers see what each part and each hour cost, so there's less haggling and a
-                clear record of what they paid for.
-              </p>
+              <p>Customers see what each part cost, so there's less haggling.</p>
             </article>
           </div>
 
@@ -420,12 +346,11 @@
                 >language</span
               >
               <div>
-                <h3>Software that speaks the user's language</h3>
+                <h3>Software in the user's language</h3>
                 <p>
                   About 89 in 100 Indians don't use English as a first, second or third language.
-                  Voice-first, mixed-language software opens digital billing to people who were
-                  locked out of English-first apps, and builds on the UPI and WhatsApp habits they
-                  already have.
+                  Voice-first, mixed-language software reaches the people English-first apps leave
+                  out.
                 </p>
               </div>
             </div>
@@ -444,29 +369,25 @@
               <tbody>
                 <tr>
                   <th scope="row">Sector</th>
-                  <td>All unincorporated non-farm enterprises in India</td>
+                  <td>All unincorporated non-farm enterprises</td>
                   <td><b>≈ 7.3 crore</b> establishments, <b>≈ 12 crore</b> workers</td>
                 </tr>
                 <tr>
                   <th scope="row">Addressable <em>(estimate)</em></th>
-                  <td>Services enterprises doing repair, installation and trade work</td>
+                  <td>Repair, installation and trade services</td>
                   <td><b>≈ 1–1.5 crore</b></td>
                 </tr>
                 <tr>
                   <th scope="row">First market <em>(estimate)</em></th>
-                  <td>
-                    Solo electricians, plumbers and AC technicians with smartphones in Hindi-belt
-                    cities
-                  </td>
+                  <td>Solo electricians, plumbers and AC technicians in Hindi-belt cities</td>
                   <td><b>≈ 10–20 lakh</b></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p class="fineprint">
-            Sector figures: NSO, Annual Survey of Unincorporated Sector Enterprises (ASUSE) 2023-24,
-            MoSPI. The addressable and first-market rows are our own estimates from stated
-            assumptions, not official statistics.
+            Sector figures: NSO, ASUSE 2023-24 (MoSPI). Addressable and first-market rows are our
+            own estimates.
           </p>
 
           <h3 class="table-title">What success looks like</h3>
@@ -502,21 +423,75 @@
             </p>
           </div>
 
+          <div class="how-demo">
+            <div class="phone phone-sm" aria-label="KaamBill demo">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <img
+                class="phone-gif"
+                src="/kaambill-demo-english.gif"
+                width="360"
+                height="720"
+                loading="lazy"
+                alt="Screen recording of KaamBill: a job is typed in English, the itemized bill is checked, payment details are filled and the bill is ready to send on WhatsApp."
+              />
+            </div>
+            <div class="how-demo-copy">
+              <p class="kicker">See it in action</p>
+              <h3>One sentence in, a ready-to-send bill out.</h3>
+              <ul class="demo-points">
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
+                  <span>
+                    <b>Say or type the job.</b> “Verma ji's house, 2 Havells MCB, 15 meter Finolex
+                    wire and 500 labour, make the bill.”
+                  </span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">fact_check</span>
+                  <span>
+                    <b>Check the items.</b> Prices come from your rate card; confirm the total with
+                    one tap.
+                  </span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true"
+                    >account_balance_wallet</span
+                  >
+                  <span>
+                    <b>Pick how they pay.</b> UPI QR, cash or later, with the amount already filled
+                    in.
+                  </span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined" aria-hidden="true">send</span>
+                  <span>
+                    <b>Send on WhatsApp.</b> A clean PDF bill with a UPI QR, sent when you press
+                    Send.
+                  </span>
+                </li>
+              </ul>
+              <a class="btn btn-primary" href="#try">
+                Try it yourself
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
+              </a>
+            </div>
+          </div>
+
           <ol class="steps">
             <li>
               <span class="step-no">1</span>
-              <h3>Saaman <small>Items</small></h3>
+              <h3>Items</h3>
               <p>
-                Tap the mic and describe the job, or tap <b>“Likh ke daalein”</b> to type or dictate
-                with Wispr Flow.
+                Tap the mic and describe the job, or tap <b>“Type it in”</b> to type or dictate with
+                Wispr Flow.
               </p>
             </li>
             <li>
               <span class="step-no">2</span>
-              <h3>Jaanch <small>Check</small></h3>
+              <h3>Check</h3>
               <p>
                 Answer one question at a time (a missing price, an unsure quantity), then confirm
-                the total with “haan”.
+                the total with “yes”.
               </p>
             </li>
             <li>
@@ -524,20 +499,20 @@
               <h3>Details</h3>
               <p>
                 Check the amount and your UPI ID, add the customer's WhatsApp number, and pick UPI,
-                Cash or Baad mein (later).
+                Cash or Later (on credit).
               </p>
             </li>
             <li>
               <span class="step-no">4</span>
               <h3>Payment</h3>
               <p>
-                The customer scans the QR with the amount filled in. You tap <b>“Paisa mil gaya”</b>
-                (or “Cash mila”).
+                The customer scans the QR with the amount filled in. You tap <b>“Got the money”</b>
+                (or “Yes, got the cash”).
               </p>
             </li>
             <li>
               <span class="step-no">5</span>
-              <h3>Bill</h3>
+              <h3>Invoice</h3>
               <p>
                 The bill is marked <b>PAID</b> or <b>DUE</b>. WhatsApp opens with the PDF and you
                 press Send.
@@ -549,41 +524,26 @@
             <div class="card">
               <h3 class="split-title">Say it like you'd tell a friend</h3>
               <p class="muted">
-                Pauses are fine. KaamBill waits for you, or say “Ruk jaiye” to stop.
+                Pauses are fine. KaamBill waits for you, or say “Stop” when you're done.
               </p>
               <ul class="examples">
                 <li>
                   <q
-                    >Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill
-                    bana do</q
+                    >Verma ji's house, 2 Havells MCB, 15 meter Finolex wire and 500 labour, make the
+                    bill</q
                   >
-                  <button
-                    type="button"
-                    class="copy"
-                    data-copy="Verma ji ke ghar 2 Havells MCB, 15 meter Finolex wire, aur 500 labour ka bill bana do"
-                  >
-                    Copy
-                  </button>
+                  <button type="button" class="copy">Copy</button>
                 </li>
                 <li>
-                  <q>Sharma ji ke yahan AC gas refill, dedh hazaar, aur 300 visiting charge</q>
-                  <button
-                    type="button"
-                    class="copy"
-                    data-copy="Sharma ji ke yahan AC gas refill, dedh hazaar, aur 300 visiting charge"
+                  <q
+                    >At Sharma ji's place, AC gas refill, fifteen hundred, and 300 visiting
+                    charge</q
                   >
-                    Copy
-                  </button>
+                  <button type="button" class="copy">Copy</button>
                 </li>
                 <li>
-                  <q>Gupta ji ke ghar 4 CPVC elbow, 40 rupaye ka ek, aur 200 labour</q>
-                  <button
-                    type="button"
-                    class="copy"
-                    data-copy="Gupta ji ke ghar 4 CPVC elbow, 40 rupaye ka ek, aur 200 labour"
-                  >
-                    Copy
-                  </button>
+                  <q>Gupta ji's house, 4 CPVC elbows at 40 rupees each, and 200 labour</q>
+                  <button type="button" class="copy">Copy</button>
                 </li>
               </ul>
             </div>
@@ -597,7 +557,7 @@
                 <li>
                   <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
                   <span>
-                    No mic, weak network or a noisy site? Tap <b>“Likh ke daalein”</b> and type or
+                    No mic, weak network or a noisy site? Tap <b>“Type it in”</b> and type or
                     dictate with Wispr Flow.
                   </span>
                 </li>
@@ -629,8 +589,8 @@
             </p>
             <ol class="try-steps">
               <li>Complete the 3-step set-up (your name, UPI ID, rate card).</li>
-              <li>Tap the mic, or tap “Likh ke daalein” and paste an example sentence.</li>
-              <li>Check the total, say “haan”, and continue to the UPI QR.</li>
+              <li>Tap the mic, or tap “Type it in” and paste an example sentence.</li>
+              <li>Check the total, say “yes”, and continue to the UPI QR.</li>
             </ol>
             <div class="cta-row">
               <a class="btn btn-light btn-lg" href="/app/" target="_blank" rel="noopener">
@@ -757,7 +717,10 @@
         </nav>
       </div>
       <div class="container footer-bottom">
-        <p>© <span id="year">2026</span> Ashish Kumar Sankhua. All rights reserved.</p>
+        <p>
+          <span>© <span id="year">2026</span> Ashish Kumar Sankhua.</span>
+          <span>All rights reserved.</span>
+        </p>
         <p>
           <a class="license-link" href="/LICENSE.txt" download="LICENSE.txt">
             <span class="material-symbols-outlined" aria-hidden="true">download</span>

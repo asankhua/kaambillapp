@@ -182,7 +182,7 @@ iframe {
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 68px;
   gap: 16px;
 }
@@ -220,6 +220,58 @@ iframe {
 .nav-links a:not(.btn):hover {
   color: var(--green-700);
 }
+/* Language selector: dropdown in the header, right of "Try it live" (English / हिंदी / Hinglish) */
+/* Header: the language picker sits right after "Try it live", at the right edge of the header */
+.nav-links {
+  margin-left: auto;
+}
+.site-header .lang-picker {
+  height: 44px;
+  flex: none;
+  margin-left: 16px;
+}
+.lang-picker {
+  display: inline-flex;
+  height: 52px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 14px;
+  border: 1px solid rgba(11, 122, 75, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(17, 24, 39, 0.08);
+}
+.lang-picker .material-symbols-outlined {
+  color: var(--green-600);
+  font-size: 20px;
+}
+.lang-picker select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%234b5563' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 4px center;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 26px 10px 2px;
+  cursor: pointer;
+}
+.lang-picker select:focus-visible {
+  outline-offset: 4px;
+}
+/* Devanagari needs more line height and no tight tracking. */
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3 {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+html[lang="hi"] body {
+  line-height: 1.7;
+}
+
 .nav-toggle {
   display: none;
   width: 44px;
@@ -749,6 +801,58 @@ h3 {
 }
 
 /* Steps */
+.how-demo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+.phone.phone-sm {
+  width: 332px;
+}
+.phone.phone-sm .phone-notch {
+  display: none;
+}
+.phone-gif {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 34px;
+  background: #fafaf7;
+}
+.how-demo-copy h3 {
+  margin-top: 10px;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.demo-points {
+  display: grid;
+  gap: 16px;
+  margin: 22px 0 28px;
+}
+.demo-points li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--muted);
+}
+.demo-points .material-symbols-outlined {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: 22px;
+}
+.demo-points b {
+  color: var(--ink);
+}
 .steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1083,8 +1187,16 @@ h3 {
   .hero-grid,
   .split,
   .split.tips,
-  .try-grid {
+  .try-grid,
+  .how-demo {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .how-demo {
+    justify-items: center;
+    gap: 36px;
+  }
+  .how-demo-copy {
+    justify-self: stretch;
   }
   .hero {
     padding: 48px 0 48px;
@@ -1113,6 +1225,9 @@ h3 {
 
   .nav-toggle {
     display: grid;
+  }
+  .site-header .lang-picker {
+    margin-left: auto;
   }
   .nav-links {
     position: absolute;
