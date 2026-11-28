@@ -16,6 +16,7 @@
     "dev:api": "node --env-file=.env --import tsx phase-0-setup/scripts/dev-api.ts",
     "build": "node phase-0-setup/scripts/typecheck.mjs && vite build --config app/vite.config.ts",
     "preview": "vite preview --config app/vite.config.ts",
+    "start": "node --import tsx phase-0-setup/scripts/serve.ts",
     "typecheck": "node phase-0-setup/scripts/typecheck.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
