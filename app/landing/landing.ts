@@ -1,5 +1,6 @@
 /** Landing page behaviour: language switch, mobile menu, copy-to-clipboard for example sentences, footer year. */
 import { initI18n, label } from "./i18n";
+import { initSttPicker } from "./stt";
 
 const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
 const links = document.getElementById("nav-links");
@@ -41,6 +42,8 @@ for (const btn of document.querySelectorAll<HTMLButtonElement>("button.copy")) {
 
 const year = document.getElementById("year");
 if (year) year.textContent = String(new Date().getFullYear());
+
+initSttPicker();
 
 // Last: the year is already filled in and the DOM is complete, so the translation pass sees final text.
 initI18n();

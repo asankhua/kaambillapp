@@ -592,8 +592,28 @@
               <li>Tap the mic, or tap “Type it in” and paste an example sentence.</li>
               <li>Check the total, say “yes”, and continue to the UPI QR.</li>
             </ol>
+            <div class="stt-row">
+              <div class="lang-picker stt-picker">
+                <span class="material-symbols-outlined" aria-hidden="true">mic</span>
+                <select id="stt-select" aria-label="Voice engine">
+                  <option value="webspeech">Browser (Web Speech)</option>
+                  <option value="groq-whisper">Groq Whisper</option>
+                  <option value="sarvam">Sarvam AI</option>
+                </select>
+              </div>
+              <p class="stt-note">
+                Voice engine for the live app. Groq Whisper and Sarvam AI run on the KaamBill server
+                and need its API keys.
+              </p>
+            </div>
             <div class="cta-row">
-              <a class="btn btn-light btn-lg" href="/app/" target="_blank" rel="noopener">
+              <a
+                id="open-full"
+                class="btn btn-light btn-lg"
+                href="/app/?stt=webspeech"
+                target="_blank"
+                rel="noopener"
+              >
                 Open full screen
                 <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
               </a>
@@ -608,7 +628,7 @@
             <div class="phone-notch" aria-hidden="true"></div>
             <iframe
               class="phone-screen"
-              src="/app/"
+              src="/app/?stt=webspeech"
               title="KaamBill: live voice billing app"
               loading="lazy"
               allow="microphone; clipboard-write"

@@ -50,6 +50,17 @@ describe("Sarvam speech-to-text wrapper", () => {
     expect((form.get("file") as File).name).toBe("turn.m4a");
   });
 
+  it("sends the file type without codec parameters (Sarvam rejects audio/webm;codecs=opus)", async () => {
+    const fetchImpl = reply({ transcript: "ok" });
+    await transcribeSarvam(new Blob(["x"], { type: "audio/webm;codecs=opus" }), {
+      ...base,
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+    });
+    const form = fetchImpl.mock.calls[0]![1]?.body as FormData;
+    expect((form.get("file") as File).type).toBe("audio/webm");
+    expect((form.get("file") as File).name).toBe("turn.webm");
+  });
+
   it("treats an empty transcript as no speech", async () => {
     const r = await transcribeSarvam(new Blob(["x"]), {
       ...base,

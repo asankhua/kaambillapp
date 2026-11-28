@@ -1001,6 +1001,18 @@ h3 {
   font-weight: 700;
   font-size: 14px;
 }
+.stt-row {
+  margin-top: 26px;
+}
+.stt-picker select {
+  width: 220px;
+}
+.stt-note {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #9ec7b1;
+  max-width: 520px;
+}
 .try-note {
   margin-top: 18px;
   font-size: 14px;

@@ -54,7 +54,10 @@ export async function transcribeSarvam(
         ? "wav"
         : "webm";
   const form = new FormData();
-  form.append("file", audio, `turn.${ext}`);
+  // Sarvam rejects MIME types with codec parameters ("audio/webm;codecs=opus" -> HTTP 400), which is
+  // what MediaRecorder reports in Chrome and Edge. Send the bare type ("audio/webm").
+  const mime = audio.type.split(";")[0]!.trim();
+  form.append("file", new Blob([audio], { type: mime }), `turn.${ext}`);
   form.append("model", opts.model);
   form.append("mode", opts.mode);
   form.append("language_code", SARVAM_LANGS[opts.lang]);
